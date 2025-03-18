@@ -37,6 +37,24 @@ nav {
     padding: 0 2rem;
 }
 
+/* Add hamburger menu styles */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px 0;
+    background: var(--text);
+    transition: all 0.3s ease;
+}
+
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
@@ -205,6 +223,9 @@ footer {
     padding-left: 2rem;
 }
 
+/* Add these styles where appropriate in your CSS file */
+
+/* Define the bouncing animation */
 @keyframes float {
     0% {
         transform: translateY(0px);
@@ -217,6 +238,17 @@ footer {
     }
 }
 
+.bot-avatar {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin-bottom: 2rem;
+    border: 4px solid var(--primary);
+    box-shadow: 0 0 20px rgba(91, 110, 174, 0.3);
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Add a subtle shadow animation to enhance the floating effect */
 @keyframes shadow {
     0% {
         box-shadow: 0 0 20px rgba(91, 110, 174, 0.3);
@@ -240,4 +272,69 @@ footer {
     animation: 
         float 3s ease-in-out infinite,
         shadow 3s ease-in-out infinite;
+}
+
+/* Mobile responsive styles */
+@media screen and (max-width: 768px) {
+    .hamburger {
+        display: block;
+        z-index: 1001;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: var(--secondary);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: right 0.3s ease;
+        z-index: 1000;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links a {
+        margin: 1.5rem 0;
+        font-size: 1.2rem;
+    }
+
+    .invite-btn {
+        margin-top: 1rem;
+    }
+
+    /* Hamburger animation */
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    /* Add overlay when menu is open */
+    .nav-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+
+    .nav-overlay.active {
+        display: block;
+    }
 }
