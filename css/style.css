@@ -76,6 +76,13 @@ header {
                 url('../images/hero-bg.jpg') center/cover;
 }
 
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .hero h1 {
     font-size: 4rem;
     margin-bottom: 1rem;
@@ -196,4 +203,55 @@ footer {
 .content-page ul {
     margin-bottom: 1rem;
     padding-left: 2rem;
+}
+
+/* Add these styles where appropriate in your CSS file */
+
+/* Define the bouncing animation */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.bot-avatar {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin-bottom: 2rem;
+    border: 4px solid var(--primary);
+    box-shadow: 0 0 20px rgba(91, 110, 174, 0.3);
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Add a subtle shadow animation to enhance the floating effect */
+@keyframes shadow {
+    0% {
+        box-shadow: 0 0 20px rgba(91, 110, 174, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(91, 110, 174, 0.2);
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(91, 110, 174, 0.3);
+    }
+}
+
+.bot-avatar {
+    /* Keep existing properties */
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin-bottom: 2rem;
+    border: 4px solid var(--primary);
+    /* Add both animations */
+    animation: 
+        float 3s ease-in-out infinite,
+        shadow 3s ease-in-out infinite;
 }
