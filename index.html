@@ -3,29 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Discord Embed Meta Tags -->
+    <meta name="description" content="Alfred - Your intelligent Discord assistant with multiple AI models, image generation, and smart search capabilities">
     <meta property="og:title" content="Alfred - AI Discord Bot">
-    <meta property="og:description" content="Your Intelligent Discord Assistant with multiple AI models, image generation, and smart search capabilities.">
+    <meta property="og:description" content="Your Intelligent Discord Assistant with multiple AI models, image generation, and smart search capabilities">
     <meta property="og:image" content="https://cdn.discordapp.com/avatars/717830171574403162/39942ecc80adcfa855f0374478442052.png">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#7289DA">
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
-    <meta name="theme-color" content="#5B6EAE">
     <title>Alfred - AI Discord Bot</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav>
         <div class="nav-container">
-            <div class="logo">Alfred</div>
-            <button class="hamburger">
+            <a href="/" class="logo">Alfred</a>
+            <button class="hamburger" aria-label="Menu">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
             <div class="nav-links">
-                <a href="index.html" class="active">Home</a>
+                <a href="/" class="active">Home</a>
                 <a href="features.html">Features</a>
-                <a href="tos.html">Terms of Service</a>
-                <a href="privacy.html">Privacy Policy</a>
+                <a href="tos.html">Terms</a>
+                <a href="privacy.html">Privacy</a>
                 <a href="https://discord.com/oauth2/authorize?client_id=717830171574403162&permissions=67584&integration_type=0&scope=bot" class="invite-btn">Add to Discord</a>
             </div>
         </div>
@@ -34,10 +38,15 @@
 
     <header>
         <div class="hero">
-            <img src="https://cdn.discordapp.com/avatars/717830171574403162/39942ecc80adcfa855f0374478442052.png?size=1024" alt="Alfred Bot" class="bot-avatar">
+            <img src="https://cdn.discordapp.com/avatars/717830171574403162/39942ecc80adcfa855f0374478442052.png?size=1024" 
+                 alt="Alfred Bot Avatar" 
+                 class="bot-avatar"
+                 width="180"
+                 height="180">
             <h1>Meet Alfred</h1>
             <p>Your Intelligent Discord Assistant</p>
-            <a href="https://discord.com/oauth2/authorize?client_id=717830171574403162&permissions=67584&integration_type=0&scope=bot" class="cta-button">Add to Server</a>
+            <a href="https://discord.com/oauth2/authorize?client_id=717830171574403162&permissions=67584&integration_type=0&scope=bot" 
+               class="invite-btn">Add to Server</a>
         </div>
     </header>
 
@@ -83,34 +92,43 @@
             </div>
             <div class="footer-section">
                 <h4>Connect</h4>
-                <a href="https://top.gg/bot/717830171574403162">Top.gg</a>
+                <a href="https://top.gg/bot/717830171574403162" target="_blank" rel="noopener">Top.gg</a>
             </div>
         </div>
     </footer>
+
     <script>
+        // Enhanced mobile menu functionality
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
         const navOverlay = document.querySelector('.nav-overlay');
 
-        hamburger.addEventListener('click', () => {
+        function toggleMenu() {
             hamburger.classList.toggle('active');
             navLinks.classList.toggle('active');
             navOverlay.classList.toggle('active');
-        });
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        }
 
-        navOverlay.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
-            navOverlay.classList.remove('active');
-        });
-
-        // Close menu when a link is clicked
+        hamburger.addEventListener('click', toggleMenu);
+        navOverlay.addEventListener('click', toggleMenu);
+        
         document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('active');
-                navOverlay.classList.remove('active');
-            });
+            link.addEventListener('click', toggleMenu);
+        });
+
+        // Hide header on scroll down, show on scroll up
+        let lastScroll = 0;
+        const nav = document.querySelector('nav');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                nav.style.transform = 'translateY(-100%)';
+            } else {
+                nav.style.transform = 'translateY(0)';
+            }
+            lastScroll = currentScroll;
         });
     </script>
 </body>
