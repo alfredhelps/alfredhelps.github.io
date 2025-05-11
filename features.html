@@ -1,25 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Discord Embed Meta Tags -->
-    <meta property="og:title" content="Features - Alfred Bot">
-    <meta property="og:description" content="Explore Alfred's features: Multiple AI models, image generation, smart search, and advanced server management.">
-    <meta property="og:image" content="https://cdn.discordapp.com/avatars/717830171574403162/39942ecc80adcfa855f0374478442052.png">
+    <meta name="description"
+        content="Explore AlfredHelps's features: Multiple AI models, image generation, smart search, and advanced server management">
+    <meta property="og:title" content="Features - AlfredHelps Bot">
+    <meta property="og:description"
+        content="Explore AlfredHelps's features: Multiple AI models, image generation, smart search, and advanced server management">
+    <meta property="og:image"
+        content="https://cdn.discordapp.com/attachments/717835759406678147/1370888100942708746/3ba757c892c384da23f0d9d5c15ae81c.png?ex=68212289&is=681fd109&hm=6eab7133c3be6c9862db855a9e3cc6af98c80f8202f74186149988f8ed73083c&">
     <meta property="og:type" content="website">
-    <meta name="theme-color" content="#7289DA">
+    <meta name="theme-color" content="#5865F2">
+    <title>Features - AlfredHelps</title>
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
-    <title>Features - Alfred</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
+    <!-- Loading Animation -->
+    <div class="loader-wrapper">
+        <div class="loader">
+            <div class="loader-circle"></div>
+            <div class="loader-circle"></div>
+            <div class="loader-circle"></div>
+            <div class="loader-text">LOADING</div>
+        </div>
+    </div>
+
     <nav>
         <div class="nav-container">
-            <a href="/" class="logo">Alfred</a>
+            <a href="index.html" class="logo">AlfredHelps</a>
             <button class="hamburger" aria-label="Menu">
                 <span></span>
                 <span></span>
@@ -30,7 +46,8 @@
                 <a href="features.html" class="active">Features</a>
                 <a href="tos.html">Terms</a>
                 <a href="privacy.html">Privacy</a>
-                <a href="https://discord.com/oauth2/authorize?client_id=717830171574403162&permissions=67584&integration_type=0&scope=bot" class="invite-btn">Add to Discord</a>
+                <a href="https://discord.com/oauth2/authorize?client_id=717830171574403162&permissions=67584&integration_type=0&scope=bot"
+                    class="invite-btn">Add to Discord</a>
             </div>
         </div>
         <div class="nav-overlay"></div>
@@ -38,111 +55,95 @@
 
     <header>
         <div class="hero">
-            <img src="https://cdn.discordapp.com/avatars/717830171574403162/39942ecc80adcfa855f0374478442052.png?size=1024" 
-                 alt="Alfred Bot Avatar" 
-                 class="bot-avatar"
-                 width="180"
-                 height="180">
+            <img src="https://cdn.discordapp.com/attachments/717835759406678147/1370888100942708746/3ba757c892c384da23f0d9d5c15ae81c.png?ex=68212289&is=681fd109&hm=6eab7133c3be6c9862db855a9e3cc6af98c80f8202f74186149988f8ed73083c&"
+                alt="AlfredHelps Bot Avatar" class="bot-avatar" style="animation: float 6s ease-in-out infinite;">
             <h1>Features</h1>
             <p>Discover What Alfred Can Do For You</p>
         </div>
     </header>
 
-    <main class="content-page">
-        <section class="terms-section">
-            <h2>🤖 AI Capabilities</h2>
-            <ul>
-                <li>Multiple AI models support:
-                    <ul>
-                        <li>AlfredHelps (Default model)</li>
-                        <li>LearnLM 1.5 Pro (Vision capable)</li>
-                        <li>Gemini 2.0 (Vision capable)</li>
-                        <li>Gen Z Mode (Vision capable)</li>
-                    </ul>
-                </li>
-                <li>Custom AI personalities system</li>
-                <li>Image generation and analysis</li>
-                <li>Smart web search and webpage summarization</li>
-                <li>Context-aware conversations (140 message history per channel)</li>
-            </ul>
+    <main>
+        <div class="container">
+            <div class="content-container">
+                <h2><i class="fas fa-brain"></i> AI Capabilities</h2>
 
-            <h2>💻 Command System</h2>
-            <ul>
-                <li>Message context menu commands</li>
-                <li>Dynamic command help system</li>
-                <li>Interactive pagination for help menus</li>
-            </ul>
+                <h3>Multiple AI Models</h3>
+                <p>Alfred offers a variety of AI models to suit your needs:</p>
+                <ul>
+                    <li><strong>Default Model</strong> - Optimized for general assistance and everyday tasks</li>
+                    <li><strong>Advanced Models</strong> - Enhanced capabilities including vision support</li>
+                    <li><strong>Specialized Models</strong> - Tailored for specific use cases and conversation styles
+                    </li>
+                </ul>
 
-            <h2>👤 User Features</h2>
-            <ul>
-                <li>Personal user settings and preferences</li>
-                <li>User statistics tracking</li>
-                <li>Badge system for achievements</li>
-                <li>Terms of service management</li>
-                <li>Chat history export</li>
-            </ul>
+                <h3>Custom AI Personalities</h3>
+                <p>Create and use personalized AI assistants tailored to your specific needs. Define their tone,
+                    knowledge areas, and behavior to get the perfect assistant for any task.</p>
 
-            <h2>⚙️ Server Management</h2>
-            <ul>
-                <li>Server-specific settings</li>
-                <li>Family-friendly mode options</li>
-                <li>Customizable AI behavior per server</li>
-            </ul>
-        </section>
+                <h3>Image Generation & Analysis</h3>
+                <p>Generate stunning images from text descriptions using advanced AI. Alfred can also analyze images,
+                    providing detailed descriptions and insights about visual content.</p>
+
+                <h3>Smart Web Search</h3>
+                <p>Get real-time information from the web without leaving Discord. Alfred can search the internet and
+                    provide up-to-date answers to your questions.</p>
+
+                <h3>Context-Aware Conversations</h3>
+                <p>Alfred remembers up to 140 messages per channel, allowing for natural, flowing conversations that
+                    maintain context over time.</p>
+
+                <h3>Vision Support</h3>
+                <p>Send images to Alfred for analysis and include them as context in your conversations. Perfect for
+                    getting information about visual content or using images as reference.</p>
+
+                <h2><i class="fas fa-terminal"></i> Command System</h2>
+
+                <h3>Core Commands</h3>
+                <ul>
+                    <li><strong>/ask</strong> - Ask a question to the AI assistant</li>
+                    <li><strong>/user-settings</strong> - Configure your AI preferences</li>
+                    <li><strong>/imagine</strong> - Generate AI images from text descriptions</li>
+                </ul>
+
+                <h3>Conversation Management</h3>
+                <ul>
+                    <li><strong>/delete-history</strong> - Clear conversation history</li>
+                    <li><strong>/export-history</strong> - Export chat logs for backup</li>
+                </ul>
+
+                <h3>Server Settings</h3>
+                <ul>
+                    <li><strong>/create-personality</strong> - Create custom AI personalities</li>
+                    <li><strong>/server-settings</strong> - Configure server-wide bot behavior</li>
+                </ul>
+
+                <h3>Utility Commands</h3>
+                <ul>
+                    <li><strong>/about</strong> - Display bot information and statistics</li>
+                    <li><strong>/ping</strong> - Check bot latency and performance</li>
+                    <li><strong>/notifications</strong> - View your notifications and updates</li>
+                    <li><strong>/how-to-use</strong> - Detailed help guide for using Alfred</li>
+                </ul>
+            </div>
+        </div>
     </main>
 
     <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Alfred</h4>
-                <p>Made with 💜 in TypeScript</p>
-            </div>
-            <div class="footer-section">
-                <h4>Links</h4>
-                <a href="tos.html">Terms of Service</a>
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="features.html">Features</a>
-            </div>
-            <div class="footer-section">
-                <h4>Connect</h4>
-                <a href="https://top.gg/bot/717830171574403162" target="_blank" rel="noopener">Top.gg</a>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">AlfredHelps</div>
+                <div class="footer-links">
+                    <a href="https://top.gg/bot/717830171574403162">Top.gg</a>
+                    <a href="http://discord.gg/tsGdPKygqZ">Support Server</a>
+                </div>
+                <div class="footer-copyright">
+                    &copy; 2025 AlfredHelps Bot. All rights reserved.
+                </div>
             </div>
         </div>
     </footer>
 
-    <script>
-        // Enhanced mobile menu functionality
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        const navOverlay = document.querySelector('.nav-overlay');
-
-        function toggleMenu() {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('active');
-            navOverlay.classList.toggle('active');
-            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-        }
-
-        hamburger.addEventListener('click', toggleMenu);
-        navOverlay.addEventListener('click', toggleMenu);
-        
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', toggleMenu);
-        });
-
-        // Hide header on scroll down, show on scroll up
-        let lastScroll = 0;
-        const nav = document.querySelector('nav');
-
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            if (currentScroll > lastScroll && currentScroll > 100) {
-                nav.style.transform = 'translateY(-100%)';
-            } else {
-                nav.style.transform = 'translateY(0)';
-            }
-            lastScroll = currentScroll;
-        });
-    </script>
+    <script src="js/main.js"></script>
 </body>
+
 </html>

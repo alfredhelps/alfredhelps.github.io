@@ -1,25 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Discord Embed Meta Tags -->
-    <meta property="og:title" content="Privacy Policy - Alfred Bot">
-    <meta property="og:description" content="Learn about Alfred's privacy policy, data collection practices, and user rights.">
-    <meta property="og:image" content="https://cdn.discordapp.com/avatars/717830171574403162/39942ecc80adcfa855f0374478442052.png">
+    <meta name="description" content="AlfredHelps Bot Privacy Policy - How we handle and protect your data">
+    <meta property="og:title" content="Privacy Policy - AlfredHelps Bot">
+    <meta property="og:description" content="AlfredHelps Bot Privacy Policy - How we handle and protect your data">
+    <meta property="og:image"
+        content="https://cdn.discordapp.com/attachments/717835759406678147/1370888100942708746/3ba757c892c384da23f0d9d5c15ae81c.png?ex=68212289&is=681fd109&hm=6eab7133c3be6c9862db855a9e3cc6af98c80f8202f74186149988f8ed73083c&">
     <meta property="og:type" content="website">
-    <meta name="theme-color" content="#7289DA">
+    <meta name="theme-color" content="#5865F2">
+    <title>Privacy Policy - AlfredHelps</title>
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
-    <title>Privacy Policy - Alfred</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
+    <!-- Loading Animation -->
+    <div class="loader-wrapper">
+        <div class="loader">
+            <div class="loader-circle"></div>
+            <div class="loader-circle"></div>
+            <div class="loader-circle"></div>
+            <div class="loader-text">LOADING</div>
+        </div>
+    </div>
+
     <nav>
         <div class="nav-container">
-            <a href="/" class="logo">Alfred</a>
+            <a href="index.html" class="logo">AlfredHelps</a>
             <button class="hamburger" aria-label="Menu">
                 <span></span>
                 <span></span>
@@ -30,7 +44,8 @@
                 <a href="features.html">Features</a>
                 <a href="tos.html">Terms</a>
                 <a href="privacy.html" class="active">Privacy</a>
-                <a href="https://discord.com/oauth2/authorize?client_id=717830171574403162&permissions=67584&integration_type=0&scope=bot" class="invite-btn">Add to Discord</a>
+                <a href="https://discord.com/oauth2/authorize?client_id=717830171574403162&permissions=67584&integration_type=0&scope=bot"
+                    class="invite-btn">Add to Discord</a>
             </div>
         </div>
         <div class="nav-overlay"></div>
@@ -38,113 +53,99 @@
 
     <header>
         <div class="hero">
-            <img src="https://cdn.discordapp.com/avatars/717830171574403162/39942ecc80adcfa855f0374478442052.png?size=1024" 
-                 alt="Alfred Bot Avatar" 
-                 class="bot-avatar"
-                 width="180"
-                 height="180">
+            <img src="https://cdn.discordapp.com/attachments/717835759406678147/1370888100942708746/3ba757c892c384da23f0d9d5c15ae81c.png?ex=68212289&is=681fd109&hm=6eab7133c3be6c9862db855a9e3cc6af98c80f8202f74186149988f8ed73083c&"
+                alt="AlfredHelps Avatar" class="bot-avatar" style="animation: float 6s ease-in-out infinite;">
             <h1>Privacy Policy</h1>
             <p>How We Handle Your Data</p>
         </div>
     </header>
 
-    <main class="content-page">
-        <section class="terms-section">
-            <h2>1. Information We Collect</h2>
-            <h3>a) Message Data</h3>
-            <ul>
-                <li>Up to 140 messages per channel for conversation context</li>
-                <li>Message content, timestamps, and associated metadata</li>
-            </ul>
+    <main>
+        <div class="container">
+            <div class="content-container">
+                <h2>Privacy Policy</h2>
+                <p>Last Updated: April 23, 2025</p>
 
-            <h3>b) User Information</h3>
-            <ul>
-                <li>Discord user ID</li>
-                <li>Display name</li>
-                <li>Server-specific settings</li>
-                <li>Usage statistics and message counts</li>
-                <li>Achievement and badge data</li>
-                <li>User behavior analysis data</li>
-            </ul>
+                <h3>1. Introduction</h3>
+                <p>This Privacy Policy explains how Alfred ("we", "us", "our") collects, uses, and protects your data
+                    when you use our Discord bot. We are committed to ensuring the privacy and security of your
+                    information.</p>
 
-            <h2>2. How We Use Your Data</h2>
-            <ul>
-                <li>To provide AI-powered conversation capabilities</li>
-                <li>To maintain context in ongoing discussions</li>
-                <li>To improve our services and AI models</li>
-                <li>To personalize your experience</li>
-            </ul>
+                <h3>2. Information We Collect</h3>
+                <p>When you use Alfred, we may collect the following information:</p>
+                <ul>
+                    <li><strong>User Data:</strong> Discord user ID</li>
+                    <li><strong>Server Data:</strong> Server ID and channel IDs where Alfred is used</li>
+                    <li><strong>Conversation Data:</strong> Messages sent to Alfred and AlfredHelps's responses</li>
+                    <li><strong>Settings:</strong> User and server preferences configured through Alfred</li>
+                </ul>
 
-            <h2>3. Data Protection</h2>
-            <ul>
-                <li>Industry-standard encryption for data transmission</li>
-                <li>Regular security audits and updates</li>
-                <li>Limited access to personal information</li>
-            </ul>
+                <h3>3. How We Use Your Information</h3>
+                <p>We use the collected information for the following purposes:</p>
+                <ul>
+                    <li>Providing and maintaining AlfredHelps's services</li>
+                    <li>Improving and developing new features</li>
+                    <li>Analyzing usage patterns to optimize performance</li>
+                    <li>Ensuring compliance with our Terms of Service</li>
+                    <li>Responding to user support requests</li>
+                </ul>
 
-            <h2>4. Your Rights</h2>
-            <ul>
-                <li>Request data export</li>
-                <li>Delete your data</li>
-                <li>Opt-out of data collection</li>
-            </ul>
+                <h3>4. Data Storage and Security</h3>
+                <p>We store your data on secure servers and implement appropriate security measures to protect against
+                    unauthorized access, alteration, disclosure, or destruction of your information. However, no method
+                    of transmission over the Internet or electronic storage is 100% secure.</p>
 
-            <p class="terms-note"><em>Last updated: January 2025</em></p>
-        </section>
+                <h3>5. Data Retention</h3>
+                <p>We retain conversation data for up to 30 days to maintain context for ongoing conversations.</p>
+
+                <h3>6. Third-Party Services</h3>
+                <p>Alfred may use third-party services to enhance functionality, such as:</p>
+                <ul>
+                    <li>AI providers for language processing and image generation</li>
+                </ul>
+                <p>These third parties may have access to your data only to perform specific tasks on our behalf and are
+                    obligated not to disclose or use it for any other purpose.</p>
+
+                <h3>7. Your Rights</h3>
+                <p>You have the right to:</p>
+                <ul>
+                    <li>Access the personal data we hold about you</li>
+                    <li>Request deletion of your data</li>
+                    <li>Object to processing of your data</li>
+                    <li>Request restriction of processing</li>
+                </ul>
+
+                <h3>8. Children's Privacy</h3>
+                <p>Alfred is not intended for use by individuals under the age of 13, or the minimum age required by
+                    Discord in your country. We do not knowingly collect personal information from children.</p>
+
+                <h3>9. Changes to This Privacy Policy</h3>
+                <p>We may update our Privacy Policy from time to time. We will notify users of any significant changes
+                    by posting the new Privacy Policy on this page.</p>
+
+                <h3>10. Contact Us</h3>
+                <p>If you have any questions about this Privacy Policy, please contact us through our Discord support
+                    server.</p>
+            </div>
+        </div>
     </main>
 
     <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Alfred</h4>
-                <p>Made with 💜 in TypeScript</p>
-            </div>
-            <div class="footer-section">
-                <h4>Links</h4>
-                <a href="tos.html">Terms of Service</a>
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="features.html">Features</a>
-            </div>
-            <div class="footer-section">
-                <h4>Connect</h4>
-                <a href="https://top.gg/bot/717830171574403162" target="_blank" rel="noopener">Top.gg</a>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">AlfredHelps</div>
+                <div class="footer-links">
+                    <a href="https://top.gg/bot/717830171574403162">Top.gg</a>
+                    <a href="http://discord.gg/tsGdPKygqZ">Support Server</a>
+                </div>
+                <div class="footer-copyright">
+                    &copy; 2025 AlfredHelps Bot. All rights reserved.
+                </div>
             </div>
         </div>
     </footer>
 
-    <script>
-        // Enhanced mobile menu functionality
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        const navOverlay = document.querySelector('.nav-overlay');
-
-        function toggleMenu() {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('active');
-            navOverlay.classList.toggle('active');
-            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-        }
-
-        hamburger.addEventListener('click', toggleMenu);
-        navOverlay.addEventListener('click', toggleMenu);
-        
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', toggleMenu);
-        });
-
-        // Hide header on scroll down, show on scroll up
-        let lastScroll = 0;
-        const nav = document.querySelector('nav');
-
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            if (currentScroll > lastScroll && currentScroll > 100) {
-                nav.style.transform = 'translateY(-100%)';
-            } else {
-                nav.style.transform = 'translateY(0)';
-            }
-            lastScroll = currentScroll;
-        });
-    </script>
+    <script src="js/main.js"></script>
 </body>
+
 </html>
