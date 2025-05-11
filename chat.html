@@ -3,14 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width,
+             initial-scale=1.0,
+             maximum-scale=1.0,
+             user-scalable=no,
+             viewport-fit=cover,
+             interactive-widget=resizes-content" />
+
     <meta name="description" content="Test Alfred's chat capabilities directly in your browser">
     <meta property="og:title" content="Chat with Alfred">
     <meta property="og:description" content="Try Alfred's AI capabilities directly in your browser">
     <meta property="og:image"
-        content="https://cdn.discordapp.com/attachments/717835759406678147/1370888100942708746/3ba757c892c384da23f0d9d5c15ae81c.png?ex=68212289&is=681fd109&hm=6eab7133c3be6c9862db855a9e3cc6af98c80f8202f74186149988f8ed73083c&">
+        content="https://cdn.discordapp.com/avatars/717830171574403162/3ba757c892c384da23f0d9d5c15ae81c.png?size=512">
     <title>Chat with AlfredHelps</title>
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,7 +56,7 @@
             color: var(--text-color);
             line-height: 1.6;
             overflow-x: hidden;
-            height: 100vh;
+            height: 100dvh;
             display: flex;
             flex-direction: column;
             font-weight: 400;
@@ -103,7 +107,6 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            height: 100vh;
             padding-top: 56px;
             /* Header height */
             padding-bottom: 80px;
@@ -235,7 +238,7 @@
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            background-image: url('https://cdn.discordapp.com/attachments/717835759406678147/1370888100942708746/3ba757c892c384da23f0d9d5c15ae81c.png?ex=68212289&is=681fd109&hm=6eab7133c3be6c9862db855a9e3cc6af98c80f8202f74186149988f8ed73083c&');
+            background-image: url('https://cdn.discordapp.com/avatars/717830171574403162/3ba757c892c384da23f0d9d5c15ae81c.png?size=512');
             background-size: cover;
             position: absolute;
             left: -40px;
@@ -651,7 +654,7 @@
     <!-- Header -->
     <header>
         <a href="index.html" class="logo">
-            <img src="https://cdn.discordapp.com/attachments/717835759406678147/1370888100942708746/3ba757c892c384da23f0d9d5c15ae81c.png?ex=68212289&is=681fd109&hm=6eab7133c3be6c9862db855a9e3cc6af98c80f8202f74186149988f8ed73083c&"
+            <img src="https://cdn.discordapp.com/avatars/717830171574403162/3ba757c892c384da23f0d9d5c15ae81c.png?size=512"
                 alt="Alfred Logo">
             <span>AlfredHelps</span>
         </a>
@@ -663,7 +666,7 @@
             <div class="chat-messages" id="chat-messages">
                 <!-- Bot welcome message -->
                 <div class="message bot-message">
-                    <img src="https://cdn.discordapp.com/attachments/717835759406678147/1370888100942708746/3ba757c892c384da23f0d9d5c15ae81c.png?ex=68212289&is=681fd109&hm=6eab7133c3be6c9862db855a9e3cc6af98c80f8202f74186149988f8ed73083c&"
+                    <img src="https://cdn.discordapp.com/avatars/717830171574403162/3ba757c892c384da23f0d9d5c15ae81c.png?size=512"
                         alt="Alfred Avatar">
                     Hello! I'm Alfred, your intelligent assistant. How can I help you today?
                 </div>
@@ -729,7 +732,7 @@
                 if (exampleQuestions) {
                     exampleQuestions.classList.add('hide-examples');
                 }
-                
+
                 // Wait for page to fully load before sending the initial question
                 setTimeout(() => {
                     // Set the input value to the decoded question
@@ -822,7 +825,7 @@
                 messageDiv.classList.add('message', 'bot-message');
 
                 const botAvatar = document.createElement('img');
-                botAvatar.src = "https://cdn.discordapp.com/attachments/717835759406678147/1370888100942708746/3ba757c892c384da23f0d9d5c15ae81c.png?ex=68212289&is=681fd109&hm=6eab7133c3be6c9862db855a9e3cc6af98c80f8202f74186149988f8ed73083c&";
+                botAvatar.src = "https://cdn.discordapp.com/avatars/717830171574403162/3ba757c892c384da23f0d9d5c15ae81c.png?size=512";
                 botAvatar.alt = "Alfred Avatar";
                 messageDiv.appendChild(botAvatar);
 
@@ -995,21 +998,14 @@
                 }
             });
 
-            // Handle mobile keyboard issues
-            if ('virtualKeyboard' in navigator) {
-                navigator.virtualKeyboard.overlaysContent = true;
+            function updateVh() {
+                scrollTo(0, document.documentElement.offsetHeight)
             }
+            window.addEventListener('resize', updateVh);
 
-            // Adjust UI when keyboard appears on mobile
-            const originalHeight = window.innerHeight;
-            window.addEventListener('resize', function () {
-                // If height is significantly reduced, keyboard is likely open
-                if (window.innerHeight < originalHeight * 0.75) {
-                    document.body.classList.add('keyboard-open');
-                } else {
-                    document.body.classList.remove('keyboard-open');
-                }
-            });
+
+
+            // Adjust UI when keyboard appears on mobil
 
             // Focus input on page load
             setTimeout(() => {
