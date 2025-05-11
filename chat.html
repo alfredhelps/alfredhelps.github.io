@@ -123,9 +123,10 @@
 
         .chat-messages {
             flex: 1;
-            overflow-y: auto;
+            overflow-y: scroll;
             padding: 20px;
             display: flex;
+            flex: 1;
             flex-direction: column;
             gap: 20px;
             scroll-behavior: smooth;
@@ -772,6 +773,10 @@
                 }, 500);
             });
 
+            function scrollToLastMessage() {
+                chatMessages.children[chatMessages.children.length - 1].scrollIntoView({ behavior: "smooth", block: "start" })
+            }
+
             // Function to show typing indicator
             function showTypingIndicator() {
                 // First remove the typing indicator if it exists in the DOM
@@ -782,7 +787,7 @@
                 // Then append it to the end of the chat messages
                 chatMessages.appendChild(typingIndicator);
                 typingIndicator.style.display = 'flex';
-                scrollTo(0, document.documentElement.offsetHeight)
+                scrollToLastMessage()
             }
 
             // Function to hide typing indicator
@@ -806,7 +811,7 @@
                 // Use the configured renderer to properly handle links
                 messageDiv.innerHTML = marked.parse(text);
                 chatMessages.appendChild(messageDiv);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
+                scrollToLastMessage()
 
                 // Hide example questions
                 if (exampleQuestions) {
@@ -835,7 +840,7 @@
                 messageDiv.appendChild(textContainer);
 
                 chatMessages.appendChild(messageDiv);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
+                scrollToLastMessage()
 
                 // For all devices, add text with improved typing animation
                 let i = 0;
@@ -849,18 +854,18 @@
                         const currentText = text.substring(0, nextIndex);
                         textContainer.innerHTML = currentText + '<span class="cursor">|</span>';
                         i = nextIndex;
+                        scrollToLastMessage()
 
                         // Faster typing on mobile for better UX
                         const randomDelay = window.innerWidth <= 768 ?
                             speed + Math.random() * 5 : // Faster on mobile
                             speed + Math.random() * 15; // Normal on desktop
                         setTimeout(typeWriter, randomDelay);
-                        scrollTo(0, document.documentElement.offsetHeight)
                     } else {
                         // Remove cursor and convert markdown after typing is complete
                         // Use the configured renderer to properly handle links
                         textContainer.innerHTML = marked.parse(text);
-                        scrollTo(0, document.documentElement.offsetHeight)
+                        scrollToLastMessage()
 
                         // Add subtle highlight animation after typing completes
                         messageDiv.style.transition = "box-shadow 0.3s ease";
@@ -910,7 +915,7 @@
                             systemMessage.classList.add('system-message');
                             systemMessage.textContent = 'You are sending messages too quickly. Please wait a moment and try again.';
                             chatMessages.appendChild(systemMessage);
-                            chatMessages.scrollTop = chatMessages.scrollHeight;
+                            scrollToLastMessage()
 
                             // Update response info with typing animation
                             updateResponseInfo('Rate limited');
@@ -943,7 +948,7 @@
                         systemMessage.classList.add('system-message');
                         systemMessage.textContent = 'Sorry, there was an error processing your request. Please try again.';
                         chatMessages.appendChild(systemMessage);
-                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                        scrollToLastMessage()
 
                         responseInfo.innerHTML = 'Error occurred';
                     }
@@ -994,12 +999,13 @@
 
             userInput.addEventListener('keypress', function (e) {
                 if (e.key === 'Enter') {
+                    userInput.blur()
                     sendMessage();
                 }
             });
 
             function updateVh() {
-                scrollTo(0, document.documentElement.offsetHeight)
+                scrollToLastMessage()
             }
             window.addEventListener('resize', updateVh);
 
