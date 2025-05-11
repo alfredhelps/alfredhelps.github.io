@@ -199,6 +199,186 @@
             opacity: 0.5;
             z-index: -1;
         }
+        
+        /* Fancy Chat Box Styles */
+        .hero-chat-section {
+            padding: 40px 0;
+            background: linear-gradient(180deg, var(--background) 0%, var(--card-bg) 100%);
+        }
+        
+        .fancy-chat-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(26, 20, 38, 0.7);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 
+                        0 0 20px rgba(155, 109, 198, 0.2),
+                        0 0 0 1px rgba(155, 109, 198, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(155, 109, 198, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .fancy-chat-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(155, 109, 198, 0.1) 0%, transparent 70%);
+            animation: rotateGradient 15s linear infinite;
+            z-index: 0;
+        }
+        
+        @keyframes rotateGradient {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .chat-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .chat-avatar {
+            margin-right: 15px;
+        }
+        
+        .chat-avatar img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(155, 109, 198, 0.6);
+            animation: pulse 3s infinite ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(155, 109, 198, 0.6); }
+            70% { box-shadow: 0 0 0 10px rgba(155, 109, 198, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(155, 109, 198, 0); }
+        }
+        
+        .chat-title h3 {
+            margin: 0;
+            font-size: 1.4rem;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .chat-title p {
+            margin: 5px 0 0;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .fancy-input-container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        #fancy-chat-form input {
+            width: 100%;
+            padding: 16px 60px 16px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(155, 109, 198, 0.3);
+            background: rgba(36, 26, 51, 0.6);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        #fancy-chat-form input:focus {
+            outline: none;
+            border-color: rgba(155, 109, 198, 0.8);
+            box-shadow: 0 4px 20px rgba(155, 109, 198, 0.3);
+        }
+        
+        #fancy-chat-form input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .pulse-button {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(155, 109, 198, 0.5);
+        }
+        
+        .pulse-button:hover {
+            transform: translateY(-50%) scale(1.05);
+            box-shadow: 0 5px 15px rgba(155, 109, 198, 0.7);
+        }
+        
+        .chat-examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .example-chip {
+            background: rgba(85, 43, 127, 0.3);
+            border: 1px solid rgba(155, 109, 198, 0.3);
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.9);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .example-chip:hover {
+            background: rgba(85, 43, 127, 0.5);
+            border-color: rgba(155, 109, 198, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .fancy-chat-container {
+                max-width: 90%;
+                padding: 20px;
+            }
+            
+            .chat-avatar img {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .chat-title h3 {
+                font-size: 1.2rem;
+            }
+            
+            #fancy-chat-form input {
+                padding: 14px 50px 14px 15px;
+            }
+            
+            .pulse-button {
+                width: 38px;
+                height: 38px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -245,6 +425,35 @@
                class="invite-btn">Add to Server</a>
         </div>
     </header>
+
+    <section class="hero-chat-section">
+        <div class="container">
+            <div class="fancy-chat-container">
+                <div class="chat-header">
+                    <div class="chat-avatar">
+                        <img src="https://cdn.discordapp.com/attachments/717835759406678147/1370888100942708746/3ba757c892c384da23f0d9d5c15ae81c.png?ex=68212289&is=681fd109&hm=6eab7133c3be6c9862db855a9e3cc6af98c80f8202f74186149988f8ed73083c&" alt="Alfred Avatar">
+                    </div>
+                    <div class="chat-title">
+                        <h3>Ask Alfred Anything</h3>
+                        <p>Try it now - no login required</p>
+                    </div>
+                </div>
+                <form id="fancy-chat-form">
+                    <div class="fancy-input-container">
+                        <input type="text" id="fancy-question" placeholder="Type your question here...">
+                        <button type="submit" class="pulse-button">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
+                <div class="chat-examples">
+                    <span class="example-chip" onclick="setQuestion('What can you do?')">What can you do?</span>
+                    <span class="example-chip" onclick="setQuestion('How do I add you to Discord?')">Add to Discord?</span>
+                    <span class="example-chip" onclick="setQuestion('Tell me a fun fact')">Fun fact</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <main>
         <section class="section">
@@ -311,6 +520,25 @@
             </div>
         </section>
 
+        <section class="section" style="background-color: var(--card-bg);">
+            <div class="container" style="text-align: center;">
+                <div class="section-title">
+                    <h2>Try Alfred Now</h2>
+                    <p>Ask a question and experience Alfred's capabilities</p>
+                </div>
+                <div class="mini-chat">
+                    <form id="mini-chat-form" style="display: flex; max-width: 500px; margin: 0 auto;">
+                        <input type="text" id="quick-question" placeholder="Type your question here..." 
+                               style="flex: 1; padding: 12px 15px; border-radius: 8px 0 0 8px; border: none; background: rgba(255,255,255,0.1); color: white;">
+                        <button type="submit" 
+                                style="background: var(--primary-color); color: white; border: none; padding: 12px 20px; border-radius: 0 8px 8px 0; cursor: pointer;">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
         <section class="section">
             <div class="container" style="text-align: center;">
                 <div class="section-title">
@@ -341,5 +569,22 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script>
+        function setQuestion(text) {
+            document.getElementById('fancy-question').value = text;
+            document.getElementById('fancy-question').focus();
+        }
+        
+        document.getElementById('fancy-chat-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const question = document.getElementById('fancy-question').value.trim();
+            if (question) {
+                // Encode the question for URL safety
+                const encodedQuestion = encodeURIComponent(question);
+                // Redirect to chat.html with query parameter
+                window.location.href = `chat.html?q=${encodedQuestion}`;
+            }
+        });
+    </script>
 </body>
 </html>
