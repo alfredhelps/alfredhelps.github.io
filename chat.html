@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="description" content="Test Alfred's chat capabilities directly in your browser">
     <meta property="og:title" content="Chat with Alfred - Test Bot">
     <meta property="og:description" content="Try Alfred's AI capabilities directly in your browser">
@@ -97,35 +98,11 @@
             background: radial-gradient(circle, rgba(155, 109, 198, 0.2) 0%, transparent 70%);
             border-radius: 50%;
             filter: blur(30px);
-            animation: pulseGlow 8s ease-in-out infinite alternate;
             z-index: -1;
-        }
-
-        @keyframes pulseGlow {
-            0% {
-                opacity: 0.5;
-                transform: translateX(-50%) scale(1);
-            }
-
-            100% {
-                opacity: 0.8;
-                transform: translateX(-50%) scale(1.3);
-            }
         }
 
         .hero h1 {
             text-shadow: 0 0 10px rgba(155, 109, 198, 0.5);
-            animation: textGlow 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes textGlow {
-            0% {
-                text-shadow: 0 0 10px rgba(155, 109, 198, 0.5);
-            }
-
-            100% {
-                text-shadow: 0 0 20px rgba(155, 109, 198, 0.8), 0 0 30px rgba(85, 43, 127, 0.4);
-            }
         }
 
         .bot-avatar {
@@ -138,9 +115,9 @@
             transform: scale(1.05) rotate(5deg) !important;
         }
 
-        /* Premium chat container */
+        /* Premium chat container - increase size */
         .chat-container {
-            max-width: 1000px; /* Increased from 900px */
+            max-width: 1200px; /* Increased from 1000px */
             margin: 0 auto;
             background: rgba(26, 20, 38, 0.8);
             backdrop-filter: blur(10px);
@@ -149,7 +126,7 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            height: 700px; /* Increased from 600px */
+            height: 800px; /* Increased from 700px */
             border: 1px solid rgba(155, 109, 198, 0.3);
             transition: all 0.4s ease;
             position: relative;
@@ -165,17 +142,6 @@
             background: radial-gradient(circle at center, rgba(155, 109, 198, 0.1) 0%, transparent 60%);
             opacity: 0.5;
             z-index: -1;
-            animation: rotateGradient 15s linear infinite;
-        }
-
-        @keyframes rotateGradient {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
         }
 
         .chat-container:hover {
@@ -204,7 +170,8 @@
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transform: translateX(-100%);
-            animation: shimmer 5s infinite;
+            animation: shimmer 8s infinite;
+            /* Reduced from 5s to 8s */
         }
 
         @keyframes shimmer {
@@ -512,7 +479,8 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 10px rgba(85, 43, 127, 0.3);
-            flex-shrink: 0; /* Prevent button from shrinking */
+            flex-shrink: 0;
+            /* Prevent button from shrinking */
         }
 
         .chat-input button:hover {
@@ -634,16 +602,19 @@
         /* Responsive adjustments */
         @media (max-width: 1100px) {
             .chat-container {
-                max-width: 95%; /* Increased from 90% */
-                height: 700px; /* Maintained height from desktop */
+                max-width: 95%;
+                /* Increased from 90% */
+                height: 800px; /* Maintained height from desktop */
             }
         }
 
         @media (max-width: 768px) {
             .chat-container {
-                height: 650px; /* Increased from 600px */
-                max-width: 95%; /* Ensure consistent width */
-                margin: 0 auto; /* Center the container */
+                height: 750px; /* Increased from 650px */
+                max-width: 95%;
+                /* Ensure consistent width */
+                margin: 0 auto;
+                /* Center the container */
             }
 
             .chat-messages {
@@ -654,8 +625,9 @@
 
         @media (max-width: 480px) {
             .chat-container {
-                height: 600px; /* Increased from 500px */
-                max-width: 98%; /* Almost full width on smallest screens */
+                height: 700px; /* Increased from 600px */
+                max-width: 98%;
+                /* Almost full width on smallest screens */
                 margin: 0 auto;
             }
 
@@ -663,42 +635,52 @@
                 padding: 20px;
                 gap: 16px;
             }
-            
+
             .chat-input {
-                padding: 12px; /* Reduced padding */
+                padding: 12px;
+                /* Reduced padding */
             }
-            
+
             .chat-input input {
-                max-width: 75%; /* Limit input width on small screens */
-                padding: 10px 15px; /* Smaller padding */
-                font-size: 0.9rem; /* Smaller font */
+                max-width: 75%;
+                /* Limit input width on small screens */
+                padding: 10px 15px;
+                /* Smaller padding */
+                font-size: 0.9rem;
+                /* Smaller font */
             }
-            
+
             .chat-input button {
-                width: 40px; /* Smaller button */
+                width: 40px;
+                /* Smaller button */
                 height: 40px;
-                min-width: 40px; /* Ensure minimum width */
-                margin-left: auto; /* Push to the right */
+                min-width: 40px;
+                /* Ensure minimum width */
+                margin-left: auto;
+                /* Push to the right */
             }
         }
 
         /* Extra small screens */
         @media (max-width: 360px) {
             .chat-container {
-                height: 550px; /* Even taller on very small screens */
+                height: 650px; /* Increased from 550px */
             }
-            
+
             .chat-input {
-                padding: 10px; /* Minimal padding */
+                padding: 10px;
+                /* Minimal padding */
             }
-            
+
             .chat-input input {
-                max-width: 70%; /* Even narrower input */
+                max-width: 70%;
+                /* Even narrower input */
                 padding: 8px 12px;
             }
-            
+
             .chat-input button {
-                width: 36px; /* Smaller button */
+                width: 36px;
+                /* Smaller button */
                 height: 36px;
                 min-width: 36px;
             }
@@ -708,7 +690,16 @@
             margin: 20px 0;
             text-align: center;
             animation: fadeIn 0.5s ease-out;
-            transition: opacity 0.3s, transform 0.3s;
+            transition: opacity 0.3s, transform 0.3s, height 0.3s ease-out, margin 0.3s ease-out;
+            height: auto;
+            overflow: hidden;
+        }
+
+        .example-questions.hide-examples {
+            opacity: 0;
+            transform: translateY(-10px);
+            height: 0;
+            margin: 0;
         }
 
         .example-questions p {
@@ -755,17 +746,7 @@
 
         /* Glowing animation for bot messages */
         .glow-animation {
-            animation: messageGlow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes messageGlow {
-            0% {
-                box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(155, 109, 198, 0.1);
-            }
-
-            100% {
-                box-shadow: 0 5px 20px rgba(155, 109, 198, 0.3), 0 0 10px rgba(155, 109, 198, 0.2);
-            }
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(155, 109, 198, 0.1);
         }
 
         /* Typing cursor animation */
@@ -800,123 +781,153 @@
         /* Mobile-specific message styling - more aggressive */
         @media (max-width: 480px) {
             .message {
-                max-width: 85%; /* Slightly wider to fit more content */
-                padding: 10px 12px; /* Much smaller padding */
-                border-radius: 12px; /* Smaller radius */
-                font-size: 0.9rem; /* Smaller font size */
-                line-height: 1.4; /* Even tighter line height */
-                margin-bottom: 2px; /* Less space between messages */
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+                max-width: 85%;
+                /* Slightly wider to fit more content */
+                padding: 10px 12px;
+                /* Much smaller padding */
+                border-radius: 12px;
+                /* Smaller radius */
+                font-size: 0.9rem;
+                /* Smaller font size */
+                line-height: 1.4;
+                /* Even tighter line height */
+                margin-bottom: 2px;
+                /* Less space between messages */
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                /* Lighter shadow */
             }
-            
+
             .message p {
-                margin: 0 0 6px 0; /* Smaller margins */
+                margin: 0 0 6px 0;
+                /* Smaller margins */
             }
-            
+
             .message p:last-child {
-                margin-bottom: 0; /* No margin on last paragraph */
+                margin-bottom: 0;
+                /* No margin on last paragraph */
             }
-            
-            .message h1, .message h2, .message h3, 
-            .message h4, .message h5, .message h6 {
+
+            .message h1,
+            .message h2,
+            .message h3,
+            .message h4,
+            .message h5,
+            .message h6 {
                 margin-top: 6px;
                 margin-bottom: 6px;
-                font-size: 0.95em; /* Smaller headings relative to text */
+                font-size: 0.95em;
+                /* Smaller headings relative to text */
             }
-            
+
             .message code {
-                padding: 1px 2px; /* Smaller code padding */
-                font-size: 0.85em; /* Smaller code font */
+                padding: 1px 2px;
+                /* Smaller code padding */
+                font-size: 0.85em;
+                /* Smaller code font */
             }
-            
+
             .message pre {
-                margin: 6px 0; /* Smaller margins for code blocks */
-                padding: 6px; /* Smaller padding for code blocks */
+                margin: 6px 0;
+                /* Smaller margins for code blocks */
+                padding: 6px;
+                /* Smaller padding for code blocks */
             }
-            
+
             .message pre code {
-                font-size: 0.8em; /* Even smaller font for code blocks */
+                font-size: 0.8em;
+                /* Even smaller font for code blocks */
             }
-            
-            .message ul, .message ol {
-                padding-left: 14px; /* Less indentation for lists */
-                margin: 6px 0; /* Smaller margins */
+
+            .message ul,
+            .message ol {
+                padding-left: 14px;
+                /* Less indentation for lists */
+                margin: 6px 0;
+                /* Smaller margins */
             }
-            
+
             .message li {
-                margin-bottom: 3px; /* Less space between list items */
+                margin-bottom: 3px;
+                /* Less space between list items */
             }
-            
+
             .message table {
-                font-size: 0.8em; /* Smaller table text */
-                margin: 6px 0; /* Smaller table margins */
+                font-size: 0.8em;
+                /* Smaller table text */
+                margin: 6px 0;
+                /* Smaller table margins */
             }
-            
-            .message th, .message td {
-                padding: 3px 4px; /* Smaller cell padding */
+
+            .message th,
+            .message td {
+                padding: 3px 4px;
+                /* Smaller cell padding */
             }
-            
+
             .bot-message img {
-                width: 24px; /* Smaller avatar */
+                width: 24px;
+                /* Smaller avatar */
                 height: 24px;
                 bottom: -6px;
                 left: -10px;
             }
-            
+
             .user-message::after,
             .bot-message::before {
-                width: 16px; /* Smaller chat bubble tails */
+                width: 16px;
+                /* Smaller chat bubble tails */
                 height: 16px;
             }
-            
+
             .chat-messages {
-                gap: 12px; /* Less space between message groups */
+                gap: 12px;
+                /* Less space between message groups */
             }
-            
+
             .glow-animation {
-                animation: messageGlowMobile 2s ease-in-out infinite alternate;
-            }
-            
-            @keyframes messageGlowMobile {
-                0% {
-                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(155, 109, 198, 0.05);
-                }
-                100% {
-                    box-shadow: 0 3px 12px rgba(155, 109, 198, 0.2), 0 0 5px rgba(155, 109, 198, 0.1);
-                }
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(155, 109, 198, 0.05);
             }
         }
 
         /* Even smaller for very small screens */
         @media (max-width: 360px) {
             .message {
-                max-width: 90%; /* Wider to fit the smaller screen */
-                padding: 8px 10px; /* Even smaller padding */
-                font-size: 0.85rem; /* Even smaller font */
-                line-height: 1.3; /* Tightest line height */
-                border-radius: 10px; /* Smallest radius */
+                max-width: 90%;
+                /* Wider to fit the smaller screen */
+                padding: 8px 10px;
+                /* Even smaller padding */
+                font-size: 0.85rem;
+                /* Even smaller font */
+                line-height: 1.3;
+                /* Tightest line height */
+                border-radius: 10px;
+                /* Smallest radius */
             }
-            
+
             .bot-message img {
-                width: 20px; /* Even smaller avatar */
+                width: 20px;
+                /* Even smaller avatar */
                 height: 20px;
                 bottom: -5px;
                 left: -8px;
             }
-            
+
             .user-message::after,
             .bot-message::before {
-                width: 12px; /* Smallest chat bubble tails */
+                width: 12px;
+                /* Smallest chat bubble tails */
                 height: 12px;
             }
-            
+
             .chat-messages {
-                gap: 10px; /* Minimal space between message groups */
+                gap: 10px;
+                /* Minimal space between message groups */
             }
         }
 
         /* Add these styles to handle mobile keyboard issues */
         @media (max-width: 480px) {
+
             /* Styles for when keyboard is open */
             body.keyboard-open {
                 overflow: hidden;
@@ -924,33 +935,36 @@
                 width: 100%;
                 height: 100%;
             }
-            
+
             body.keyboard-open .chat-container {
                 z-index: 1000;
                 box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
             }
-            
+
             body.keyboard-open .chat-messages {
                 max-height: 40vh;
             }
-            
+
             body.keyboard-open .chat-input {
                 position: sticky;
                 bottom: 0;
                 z-index: 1001;
-                background: rgba(36, 26, 51, 0.95); /* More opaque when keyboard is open */
+                background: rgba(36, 26, 51, 0.95);
+                /* More opaque when keyboard is open */
             }
-            
+
             /* Prevent iOS zoom on input focus */
-            input, textarea, select {
+            input,
+            textarea,
+            select {
                 font-size: 16px !important;
             }
-            
+
             /* Ensure the page doesn't scroll unnecessarily */
             html {
                 height: -webkit-fill-available;
             }
-            
+
             body {
                 min-height: 100vh;
                 min-height: -webkit-fill-available;
@@ -1092,7 +1106,7 @@
 
             // Scroll to chat container after page loads
             setTimeout(() => {
-                const chatContainer = document.querySelector('.chat-container');
+                const chatContainer = document.querySelector('.model-option');
                 if (chatContainer) {
                     chatContainer.scrollIntoView({ behavior: 'smooth' });
                 }
@@ -1186,10 +1200,8 @@
                 // Hide example questions when user sends a message
                 if (exampleQuestions) {
                     exampleQuestions.classList.add('hide-examples');
-                    // Remove from DOM after animation completes
-                    setTimeout(() => {
-                        exampleQuestions.remove();
-                    }, 300);
+                    // Don't remove from DOM, just hide with CSS transition
+                    // The height:0 and margin:0 in CSS will smoothly collapse the space
                 }
             }
 
@@ -1204,7 +1216,7 @@
                 });
             });
 
-            // Function to add a bot message with markdown support and typing animation
+            // Function to add a bot message with markdown support and optimized typing
             function addBotMessage(text) {
                 messages.push({
                     content: text,
@@ -1212,13 +1224,15 @@
                 });
 
                 const messageDiv = document.createElement('div');
-                messageDiv.classList.add('message', 'bot-message', 'glow-animation');
+                messageDiv.classList.add('message', 'bot-message');
+                // Remove glow-animation class for better performance
+                // messageDiv.classList.add('glow-animation');
 
                 const botAvatar = document.createElement('img');
                 botAvatar.src = "https://cdn.discordapp.com/attachments/717835759406678147/1370888100942708746/3ba757c892c384da23f0d9d5c15ae81c.png?ex=68212289&is=681fd109&hm=6eab7133c3be6c9862db855a9e3cc6af98c80f8202f74186149988f8ed73083c&";
                 botAvatar.alt = "Alfred Avatar";
 
-                // Create a temporary container for the typing animation
+                // Create a container for the text
                 const textContainer = document.createElement('div');
                 textContainer.classList.add('typing-text-container');
 
@@ -1226,49 +1240,46 @@
                 messageDiv.appendChild(botAvatar);
                 messageDiv.appendChild(textContainer);
 
+                // Add to DOM immediately to show avatar
                 chatMessages.appendChild(messageDiv);
+
+                // Scroll to the new message
                 chatMessages.scrollTop = chatMessages.scrollHeight;
 
-                // Start the typing animation
+                // Start typing animation with optimized parameters
                 typeWriter(text, textContainer, 0, function () {
-                    // After typing is complete, convert markdown and apply syntax highlighting
-                    textContainer.innerHTML = marked.parse(text);
+                    // Convert markdown after typing is complete
+                    const formattedText = marked.parse(text);
+                    textContainer.innerHTML = formattedText;
 
-                    // Apply syntax highlighting to code blocks
-                    messageDiv.querySelectorAll('pre code').forEach((block) => {
-                        hljs.highlightElement(block);
-                    });
-                    
-                    // Scroll to bottom again after markdown is applied
+                    // Final scroll to ensure visibility after markdown rendering
                     chatMessages.scrollTop = chatMessages.scrollHeight;
                 });
             }
 
-            // Function to create typing animation (much faster version)
+            // Function to create typing animation (optimized version)
             function typeWriter(text, element, i, fnCallback) {
                 if (i < text.length) {
-                    // Display text up to current position with a blinking cursor
-                    element.innerHTML = text.substring(0, i + 1) + '<span class="cursor">|</span>';
-                    
-                    // Scroll to bottom with each update to follow the typing
-                    chatMessages.scrollTop = chatMessages.scrollHeight;
-                    
-                    // Much faster typing speed (constant and quick)
-                    const speed = 1; // Super fast, almost instant
-                    
-                    // Process multiple characters per frame for very long messages
-                    const charsPerFrame = Math.max(1, Math.floor(text.length / 100));
+                    // Process more characters at once for better performance
+                    const charsPerFrame = Math.max(5, Math.floor(text.length / 20));
                     const nextIndex = Math.min(i + charsPerFrame, text.length);
-                    
-                    setTimeout(function() {
-                        typeWriter(text, element, nextIndex, fnCallback);
-                    }, speed);
-                } else if (typeof fnCallback == 'function') {
-                    // Remove cursor and execute callback when typing is complete
-                    element.innerHTML = text;
-                    // Final scroll to ensure everything is visible
+
+                    // Only update DOM once per frame with multiple characters
+                    element.innerHTML = text.substring(0, nextIndex) + '<span class="cursor">|</span>';
+
+                    // Scroll to bottom only once per update
                     chatMessages.scrollTop = chatMessages.scrollHeight;
-                    setTimeout(fnCallback, 300);
+
+                    // Use requestAnimationFrame for better performance
+                    requestAnimationFrame(() => {
+                        setTimeout(() => {
+                            typeWriter(text, element, nextIndex, fnCallback);
+                        }, 10); // Faster typing with fewer updates
+                    });
+                } else if (typeof fnCallback == 'function') {
+                    // Remove cursor when done
+                    element.innerHTML = text;
+                    fnCallback();
                 }
             }
 
