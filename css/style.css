@@ -1,5 +1,6 @@
 :root {
   --primary: #552B7F;
+  --text-links: #945bcd;
   --primary-dark: #3A1D57;
   --secondary: #7A40B3;
   --accent: #9B6DC6;
@@ -56,7 +57,7 @@ body {
 }
 
 a {
-  color: var(--primary);
+  color: var(--text-links);
   text-decoration: none;
   transition: all var(--transition-normal);
   position: relative;
@@ -496,7 +497,7 @@ main {
 .content-container h2 {
   font-size: 2.2rem;
   margin: 2rem 0 1.2rem;
-  color: var(--primary);
+  color: var(--text-links);
   font-weight: 700;
   letter-spacing: -0.01em;
 }

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AlfredHelps Patreon Benefits - Unlock advanced AI models, custom personalities, unlimited usage and more">
+    <meta property="og:title" content="Patreon Benefits - AlfredHelps Bot">
+    <meta property="og:description" content="Become a Patreon subscriber and unlock premium features for AlfredHelps">
+    <meta property="og:image" content="https://cdn.discordapp.com/attachments/717835759406678147/1370888100942708746/3ba757c892c384da23f0d9d5c15ae81c.png?ex=68212289&is=681fd109&hm=6eab7133c3be6c9862db855a9e3cc6af98c80f8202f74186149988f8ed73083c&">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#2e151f">
+    <title>Patreon Benefits - AlfredHelps</title>
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .benefits-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(26, 20, 38, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(155, 109, 198, 0.2);
+        }
+        
+        .benefits-image {
+            width: 100%;
+            max-width: 600px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            margin: 2rem auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        .benefits-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .glow-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glow-effect::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(155, 109, 198, 0.4) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .glow-effect:hover::after {
+            opacity: 1;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            background: rgba(26, 20, 38, 0.8);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(155, 109, 198, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(155, 109, 198, 0.4);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        
+        .patreon-btn {
+            background: linear-gradient(135deg, #f96854, #e05d44);
+            color: white;
+            font-weight: 600;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .patreon-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            color: white;
+        }
+        
+        .discord-btn {
+            background: linear-gradient(135deg, #5865F2, #4752C4);
+            color: white;
+            font-weight: 600;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .discord-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loading Animation -->
+    <div class="loader-wrapper">
+        <div class="loader">
+            <div class="loader-circle"></div>
+            <div class="loader-circle"></div>
+            <div class="loader-circle"></div>
+            <div class="loader-text">LOADING</div>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">AlfredHelps</a>
+            <button class="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="features.html">Features</a>
+                <a href="patreon.html" class="active">Patreon</a>
+                <a href="tos.html">Terms</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="https://discord.com/oauth2/authorize?client_id=717830171574403162&permissions=67584&integration_type=0&scope=bot"
+                    class="invite-btn">Add to Discord</a>
+            </div>
+        </div>
+        <div class="nav-overlay"></div>
+    </nav>
+
+    <header>
+        <div class="hero">
+            <img src="https://cdn.discordapp.com/attachments/717835759406678147/1370888100942708746/3ba757c892c384da23f0d9d5c15ae81c.png?ex=68212289&is=681fd109&hm=6eab7133c3be6c9862db855a9e3cc6af98c80f8202f74186149988f8ed73083c&"
+                alt="AlfredHelps Bot Avatar" class="bot-avatar" style="animation: float 6s ease-in-out infinite;">
+            <h1>Patreon Benefits</h1>
+            <p>Unlock Premium Features for AlfredHelps</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Elevate Your Discord Experience</h2>
+                    <p>Become a Patreon subscriber and unlock exclusive features</p>
+                </div>
+
+                <div class="benefits-container glow-effect">
+                    <img src="https://cdn.discordapp.com/attachments/1311729302798209025/1371090525188526212/New_Patreon.png?ex=6821df0e&is=68208d8e&hm=0fe7a8c57a3230790bc8ef9e815dc8d4133cf6578115defbb3489fbe2f04b62a&" 
+                         alt="AlfredHelps Patreon Benefits" 
+                         class="benefits-image">
+                    
+                    <div class="cta-buttons">
+                        <a href="https://www.patreon.com/c/AlfredHelpsDC/membership" class="patreon-btn">
+                            <i class="fab fa-patreon"></i> Become a Patron
+                        </a>
+                        <a href="http://discord.gg/tsGdPKygqZ" class="discord-btn">
+                            <i class="fab fa-discord"></i> Join Support Server
+                        </a>
+                    </div>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Advanced AI Models</h3>
+                        <p>Access to GPT 4.1 Mini for sophisticated reasoning and problem solving. Unlock DeepSeek V3 for enhanced creative content generation.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-theater-masks"></i>
+                        </div>
+                        <h3>Custom AI Personalities</h3>
+                        <p>Create unique AI assistants tailored to your preferences. Save and switch between different personalities for various tasks.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-infinity"></i>
+                        </div>
+                        <h3>Unlimited Usage</h3>
+                        <p>No voting restrictions or daily limits. Use Alfred for extended conversations without interruptions.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <h3>VIP Community Status</h3>
+                        <p>Special Patreon role in our Support Server. Exclusive supporter badge displayed on your profile.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container" style="text-align: center;">
+                <div class="section-title">
+                    <h2>How to Claim Your Benefits</h2>
+                    <p>Follow these simple steps to activate your Patreon perks</p>
+                </div>
+                
+                <div class="content-container">
+                    <ol style="text-align: left; max-width: 600px; margin: 0 auto;">
+                        <li>Subscribe to our <a href="https://www.patreon.com/c/AlfredHelpsDC/membership">Patreon</a></li>
+                        <li>Link your Discord account on Patreon</li>
+                        <li>Join our <a href="http://discord.gg/tsGdPKygqZ">Support Server</a></li>
+                        <li>Use the <code>/claim</code> command in Discord</li>
+                        <li>Enjoy your premium features!</li>
+                    </ol>
+                </div>
+                
+                <a href="https://www.patreon.com/c/AlfredHelpsDC/membership"
+                   class="invite-btn" style="font-size: 1.2rem; padding: 0.8rem 2rem; margin-top: 2rem;">
+                   Subscribe Now
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">AlfredHelps</div>
+                <div class="footer-links">
+                    <a href="https://top.gg/bot/717830171574403162">Top.gg</a>
+                    <a href="http://discord.gg/tsGdPKygqZ">Support Server</a>
+                </div>
+                <div class="footer-copyright">
+                    &copy; 2025 AlfredHelps Bot. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
