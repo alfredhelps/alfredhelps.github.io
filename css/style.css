@@ -1,19 +1,20 @@
 :root {
-  --primary: #663399;
-  --primary-dark: #4B2771;
-  --secondary: #9370DB;
-  --accent: #B19CD9;
-  --background: #0f1016;
-  --card-bg: #1a1c25;
+  --primary: #552B7F;
+  --primary-dark: #3A1D57;
+  --secondary: #7A40B3;
+  --accent: #9B6DC6;
+  --accent-light: #B794D8;
+  --background: #0F0A14;
+  --card-bg: #1A1426;
   --text: #FFFFFF;
-  --text-secondary: #d0d2e0;
+  --text-secondary: #E0D6EB;
   --success: #57F287;
   --danger: #ED4245;
   --warning: #FEE75C;
   --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.15);
-  --shadow-lg: 0 15px 30px rgba(0, 0, 0, 0.2);
+  --shadow-sm: 0 4px 8px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(85, 43, 127, 0.2);
+  --shadow-md: 0 10px 15px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(85, 43, 127, 0.15);
+  --shadow-lg: 0 15px 25px rgba(0, 0, 0, 0.25), 0 5px 10px rgba(85, 43, 127, 0.2);
   --border-radius: 12px;
   --transition-fast: 0.2s ease;
   --transition-normal: 0.3s ease;
@@ -37,8 +38,8 @@ body {
   line-height: 1.7;
   overflow-x: hidden;
   background-image:
-    radial-gradient(circle at 15% 50%, rgba(102, 51, 153, 0.08) 0%, transparent 25%),
-    radial-gradient(circle at 85% 30%, rgba(102, 51, 153, 0.08) 0%, transparent 25%);
+    radial-gradient(circle at 15% 50%, rgba(85, 43, 127, 0.08) 0%, transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(85, 43, 127, 0.08) 0%, transparent 25%);
   background-attachment: fixed;
   background-size: 200% 200%;
   animation: gradientShift 15s ease infinite alternate;
@@ -115,7 +116,7 @@ header::before {
   font-size: 4rem;
   font-weight: 800;
   margin-bottom: 1.5rem;
-  background: linear-gradient(to right, #fff, #e2d9ff);
+  background: linear-gradient(to right, #fff, #d9d0ff);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -295,13 +296,13 @@ nav.scrolled {
   border-radius: 50px;
   font-weight: 600;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(102, 51, 153, 0.3);
+  box-shadow: 0 4px 15px rgba(85, 43, 127, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .invite-btn:hover {
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 25px rgba(102, 51, 153, 0.4);
+  box-shadow: 0 8px 25px rgba(85, 43, 127, 0.4);
 }
 
 .hamburger {
@@ -385,7 +386,7 @@ main {
   border-radius: var(--border-radius);
   padding: 2.5rem;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
   border: 1px solid rgba(255, 255, 255, 0.05);
   position: relative;
   overflow: hidden;
@@ -399,21 +400,20 @@ main {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(102, 51, 153, 0.05), transparent);
+  background: linear-gradient(135deg, rgba(155, 109, 198, 0.08), transparent);
   z-index: -1;
 }
 
 .card:hover {
   transform: translateY(-8px) scale(1.02);
   box-shadow: var(--shadow-lg);
-  border-color: rgba(147, 112, 219, 0.2);
+  border-color: rgba(155, 109, 198, 0.2);
 }
 
 .card-icon {
   font-size: 3rem;
   margin-bottom: 1.8rem;
-  color: var(--primary);
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  background: linear-gradient(135deg, var(--accent-light), var(--accent));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -459,9 +459,15 @@ main {
   border-radius: 50%;
   margin-bottom: 2.5rem;
   border: 4px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 40px rgba(102, 51, 153, 0.5);
+  box-shadow: 0 0 40px rgba(155, 109, 198, 0.5), 0 10px 15px rgba(0, 0, 0, 0.2);
   filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
   transition: transform 0.5s ease, box-shadow 0.5s ease, filter 0.5s ease;
+  animation: float 6s ease-in-out infinite;
+}
+
+.bot-avatar:hover {
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: 0 0 50px rgba(155, 109, 198, 0.7), 0 15px 25px rgba(0, 0, 0, 0.25);
 }
 
 /* Content Pages */
@@ -541,7 +547,7 @@ footer::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: radial-gradient(circle at 50% 80%, rgba(102, 51, 153, 0.08) 0%, transparent 60%);
+  background-image: radial-gradient(circle at 50% 80%, rgba(85, 43, 127, 0.08) 0%, transparent 60%);
   opacity: 0.5;
 }
 
