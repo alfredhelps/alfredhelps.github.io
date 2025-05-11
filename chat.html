@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Test Alfred's chat capabilities directly in your browser">
+    <meta property="og:title" content="Chat with Alfred - Test Bot">
+    <meta property="og:description" content="Try Alfred's AI capabilities directly in your browser">
+    <meta property="og:image"
+        content="https://cdn.discordapp.com/attachments/717835759406678147/1370888100942708746/3ba757c892c384da23f0d9d5c15ae81c.png?ex=68212289&is=681fd109&hm=6eab7133c3be6c9862db855a9e3cc6af98c80f8202f74186149988f8ed73083c&">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#2e151f">
+    <title>Premium Chat with Alfred - AI Assistant</title>
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.css">
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/lib/highlight.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #552B7F;
+            --secondary-color: #7A40B3;
+            --accent-color: #9B6DC6;
+            --accent-glow: rgba(155, 109, 198, 0.5);
+            --bg-color: #0F0A14;
+            --card-bg: #1A1426;
+            --secondary-bg: #241A33;
+            --text-color: #FFFFFF;
+            --text-secondary: #E0D6EB;
+            --gradient-primary: linear-gradient(135deg, #552B7F, #7A40B3);
+            --gradient-accent: linear-gradient(135deg, #7A40B3, #9B6DC6);
+            --gradient-glow: linear-gradient(135deg, rgba(85, 43, 127, 0.8), rgba(155, 109, 198, 0.8));
+            --shadow-neon: 0 0 15px rgba(155, 109, 198, 0.5), 0 0 30px rgba(85, 43, 127, 0.3);
+            --shadow-premium: 0 10px 25px rgba(0, 0, 0, 0.3), 0 6px 12px rgba(85, 43, 127, 0.2);
+        }
+
+        /* Premium background effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(85, 43, 127, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(155, 109, 198, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            animation: backgroundShift 20s ease infinite alternate;
+        }
+
+        @keyframes backgroundShift {
+            0% {
+                background-position: 0% 0%;
+            }
+
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+
+        /* Fancy header styling */
+        header {
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, var(--bg-color), transparent);
+            z-index: 1;
+        }
+
+        .hero {
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(155, 109, 198, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(30px);
+            animation: pulseGlow 8s ease-in-out infinite alternate;
+            z-index: -1;
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                opacity: 0.5;
+                transform: translateX(-50%) scale(1);
+            }
+
+            100% {
+                opacity: 0.8;
+                transform: translateX(-50%) scale(1.3);
+            }
+        }
+
+        .hero h1 {
+            text-shadow: 0 0 10px rgba(155, 109, 198, 0.5);
+            animation: textGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            0% {
+                text-shadow: 0 0 10px rgba(155, 109, 198, 0.5);
+            }
+
+            100% {
+                text-shadow: 0 0 20px rgba(155, 109, 198, 0.8), 0 0 30px rgba(85, 43, 127, 0.4);
+            }
+        }
+
+        .bot-avatar {
+            filter: drop-shadow(0 0 15px rgba(155, 109, 198, 0.6));
+            transition: all 0.5s ease;
+        }
+
+        .bot-avatar:hover {
+            filter: drop-shadow(0 0 20px rgba(155, 109, 198, 0.8));
+            transform: scale(1.05) rotate(5deg) !important;
+        }
+
+        /* Premium chat container */
+        .chat-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(26, 20, 38, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 6px 12px rgba(85, 43, 127, 0.2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+            border: 1px solid rgba(155, 109, 198, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .chat-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(155, 109, 198, 0.1) 0%, transparent 60%);
+            opacity: 0.5;
+            z-index: -1;
+            animation: rotateGradient 15s linear infinite;
+        }
+
+        @keyframes rotateGradient {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .chat-container:hover {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(85, 43, 127, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chat-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            animation: shimmer 5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            20% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .chat-header img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .chat-header img:hover {
+            transform: scale(1.15) rotate(10deg);
+            border-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .chat-header h3 {
+            margin: 0;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: linear-gradient(to right, #ffffff, #e0d6eb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background-image:
+                radial-gradient(circle at 15% 50%, rgba(85, 43, 127, 0.05) 0%, transparent 30%),
+                radial-gradient(circle at 85% 30%, rgba(85, 43, 127, 0.05) 0%, transparent 30%);
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-color) var(--card-bg);
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: rgba(26, 20, 38, 0.5);
+            border-radius: 10px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+            border: 2px solid rgba(26, 20, 38, 0.5);
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 16px 20px;
+            border-radius: 20px;
+            animation: fadeIn 0.4s ease-out;
+            position: relative;
+            line-height: 1.6;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        /* Style markdown elements inside messages */
+        .message p {
+            margin: 0 0 10px 0;
+        }
+        
+        .message p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .message h1, .message h2, .message h3, .message h4, .message h5, .message h6 {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .message code {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        .message pre {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        
+        .message pre code {
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+        }
+        
+        .message ul, .message ol {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .message blockquote {
+            border-left: 3px solid var(--accent-color);
+            padding-left: 10px;
+            margin: 10px 0;
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+        }
+        
+        .message a {
+            color: var(--accent-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--accent-color);
+        }
+        
+        .message a:hover {
+            border-bottom: 1px solid var(--accent-color);
+        }
+        
+        .message table {
+            border-collapse: collapse;
+            margin: 10px 0;
+            width: 100%;
+        }
+        
+        .message th, .message td {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 6px 10px;
+            text-align: left;
+        }
+        
+        .message th {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .message:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .user-message {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+            margin-left: 20%;
+            box-shadow: 0 3px 12px rgba(85, 43, 127, 0.2);
+        }
+
+        .user-message::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: -10px;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, transparent 50%, var(--secondary-color) 50%);
+            transform: rotate(45deg);
+            border-radius: 0 0 5px 0;
+            z-index: -1;
+        }
+
+        .bot-message {
+            background: rgba(36, 26, 51, 0.8);
+            color: var(--text-color);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            margin-right: 20%;
+            border-left: 3px solid var(--accent-color);
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(155, 109, 198, 0.1);
+        }
+
+        .bot-message::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -10px;
+            width: 20px;
+            height: 20px;
+            background: rgba(36, 26, 51, 0.8);
+            transform: rotate(45deg);
+            border-radius: 0 0 0 5px;
+            z-index: -1;
+        }
+
+        .bot-message img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            position: absolute;
+            bottom: -10px;
+            left: -15px;
+            border: 2px solid rgba(36, 26, 51, 0.8);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .bot-message:hover img {
+            transform: scale(1.2) rotate(10deg);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 10px rgba(155, 109, 198, 0.3);
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 20px 24px;
+            background: rgba(36, 26, 51, 0.8);
+            border-top: 1px solid rgba(155, 109, 198, 0.2);
+            gap: 15px;
+            position: relative;
+        }
+
+        .chat-input::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right,
+                    transparent,
+                    rgba(155, 109, 198, 0.5),
+                    rgba(155, 109, 198, 0.8),
+                    rgba(155, 109, 198, 0.5),
+                    transparent);
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 15px 22px;
+            border: none;
+            border-radius: 30px;
+            background: rgba(15, 10, 20, 0.6);
+            color: var(--text-color);
+            font-size: 1.05rem;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(155, 109, 198, 0.2);
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .chat-input input:focus {
+            outline: none;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(155, 109, 198, 0.3);
+            background: rgba(15, 10, 20, 0.7);
+        }
+
+        .chat-input input::placeholder {
+            color: rgba(224, 214, 235, 0.6);
+        }
+
+        .chat-input button {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(85, 43, 127, 0.3);
+        }
+
+        .chat-input button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 15px rgba(85, 43, 127, 0.4);
+        }
+
+        .chat-input button:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 12px 18px;
+            background: var(--secondary-bg);
+            border-radius: 18px;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            margin-top: 5px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border-left: 3px solid var(--accent-color);
+            max-width: 80px;
+        }
+
+        .typing-indicator.active {
+            opacity: 1;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typingAnimation {
+
+            0%,
+            60%,
+            100% {
+                transform: translateY(0);
+                opacity: 0.6;
+            }
+
+            30% {
+                transform: translateY(-5px);
+                opacity: 1;
+            }
+        }
+
+        .model-selector {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+            gap: 12px;
+        }
+
+        .model-option {
+            padding: 10px 20px;
+            background: var(--card-bg);
+            border: 2px solid transparent;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: var(--text-secondary);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .model-option:hover {
+            background: var(--secondary-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            color: var(--text-color);
+        }
+
+        .model-option.active {
+            border-color: var(--accent-color);
+            background: var(--secondary-bg);
+            color: var(--text-color);
+            box-shadow: 0 4px 12px rgba(85, 43, 127, 0.2);
+        }
+
+        .response-info {
+            padding: 8px 15px;
+            font-size: 0.85rem;
+            color: var(--secondary-text);
+            background-color: var(--secondary-bg);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tools-used {
+            font-style: italic;
+        }
+
+        .response-time {
+            font-weight: 500;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .chat-container {
+                height: 500px;
+                margin: 0 15px;
+            }
+
+            .message {
+                max-width: 85%;
+            }
+
+            .model-selector {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .chat-container {
+                height: 450px;
+            }
+
+            .chat-header {
+                padding: 15px;
+            }
+
+            .chat-messages {
+                padding: 15px;
+            }
+
+            .chat-input {
+                padding: 12px;
+            }
+
+            .message {
+                max-width: 90%;
+                padding: 12px 15px;
+            }
+        }
+
+        .example-questions {
+            margin: 20px 0;
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        
+        .example-questions p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+        
+        .question-chips {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .question-chip {
+            background: linear-gradient(135deg, var(--secondary-bg), var(--card-bg));
+            border: 1px solid var(--accent-color);
+            color: var(--text-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .question-chip:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(155, 109, 198, 0.3);
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+        }
+        
+        .question-chip:active {
+            transform: translateY(0);
+        }
+        
+        .hide-examples {
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loading Animation -->
+    <div class="loader-wrapper">
+        <div class="loader">
+            <div class="loader-circle"></div>
+            <div class="loader-circle"></div>
+            <div class="loader-circle"></div>
+            <div class="loader-text">LOADING</div>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">AlfredHelps</a>
+            <button class="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="features.html">Features</a>
+                <a href="patreon.html">Patreon</a>
+                <a href="chat.html" class="active">Chat</a>
+                <a href="tos.html">Terms</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="https://discord.com/oauth2/authorize?client_id=717830171574403162&permissions=67584&integration_type=0&scope=bot"
+                    class="invite-btn">Add to Discord</a>
+            </div>
+        </div>
+        <div class="nav-overlay"></div>
+    </nav>
+
+    <header>
+        <div class="hero">
+            <img src="https://cdn.discordapp.com/attachments/717835759406678147/1370888100942708746/3ba757c892c384da23f0d9d5c15ae81c.png?ex=68212289&is=681fd109&hm=6eab7133c3be6c9862db855a9e3cc6af98c80f8202f74186149988f8ed73083c&"
+                alt="AlfredHelps Bot Avatar" class="bot-avatar" style="animation: float 6s ease-in-out infinite;">
+            <h1>Chat with Alfred</h1>
+            <p>Try Alfred's capabilities directly in your browser</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="model-selector">
+                <div class="model-option active" data-model="default">Default AI</div>
+            </div>
+
+            <div class="chat-container">
+                <div class="chat-header">
+                    <img src="https://cdn.discordapp.com/attachments/717835759406678147/1370888100942708746/3ba757c892c384da23f0d9d5c15ae81c.png?ex=68212289&is=681fd109&hm=6eab7133c3be6c9862db855a9e3cc6af98c80f8202f74186149988f8ed73083c&"
+                        alt="Alfred Avatar">
+                    <h3>Alfred</h3>
+                </div>
+
+                <div class="chat-messages">
+                    <div class="message bot-message">
+                        <img src="https://cdn.discordapp.com/attachments/717835759406678147/1370888100942708746/3ba757c892c384da23f0d9d5c15ae81c.png?ex=68212289&is=681fd109&hm=6eab7133c3be6c9862db855a9e3cc6af98c80f8202f74186149988f8ed73083c&"
+                            alt="Alfred Avatar">
+                        Hello! I'm Alfred, your intelligent assistant. How can I help you today?
+                    </div>
+
+                    <div class="example-questions">
+                        <p>Try asking:</p>
+                        <div class="question-chips">
+                            <button class="question-chip">What can you do?</button>
+                            <button class="question-chip">Is 9.11 larger than 9.9?</button>
+                            <button class="question-chip">How do I add you to Discord?</button>
+                        </div>
+                    </div>
+
+                    <div class="typing-indicator">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+
+                <div class="response-info">
+                    <div class="tools-used"></div>
+                    <div class="response-time"></div>
+                </div>
+
+                <div class="chat-input">
+                    <input type="text" placeholder="Type your message here..." id="user-input">
+                    <button id="send-button">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">AlfredHelps</div>
+                <div class="footer-links">
+                    <a href="https://top.gg/bot/717830171574403162">Top.gg</a>
+                    <a href="http://discord.gg/tsGdPKygqZ">Support Server</a>
+                </div>
+                <div class="footer-copyright">
+                    &copy; 2025 AlfredHelps Bot. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Configure marked options with a custom renderer for links
+            const renderer = new marked.Renderer();
+            
+            // Override the link renderer to add target="_blank" and rel attributes
+            renderer.link = function(href, title, text) {
+                const link = marked.Renderer.prototype.link.call(this, href, title, text);
+                return link.replace('<a ', '<a target="_blank" rel="noopener noreferrer" ');
+            };
+            
+            marked.setOptions({
+                renderer: renderer,
+                highlight: function(code, lang) {
+                    if (lang && hljs.getLanguage(lang)) {
+                        return hljs.highlight(code, { language: lang }).value;
+                    }
+                    return hljs.highlightAuto(code).value;
+                },
+                breaks: true,
+                gfm: true
+            });
+            
+            const chatMessages = document.querySelector('.chat-messages');
+            const userInput = document.getElementById('user-input');
+            const sendButton = document.getElementById('send-button');
+            const modelOptions = document.querySelectorAll('.model-option');
+            const exampleQuestions = document.querySelector('.example-questions');
+            const questionChips = document.querySelectorAll('.question-chip');
+            const messages = []
+            
+            // Create typing indicator element but don't add it to DOM yet
+            const typingIndicator = document.createElement('div');
+            typingIndicator.classList.add('typing-indicator');
+            typingIndicator.innerHTML = `
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            `;
+            
+            // Function to show typing indicator
+            function showTypingIndicator() {
+                // Remove any existing typing indicator first
+                const existingIndicator = document.querySelector('.typing-indicator');
+                if (existingIndicator) {
+                    existingIndicator.remove();
+                }
+                
+                // Add the typing indicator to the end of the chat messages
+                chatMessages.appendChild(typingIndicator);
+                typingIndicator.classList.add('active');
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            
+            // Function to hide typing indicator
+            function hideTypingIndicator() {
+                typingIndicator.classList.remove('active');
+                // Remove from DOM after animation completes
+                setTimeout(() => {
+                    if (typingIndicator.parentNode === chatMessages) {
+                        chatMessages.removeChild(typingIndicator);
+                    }
+                }, 300);
+            }
+            
+            // Prevent initial auto-scroll to bottom
+            window.scrollTo(0, 0);
+
+            // Force scroll to top after a short delay to override any other scripts
+            setTimeout(() => {
+                window.scrollTo(0, 0);
+            }, 100);
+
+            let currentModel = 'default';
+
+            // Add cooldown tracking variable
+            let isOnCooldown = false;
+            const COOLDOWN_TIME = 2000; // 2 seconds cooldown
+
+            // Model selector functionality
+            modelOptions.forEach(option => {
+                option.addEventListener('click', function () {
+                    modelOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    currentModel = this.dataset.model;
+
+                    // Add a system message about model change
+                    addBotMessage(`Model switched to ${currentModel.charAt(0).toUpperCase() + currentModel.slice(1)}`);
+                });
+            });
+
+            // Function to add a user message with markdown support
+            function addUserMessage(text) {
+                messages.push({
+                    content: text,
+                    assistant: false
+                });
+                
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('message', 'user-message');
+                
+                // Convert markdown to HTML with custom link handling
+                messageDiv.innerHTML = marked.parse(text);
+                
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                
+                // Hide example questions when user sends a message
+                if (exampleQuestions) {
+                    exampleQuestions.classList.add('hide-examples');
+                    // Remove from DOM after animation completes
+                    setTimeout(() => {
+                        exampleQuestions.remove();
+                    }, 300);
+                }
+            }
+
+            // Add click event listeners to question chips
+            questionChips.forEach(chip => {
+                chip.addEventListener('click', function() {
+                    if (!isOnCooldown) {
+                        const questionText = this.textContent;
+                        userInput.value = questionText;
+                        sendMessage();
+                    }
+                });
+            });
+
+            // Function to add a bot message with markdown support
+            function addBotMessage(text) {
+                messages.push({
+                    content: text,
+                    assistant: true
+                });
+                
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('message', 'bot-message');
+                
+                const botAvatar = document.createElement('img');
+                botAvatar.src = "https://cdn.discordapp.com/attachments/717835759406678147/1370888100942708746/3ba757c892c384da23f0d9d5c15ae81c.png?ex=68212289&is=681fd109&hm=6eab7133c3be6c9862db855a9e3cc6af98c80f8202f74186149988f8ed73083c&";
+                botAvatar.alt = "Alfred Avatar";
+                
+                // Convert markdown to HTML with custom link handling
+                messageDiv.innerHTML = marked.parse(text);
+                
+                // Insert the avatar at the beginning
+                messageDiv.insertBefore(botAvatar, messageDiv.firstChild);
+                
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                
+                // Apply syntax highlighting to code blocks
+                messageDiv.querySelectorAll('pre code').forEach((block) => {
+                    hljs.highlightElement(block);
+                });
+            }
+
+            // Function to handle sending a message
+            async function sendMessage() {
+                const text = userInput.value.trim();
+                if (text && !isOnCooldown) {
+                    // Set cooldown
+                    isOnCooldown = true;
+                    sendButton.classList.add('disabled');
+
+                    // Visual feedback for cooldown
+                    sendButton.innerHTML = '<i class="fas fa-clock"></i>';
+
+                    addUserMessage(text);
+                    userInput.value = '';
+
+                    // Show typing indicator
+                    showTypingIndicator();
+
+                    // Record start time
+                    const startTime = Date.now();
+
+                    try {
+                        const request = await fetch("https://alfred.privatedns.org/chat", {
+                            mode: 'cors',
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                history: messages,
+                            })
+                        });
+
+                        // Check for rate limit response
+                        if (request.status === 429) {
+                            hideTypingIndicator();
+                            
+                            // Get rate limit details if available
+                            let retryAfter = request.headers.get('Retry-After') || '60';
+                            let rateLimitMessage = `You've reached the rate limit. Please try again in ${retryAfter} seconds.`;
+                            
+                            // Add rate limit message as a system message
+                            const systemMessage = document.createElement('div');
+                            systemMessage.classList.add('message', 'system-message');
+                            systemMessage.innerHTML = `⚠️ ${rateLimitMessage}`;
+                            chatMessages.appendChild(systemMessage);
+                            chatMessages.scrollTop = chatMessages.scrollHeight;
+                            
+                            // Update response info
+                            document.querySelector('.tools-used').innerHTML = '';
+                            document.querySelector('.response-time').innerHTML = 'Rate limited';
+                        } else if (!request.ok) {
+                            // Handle other HTTP errors
+                            throw new Error(`HTTP error! Status: ${request.status}`);
+                        } else {
+                            // Process successful response
+                            const response = await request.json();
+                            
+                            hideTypingIndicator();
+                            const endTime = Date.now();
+                            const responseTime = ((endTime - startTime) / 1000).toFixed(1);
+
+                            const toolsUsed = response.toolsUsed || [];
+
+                            addBotMessage(response.response);
+
+                            // Update response info
+                            document.querySelector('.tools-used').innerHTML =
+                                toolsUsed.length ? toolsUsed.map(tool => `${tool}`).join('<br>') : '';
+                            document.querySelector('.response-time').innerHTML =
+                                `Took ${responseTime}s`;
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        hideTypingIndicator();
+                        
+                        // Add error message
+                        const errorMessage = document.createElement('div');
+                        errorMessage.classList.add('message', 'system-message');
+                        errorMessage.innerHTML = `❌ Error: ${error.message || 'Failed to connect to Alfred. Please try again later.'}`;
+                        chatMessages.appendChild(errorMessage);
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                        
+                        // Update response info
+                        document.querySelector('.tools-used').innerHTML = '';
+                        document.querySelector('.response-time').innerHTML = 'Error';
+                    }
+
+                    // Reset cooldown after the specified time
+                    setTimeout(() => {
+                        isOnCooldown = false;
+                        sendButton.classList.remove('disabled');
+                        sendButton.innerHTML = '<i class="fas fa-paper-plane"></i>';
+                    }, COOLDOWN_TIME);
+                } else if (isOnCooldown) {
+                    // Show cooldown message
+                    const cooldownMsg = document.createElement('div');
+                    cooldownMsg.classList.add('cooldown-message');
+                    cooldownMsg.textContent = 'Please wait before sending another message';
+                    cooldownMsg.style.opacity = '1';
+
+                    document.querySelector('.chat-input').appendChild(cooldownMsg);
+
+                    // Fade out and remove the cooldown message
+                    setTimeout(() => {
+                        cooldownMsg.style.opacity = '0';
+                        setTimeout(() => cooldownMsg.remove(), 500);
+                    }, 1500);
+                }
+            }
+
+            // Add CSS for cooldown styling
+            const style = document.createElement('style');
+            style.textContent = `
+                .disabled {
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                }
+                
+                .cooldown-message {
+                    position: absolute;
+                    top: -30px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: rgba(0, 0, 0, 0.7);
+                    color: white;
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                    font-size: 0.8rem;
+                    transition: opacity 0.3s;
+                    pointer-events: none;
+                }
+                
+                .chat-input {
+                    position: relative;
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Add CSS for system messages
+            const systemMessageStyle = document.createElement('style');
+            systemMessageStyle.textContent = `
+                .system-message {
+                    background-color: rgba(255, 165, 0, 0.2);
+                    border-left: 3px solid #ff9800;
+                    color: #f5f5f5;
+                    padding: 10px 15px;
+                    margin: 10px auto;
+                    border-radius: 8px;
+                    font-size: 0.9rem;
+                    max-width: 90%;
+                    text-align: center;
+                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                }
+            `;
+            document.head.appendChild(systemMessageStyle);
+
+            // Event listeners
+            sendButton.addEventListener('click', sendMessage);
+
+            userInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+
+            // Focus input on page load but don't scroll to it
+            setTimeout(() => {
+                userInput.focus({ preventScroll: true });
+            }, 500);
+        });
+    </script>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

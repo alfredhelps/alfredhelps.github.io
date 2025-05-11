@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +18,188 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Premium background effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(85, 43, 127, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(155, 109, 198, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            animation: backgroundShift 20s ease infinite alternate;
+        }
+        
+        @keyframes backgroundShift {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+        
+        /* Enhanced header styling */
+        header {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, var(--background), transparent);
+            z-index: 1;
+        }
+        
+        .hero {
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(155, 109, 198, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(30px);
+            animation: pulseGlow 8s ease-in-out infinite alternate;
+            z-index: -1;
+        }
+        
+        @keyframes pulseGlow {
+            0% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+            100% { opacity: 0.8; transform: translateX(-50%) scale(1.3); }
+        }
+        
+        .hero h1 {
+            text-shadow: 0 0 10px rgba(155, 109, 198, 0.5);
+            animation: textGlow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 10px rgba(155, 109, 198, 0.5); }
+            100% { text-shadow: 0 0 20px rgba(155, 109, 198, 0.8), 0 0 30px rgba(85, 43, 127, 0.4); }
+        }
+        
+        .bot-avatar {
+            filter: drop-shadow(0 0 15px rgba(155, 109, 198, 0.6));
+            transition: all 0.5s ease;
+        }
+        
+        .bot-avatar:hover {
+            filter: drop-shadow(0 0 20px rgba(155, 109, 198, 0.8));
+            transform: scale(1.05) rotate(5deg) !important;
+        }
+        
+        /* Enhanced card styling */
+        .feature-card {
+            transition: all 0.4s ease;
+            border: 1px solid rgba(155, 109, 198, 0.2);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(155, 109, 198, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 8px 20px rgba(85, 43, 127, 0.2);
+            border-color: rgba(155, 109, 198, 0.4);
+        }
+        
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+        
+        .feature-icon {
+            position: relative;
+            transition: all 0.5s ease;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.2) translateY(-5px);
+            color: var(--accent);
+            text-shadow: 0 0 15px rgba(155, 109, 198, 0.6);
+        }
+        
+        /* Enhanced button styling */
+        .patreon-btn, .discord-btn, .invite-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2), 0 3px 8px rgba(85, 43, 127, 0.2);
+        }
+        
+        .patreon-btn::before, .discord-btn::before, .invite-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 60%);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+        
+        .patreon-btn:hover, .discord-btn:hover, .invite-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 5px 10px rgba(85, 43, 127, 0.3);
+        }
+        
+        .patreon-btn:hover::before, .discord-btn:hover::before, .invite-btn:hover::before {
+            opacity: 1;
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+        
+        /* Scroll reveal effect */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(155, 109, 198, 0.05) 0%, transparent 70%);
+            opacity: 0.5;
+            z-index: -1;
+        }
+        
         .benefits-container {
             max-width: 1000px;
             margin: 0 auto;
@@ -26,6 +209,13 @@
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-lg);
             border: 1px solid rgba(155, 109, 198, 0.2);
+            transition: all 0.4s ease;
+        }
+        
+        .benefits-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 8px 20px rgba(85, 43, 127, 0.2);
+            border-color: rgba(155, 109, 198, 0.4);
         }
         
         .benefits-image {
@@ -166,6 +356,7 @@
                 <a href="index.html">Home</a>
                 <a href="features.html">Features</a>
                 <a href="patreon.html" class="active">Patreon</a>
+                <a href="chat.html">Chat</a>
                 <a href="tos.html">Terms</a>
                 <a href="privacy.html">Privacy</a>
                 <a href="https://discord.com/oauth2/authorize?client_id=717830171574403162&permissions=67584&integration_type=0&scope=bot"
