@@ -782,7 +782,7 @@
                 // Then append it to the end of the chat messages
                 chatMessages.appendChild(typingIndicator);
                 typingIndicator.style.display = 'flex';
-                chatMessages.scrollTop = chatMessages.scrollHeight;
+                scrollTo(0, document.documentElement.offsetHeight)
             }
 
             // Function to hide typing indicator
@@ -849,18 +849,18 @@
                         const currentText = text.substring(0, nextIndex);
                         textContainer.innerHTML = currentText + '<span class="cursor">|</span>';
                         i = nextIndex;
-                        chatMessages.scrollTop = chatMessages.scrollHeight;
 
                         // Faster typing on mobile for better UX
                         const randomDelay = window.innerWidth <= 768 ?
                             speed + Math.random() * 5 : // Faster on mobile
                             speed + Math.random() * 15; // Normal on desktop
                         setTimeout(typeWriter, randomDelay);
+                        scrollTo(0, document.documentElement.offsetHeight)
                     } else {
                         // Remove cursor and convert markdown after typing is complete
                         // Use the configured renderer to properly handle links
                         textContainer.innerHTML = marked.parse(text);
-                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                        scrollTo(0, document.documentElement.offsetHeight)
 
                         // Add subtle highlight animation after typing completes
                         messageDiv.style.transition = "box-shadow 0.3s ease";
