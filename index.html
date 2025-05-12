@@ -7,7 +7,7 @@
     <meta name="description" content="Alfred - Your intelligent Discord assistant with multiple AI models, image generation, and smart search capabilities">
     <meta property="og:title" content="Alfred - AI Discord Bot">
     <meta property="og:description" content="Your Intelligent Discord Assistant with multiple AI models, image generation, and smart search capabilities">
-    <meta property="og:image" content="https://cdn.discordapp.com/avatars/717830171574403162/3ba757c892c384da23f0d9d5c15ae81c.png?size=512">
+    <meta property="og:image" content="images/Alfred.png">
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#2e151f">
     <title>AlfredHelps - AI Discord Bot</title>
@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Premium background effect */
+        /* Premium background effect - optimized */
         body::before {
             content: '';
             position: fixed;
@@ -30,7 +30,9 @@
                 radial-gradient(circle at 20% 30%, rgba(85, 43, 127, 0.15) 0%, transparent 50%),
                 radial-gradient(circle at 80% 70%, rgba(155, 109, 198, 0.1) 0%, transparent 50%);
             z-index: -1;
-            animation: backgroundShift 20s ease infinite alternate;
+            /* Reduced animation complexity */
+            animation: backgroundShift 30s ease infinite alternate;
+            will-change: background-position;
         }
         
         @keyframes backgroundShift {
@@ -38,7 +40,7 @@
             100% { background-position: 100% 100%; }
         }
         
-        /* Enhanced header styling */
+        /* Enhanced header styling - optimized */
         header {
             position: relative;
             overflow: hidden;
@@ -70,7 +72,8 @@
             background: radial-gradient(circle, rgba(155, 109, 198, 0.2) 0%, transparent 70%);
             border-radius: 50%;
             filter: blur(30px);
-            animation: pulseGlow 8s ease-in-out infinite alternate;
+            /* Reduced animation complexity */
+            animation: pulseGlow 10s ease-in-out infinite alternate;
             z-index: -1;
         }
         
@@ -81,42 +84,26 @@
         
         .hero h1 {
             text-shadow: 0 0 10px rgba(155, 109, 198, 0.5);
-            animation: textGlow 3s ease-in-out infinite alternate;
-        }
-        
-        @keyframes textGlow {
-            0% { text-shadow: 0 0 10px rgba(155, 109, 198, 0.5); }
-            100% { text-shadow: 0 0 20px rgba(155, 109, 198, 0.8), 0 0 30px rgba(85, 43, 127, 0.4); }
+            /* Removed animation for better performance */
         }
         
         .bot-avatar {
             filter: drop-shadow(0 0 15px rgba(155, 109, 198, 0.6));
-            transition: all 0.5s ease;
+            transition: transform 0.5s ease;
+            /* Use transform instead of filter for better performance */
+            will-change: transform;
         }
         
         .bot-avatar:hover {
-            filter: drop-shadow(0 0 20px rgba(155, 109, 198, 0.8));
             transform: scale(1.05) rotate(5deg) !important;
         }
         
-        /* Enhanced card styling */
+        /* Enhanced card styling - optimized */
         .card {
-            transition: all 0.4s ease;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
             border: 1px solid rgba(155, 109, 198, 0.2);
             overflow: hidden;
             position: relative;
-        }
-        
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(155, 109, 198, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
         }
         
         .card:hover {
@@ -125,40 +112,23 @@
             border-color: rgba(155, 109, 198, 0.4);
         }
         
-        .card:hover::before {
-            opacity: 1;
-        }
-        
         .card-icon {
             position: relative;
-            transition: all 0.5s ease;
+            transition: transform 0.5s ease, color 0.5s ease;
+            will-change: transform;
         }
         
         .card:hover .card-icon {
             transform: scale(1.2) translateY(-5px);
             color: var(--accent);
-            text-shadow: 0 0 15px rgba(155, 109, 198, 0.6);
         }
         
-        /* Enhanced button styling */
+        /* Enhanced button styling - optimized */
         .invite-btn {
             position: relative;
             overflow: hidden;
-            transition: all 0.4s ease;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2), 0 3px 8px rgba(85, 43, 127, 0.2);
-        }
-        
-        .invite-btn::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 60%);
-            transform: rotate(45deg);
-            transition: all 0.6s ease;
-            opacity: 0;
         }
         
         .invite-btn:hover {
@@ -166,10 +136,7 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 5px 10px rgba(85, 43, 127, 0.3);
         }
         
-        .invite-btn:hover::before {
-            opacity: 1;
-            transform: rotate(45deg) translate(50%, 50%);
-        }
+        /* Removed unnecessary pseudo-element animations */
         
         /* Scroll reveal effect */
         @keyframes fadeInUp {
@@ -200,7 +167,7 @@
             z-index: -1;
         }
         
-        /* Fancy Chat Box Styles */
+        /* Fancy Chat Box Styles - optimized */
         .hero-chat-section {
             padding: 40px 0;
             background: linear-gradient(180deg, var(--background) 0%, var(--card-bg) 100%);
@@ -217,27 +184,12 @@
                         0 0 0 1px rgba(155, 109, 198, 0.1);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(155, 109, 198, 0.2);
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease;
             position: relative;
             overflow: hidden;
         }
         
-        .fancy-chat-container::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(155, 109, 198, 0.1) 0%, transparent 70%);
-            animation: rotateGradient 15s linear infinite;
-            z-index: 0;
-        }
-        
-        @keyframes rotateGradient {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        /* Removed rotating gradient animation */
         
         .chat-header {
             display: flex;
@@ -256,13 +208,7 @@
             height: 48px;
             border-radius: 50%;
             box-shadow: 0 0 15px rgba(155, 109, 198, 0.6);
-            animation: pulse 3s infinite ease-in-out;
-        }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(155, 109, 198, 0.6); }
-            70% { box-shadow: 0 0 0 10px rgba(155, 109, 198, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(155, 109, 198, 0); }
+            /* Removed animation */
         }
         
         .chat-title h3 {
@@ -318,8 +264,9 @@
             color: white;
             font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 2px 10px rgba(155, 109, 198, 0.5);
+            will-change: transform;
         }
         
         .pulse-button:hover {
@@ -345,7 +292,7 @@
             font-size: 0.85rem;
             color: rgba(255, 255, 255, 0.9);
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: transform 0.2s ease, background-color 0.2s ease;
         }
         
         .example-chip:hover {
@@ -415,7 +362,7 @@
 
     <header>
         <div class="hero">
-            <img src="https://cdn.discordapp.com/avatars/717830171574403162/3ba757c892c384da23f0d9d5c15ae81c.png?size=512"
+            <img src="images/Alfred.png"
                  alt="AlfredHelps Bot Avatar"
                  class="bot-avatar"
                  style="animation: float 6s ease-in-out infinite;">
@@ -431,7 +378,7 @@
             <div class="fancy-chat-container">
                 <div class="chat-header">
                     <div class="chat-avatar">
-                        <img src="https://cdn.discordapp.com/avatars/717830171574403162/3ba757c892c384da23f0d9d5c15ae81c.png?size=512" alt="Alfred Avatar">
+                        <img src="images/Alfred.png" alt="Alfred Avatar">
                     </div>
                     <div class="chat-title">
                         <h3>Ask Alfred Anything</h3>

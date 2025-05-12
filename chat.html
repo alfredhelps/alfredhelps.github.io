@@ -14,7 +14,7 @@
     <meta property="og:title" content="Chat with Alfred">
     <meta property="og:description" content="Try Alfred's AI capabilities directly in your browser">
     <meta property="og:image"
-        content="https://cdn.discordapp.com/avatars/717830171574403162/3ba757c892c384da23f0d9d5c15ae81c.png?size=512">
+        content="images/Alfred.png">
     <title>Chat with AlfredHelps</title>
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,6 +22,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.css">
     <link rel="stylesheet" href="css/chat.css">
@@ -41,11 +42,13 @@
 
     <!-- Header -->
     <header>
-        <a href="index.html" class="logo">
-            <img src="https://cdn.discordapp.com/avatars/717830171574403162/3ba757c892c384da23f0d9d5c15ae81c.png?size=512"
-                alt="Alfred Logo">
-            <span>AlfredHelps</span>
-        </a>
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <img src="images/Alfred.png"
+                    alt="Alfred Logo">
+                <span>AlfredHelps</span>
+            </a>
+        </div>
     </header>
 
     <!-- Main Chat Area -->
@@ -54,7 +57,7 @@
             <div class="chat-messages" id="chat-messages">
                 <!-- Bot welcome message -->
                 <div class="message bot-message">
-                    <img src="https://cdn.discordapp.com/avatars/717830171574403162/3ba757c892c384da23f0d9d5c15ae81c.png?size=512"
+                    <img src="images/Alfred.png"
                         alt="Alfred Avatar">
                     Hello! I'm Alfred, your intelligent assistant. How can I help you today?
                 </div>
@@ -69,20 +72,25 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Response info -->
-            <div class="response-info" id="response-info"></div>
         </div>
     </main>
+
+    <!-- Thinking indicator -->
+    <div class="thinking-indicator-container" id="thinking-indicator-container">
+        <div class="thinking-bar" id="thinking-bar">
+            <span class="thinking-text">Thinking...</span>
+        </div>
+    </div>
 
     <!-- Chat Input -->
     <div class="chat-input-container">
         <div class="chat-input">
-            <input type="text" placeholder="Type your message here..." id="user-input">
-            <button id="send-button">
+            <textarea id="user-input" rows="1" placeholder="Ask Alfred" class="auto-resize-textarea"></textarea>
+            <button id="send-button" aria-label="Send message" class="input-icon">
                 <i class="fas fa-paper-plane"></i>
             </button>
         </div>
+        <div class="disclaimer-text">Alfred can make mistakes, so double-check it</div>
     </div>
 
     <!-- Typing indicator (not in DOM initially) -->
@@ -91,6 +99,21 @@
         <div class="typing-dot"></div>
         <div class="typing-dot"></div>
     </div>
+
+    <!-- Edit button template (will be cloned and used) -->
+    <template id="edit-button-template">
+        <button class="edit-message-button" aria-label="Edit message">
+            <i class="fas fa-pencil-alt"></i>
+        </button>
+    </template>
+
+    <!-- Source links template (will be cloned and used) -->
+    <template id="source-links-template">
+        <div class="source-links-container">
+            <div class="source-links-header">Sources</div>
+            <div class="source-links-list"></div>
+        </div>
+    </template>
 
     <script src="js/chat.js"></script>
 </body>
