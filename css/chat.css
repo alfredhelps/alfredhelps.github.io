@@ -2,9 +2,9 @@
     --primary-color: #8b5cf6;
     --secondary-color: #7c3aed;
     --accent-color: #a78bfa;
-    --bg-dark: #0a0814;
-    --bg-darker: #050508;
-    --bg-light: #1b1a2c;
+    --bg-dark: #0f0a14;
+    --bg-darker: #080508;
+    --bg-light: #1e1b2c;
     --text-color: #f8fafc;
     --text-secondary: #cbd5e1;
     --border-color: rgba(167, 139, 250, 0.3);
@@ -12,7 +12,6 @@
     --message-user-bg: rgba(124, 58, 237, 0.25);
     --message-bot-bg: rgba(30, 27, 44, 0.7);
     --input-bg: rgba(30, 27, 44, 0.7);
-    --glow-color: rgba(139, 92, 246, 0.4);
     --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     --font-mono: 'Roboto Mono', monospace;
 }
@@ -35,18 +34,17 @@ body {
     font-weight: 400;
     letter-spacing: -0.011em;
     background-image:
-        radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 35%),
-        radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.15) 0%, transparent 35%),
-        radial-gradient(circle at 50% 80%, rgba(124, 58, 237, 0.1) 0%, transparent 40%);
+        radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.12) 0%, transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.12) 0%, transparent 25%);
     background-attachment: fixed;
 }
 
 /* Header */
 header {
-    background: rgba(10, 8, 20, 0.8);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(167, 139, 250, 0.2);
+    background: rgba(15, 10, 20, 0.9);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     border-bottom: 1px solid var(--border-color);
     padding: 12px 20px;
     position: fixed;
@@ -74,18 +72,7 @@ header {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    box-shadow: 0 0 15px var(--glow-color);
-    animation: logoGlow 4s infinite alternate;
-}
-
-@keyframes logoGlow {
-    0% {
-        box-shadow: 0 0 10px var(--glow-color);
-    }
-
-    100% {
-        box-shadow: 0 0 20px var(--glow-color), 0 0 30px rgba(139, 92, 246, 0.2);
-    }
+    box-shadow: 0 0 10px rgba(167, 139, 250, 0.4);
 }
 
 /* Main chat area */
@@ -121,29 +108,27 @@ main {
 /* Message styling */
 .message {
     max-width: 85%;
-    padding: 16px 20px;
-    border-radius: 20px;
+    padding: 14px 18px;
+    border-radius: 18px;
     position: relative;
     line-height: 1.7;
     font-size: 1rem;
     letter-spacing: 0.01em;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .user-message {
     background: linear-gradient(135deg, var(--secondary-color), var(--primary-color), var(--accent-color));
     background-size: 200% 200%;
     animation: gradientShift 15s ease infinite;
-    box-shadow: 0 8px 25px rgba(124, 58, 237, 0.25);
+    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.2);
     color: white;
     align-self: flex-end;
     border-bottom-right-radius: 4px;
     margin-left: 15%;
     animation: fadeInRight 0.3s ease-out;
     font-weight: 400;
-    border: 1px solid rgba(167, 139, 250, 0.3);
+    border: 1px solid transparent;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -175,32 +160,29 @@ main {
 
 .bot-message {
     background: linear-gradient(135deg, rgba(30, 27, 44, 0.8), rgba(30, 27, 44, 0.6));
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(167, 139, 250, 0.2);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     align-self: flex-start;
     border-bottom-left-radius: 4px;
     margin-right: 15%;
     padding-left: 48px;
+    /* Space for avatar */
     animation: fadeInLeft 0.3s ease-out;
     font-weight: 400;
-    position: relative;
-    overflow: hidden;
-    
-    /* Add smooth transition for all properties */
-    transition: all 0.5s ease-in-out;
 }
 
-.bot-message::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.5), transparent);
-    opacity: 0.5;
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .bot-message img {
@@ -211,7 +193,7 @@ main {
     left: 8px;
     top: 12px;
     border: 2px solid rgba(167, 139, 250, 0.4);
-    box-shadow: 0 0 20px rgba(167, 139, 250, 0.4);
+    box-shadow: 0 0 15px rgba(167, 139, 250, 0.3);
     animation: pulseAvatar 4s infinite ease-in-out;
 }
 
@@ -234,25 +216,18 @@ main {
 
 /* Typing indicator */
 .typing-indicator {
-    position: relative;
-    display: flex !important;
-    /* Force flex display */
+    display: none;
     align-items: center;
-    flex-direction: column;
-    gap: 8px;
-    padding: 14px 20px;
-    background: linear-gradient(135deg, rgba(30, 27, 44, 0.8), rgba(30, 27, 44, 0.6));
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 20px;
+    gap: 5px;
+    padding: 12px 18px;
+    background: var(--message-bot-bg);
+    border-radius: 18px;
     width: fit-content;
     margin-right: auto;
     margin-left: 48px;
-    border: 1px solid rgba(167, 139, 250, 0.25);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    position: relative;
+    border: 1px solid rgba(167, 139, 250, 0.15);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .typing-indicator::before {
@@ -266,111 +241,64 @@ main {
     left: -40px;
     top: 50%;
     transform: translateY(-50%);
-    border: 2px solid rgba(167, 139, 250, 0.4);
-    box-shadow: 0 0 20px rgba(167, 139, 250, 0.4);
+    border: 2px solid rgba(167, 139, 250, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* New typing animation - futuristic pulse bar style */
-.typing-animation {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 24px;
+.typing-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    animation: typingBounce 1.4s infinite ease-in-out;
 }
 
-.typing-pulse {
-    display: inline-block;
-    width: 3px;
-    height: 16px;
-    background-color: var(--accent-color);
-    margin: 0 3px;
-    border-radius: 2px;
-    animation: typingPulse 1.2s infinite ease-in-out;
-    box-shadow: 0 0 8px rgba(167, 139, 250, 0.4);
+.typing-dot:nth-child(1) {
+    animation-delay: 0s;
 }
 
-@keyframes typingPulse {
+.typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typingBounce {
 
     0%,
+    60%,
     100% {
-        transform: scaleY(1);
-        opacity: 0.6;
+        transform: translateY(0);
     }
 
-    50% {
-        transform: scaleY(1.5);
-        opacity: 1;
+    30% {
+        transform: translateY(-5px);
     }
 }
 
-/* Cursor animation for typing effect */
+/* Cursor animation */
 .cursor {
     display: inline-block;
     width: 2px;
     height: 1em;
-    background-color: var(--accent-color);
+    background-color: var(--text-color);
     margin-left: 2px;
+    animation: blink 1s infinite;
     vertical-align: middle;
-    animation: blink 0.7s infinite;
-    opacity: 1;
-    transition: opacity 0.5s ease;
-}
-
-.cursor.fade-out {
-    opacity: 0;
-}
-
-/* Size placeholder to maintain container size */
-.size-placeholder {
-    display: inline-block;
-    width: 2px;
-    height: 1em;
-    margin-left: 2px;
-    vertical-align: middle;
-    opacity: 0;
 }
 
 @keyframes blink {
 
     0%,
-    49% {
+    100% {
         opacity: 1;
     }
 
-    50%,
-    100% {
+    50% {
         opacity: 0;
     }
-}
-
-/* Ensure cursor appears inline with text */
-.typing-text-container {
-    display: inline-block;
-    width: 100%;
-    line-height: 1.6;
-    position: relative;
-    
-    /* Add smooth transition for all properties */
-    transition: all 0.5s ease-in-out;
-}
-
-/* Ensure cursor appears properly in markdown content */
-.typing-text-container p:last-child {
-    display: inline;
-}
-
-/* Fix for cursor in code blocks */
-.typing-text-container pre code .cursor {
-    height: 1em;
-    vertical-align: baseline;
-}
-
-/* Ensure code blocks render properly during typing */
-.typing-text-container pre,
-.typing-text-container code {
-    white-space: pre-wrap;
-    word-break: break-word;
-    overflow-wrap: break-word;
 }
 
 /* Optimize for mobile */
@@ -384,15 +312,6 @@ main {
     /* Optimize typing animation for mobile */
     .typing-text-container {
         will-change: contents;
-    }
-
-    /* Ensure action indicator is visible on mobile */
-    .action-indicator {
-        /* Use hardware acceleration for better mobile performance */
-        transform: translateZ(0);
-        -webkit-transform: translateZ(0);
-        backface-visibility: hidden;
-        -webkit-backface-visibility: hidden;
     }
 
     /* Reduce other animations for better performance */
@@ -462,24 +381,22 @@ main {
 }
 
 .question-chip {
-    background: rgba(30, 27, 44, 0.6);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(167, 139, 250, 0.25);
+    background: rgba(167, 139, 250, 0.15);
+    border: 1px solid rgba(167, 139, 250, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     color: var(--text-color);
     padding: 10px 18px;
     border-radius: 20px;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    font-weight: 800;
 }
 
 .question-chip:hover {
-    background: rgba(124, 58, 237, 0.2);
-    border-color: rgba(167, 139, 250, 0.5);
-    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.2), 0 0 0 1px rgba(167, 139, 250, 0.3);
+    background: rgba(167, 139, 250, 0.25);
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
 }
 
 /* Input area */
@@ -489,12 +406,12 @@ main {
     left: 0;
     right: 0;
     padding: 15px 20px;
-    background: rgba(10, 8, 20, 0.8);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(15, 10, 20, 0.9);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     border-top: 1px solid var(--border-color);
     z-index: 100;
-    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .chat-input {
@@ -507,24 +424,25 @@ main {
 
 .chat-input input {
     flex: 1;
-    padding: 16px 24px;
+    padding: 14px 22px;
     background: rgba(30, 27, 44, 0.5);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(167, 139, 250, 0.25);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(167, 139, 250, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     border-radius: 24px;
     color: var(--text-color);
     font-size: 1rem;
     font-family: var(--font-sans);
     outline: none;
     transition: all 0.3s ease;
-    height: 54px;
+    height: 52px;
+    /* Fixed height for consistency */
 }
 
 .chat-input input:focus {
     border-color: var(--accent-color);
-    box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.3), 0 4px 20px rgba(0, 0, 0, 0.15), 0 0 30px rgba(139, 92, 246, 0.1);
+    box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.3), 0 4px 15px rgba(0, 0, 0, 0.1);
     background: rgba(30, 27, 44, 0.7);
 }
 
@@ -533,8 +451,8 @@ main {
     right: 8px;
     top: 50%;
     transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     border: none;
@@ -544,12 +462,7 @@ main {
     justify-content: center;
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
-}
-
-.chat-input button:hover {
-    transform: translateY(-50%) scale(1.05);
-    box-shadow: 0 4px 20px rgba(167, 139, 250, 0.5), 0 0 15px rgba(139, 92, 246, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive adjustments for input */
@@ -591,6 +504,11 @@ main {
         padding-bottom: 70px;
         /* Adjust for smaller input height */
     }
+}
+
+.chat-input button:hover {
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 4px 15px rgba(167, 139, 250, 0.4);
 }
 
 .chat-input button.disabled {
@@ -691,10 +609,6 @@ main {
 .typing-text-container {
     display: inline;
     line-height: 1.6;
-    position: relative;
-    
-    /* Add smooth transition for all properties */
-    transition: all 0.5s ease-in-out;
 }
 
 /* System message styling */
@@ -729,11 +643,11 @@ main {
 
 /* Custom scrollbar */
 .chat-messages::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
 }
 
 .chat-messages::-webkit-scrollbar-track {
-    background: rgba(15, 10, 20, 0.1);
+    background: rgba(15, 10, 20, 0.2);
     border-radius: 10px;
 }
 
@@ -750,17 +664,17 @@ main {
 /* Enhanced glow animation for user message while waiting for response */
 @keyframes messageGlow {
     0% {
-        box-shadow: 0 8px 25px rgba(124, 58, 237, 0.2);
+        box-shadow: 0 4px 15px rgba(124, 58, 237, 0.2);
         border-color: rgba(167, 139, 250, 0.2);
     }
 
     50% {
-        box-shadow: 0 8px 30px rgba(124, 58, 237, 0.6), 0 0 40px rgba(124, 58, 237, 0.3);
+        box-shadow: 0 4px 25px rgba(124, 58, 237, 0.6), 0 0 30px rgba(124, 58, 237, 0.3);
         border-color: rgba(167, 139, 250, 0.6);
     }
 
     100% {
-        box-shadow: 0 8px 25px rgba(124, 58, 237, 0.2);
+        box-shadow: 0 4px 15px rgba(124, 58, 237, 0.2);
         border-color: rgba(167, 139, 250, 0.2);
     }
 }
@@ -776,259 +690,107 @@ main {
     animation: messageGlow 2s infinite ease-in-out, gradientShift 15s ease infinite;
 }
 
-/* Enhance mobile responsiveness */
-@media (max-width: 768px) {
-
-    /* Make messages smaller and more compact */
-    .message {
-        max-width: 90%;
-        padding: 12px 16px;
-        font-size: 0.95rem;
-        line-height: 1.6;
-        margin-left: 10%;
-        margin-right: 10%;
-    }
-
-    .bot-message {
-        padding-left: 42px;
-        /* Adjust for smaller avatar */
-    }
-
-    .bot-message img {
-        width: 30px;
-        height: 30px;
-        left: 6px;
-        top: 10px;
-    }
-
-    /* Make chat container use more screen space */
-    .chat-messages {
-        padding: 15px;
-        gap: 15px;
-    }
-
-    /* Make example questions smaller */
-    .question-chip {
-        padding: 8px 14px;
-        font-size: 0.85rem;
-    }
-
-    .example-questions p {
-        font-size: 0.85rem;
-    }
-}
-
-/* Even smaller adjustments for very small screens */
-@media (max-width: 480px) {
-    .message {
-        max-width: 95%;
-        padding: 10px 14px;
-        font-size: 0.9rem;
-        line-height: 1.5;
-        margin-left: 5%;
-        margin-right: 5%;
-    }
-
-    .bot-message {
-        padding-left: 38px;
-        /* Adjust for even smaller avatar */
-    }
-
-    .bot-message img {
-        width: 26px;
-        height: 26px;
-        left: 6px;
-        top: 8px;
-    }
-
-    /* Reduce header size */
-    header {
-        padding: 8px 15px;
-    }
-
-    .logo {
-        font-size: 1rem;
-    }
-
-    .logo img {
-        width: 28px;
-        height: 28px;
-    }
-
-    /* Adjust main padding to account for smaller header */
-    main {
-        padding-top: 46px;
-    }
-
-    /* Make chat container use even more screen space */
-    .chat-messages {
-        padding: 12px;
-        gap: 12px;
-    }
-}
-
-/* Action tag inside messages - positioned at bottom during typing */
-.message-action-tag {
-    display: inline-block;
-    background: rgba(167, 139, 250, 0.2);
-    border: 1px solid rgba(167, 139, 250, 0.3);
-    color: var(--text-color);
-    padding: 3px 10px;
-    border-radius: 10px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    margin-top: 8px;
-    max-width: fit-content;
-    align-self: flex-start;
-    opacity: 1;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-/* Fade out animation for action tag */
-.message-action-tag.fade-out {
-    opacity: 0;
-    transform: translateY(5px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-/* Bot message container needs to be flex for proper positioning */
-.bot-message {
-    display: flex;
-    flex-direction: column;
-    transition: all 0.5s ease;
-    min-height: 52px;
-}
-
-/* Typing text container should take full width */
-.typing-text-container {
-    width: 100%;
-    transition: all 0.5s ease;
-    min-height: 1.6em;
-}
-
-/* Ensure paragraphs maintain their size */
-.typing-text-container p {
-    transition: all 0.5s ease;
-}
-
-/* Improve the hideTypingIndicator function */
-.typing-indicator.fade-out {
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    pointer-events: none;
-}
-
-/* Action indicator styling - redesigned for better visibility */
-.action-indicator {
-    display: block !important;
-    /* Force display */
-    margin-bottom: 8px;
-    background: linear-gradient(135deg, rgba(167, 139, 250, 0.2), rgba(124, 58, 237, 0.2));
-    border: 1px solid rgba(167, 139, 250, 0.5);
+/* Thinking bar */
+.thinking-bar {
+    position: relative;
+    margin: 8px 0 8px 48px; /* Align with bot messages (with avatar space) */
+    background: var(--message-bot-bg);
     color: var(--text-color);
     padding: 8px 16px;
-    border-radius: 14px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    text-align: center;
-    opacity: 1 !important;
-    /* Force opacity */
-    box-shadow:
-        0 3px 10px rgba(0, 0, 0, 0.15),
-        0 0 0 1px rgba(167, 139, 250, 0.3);
-    transition: none;
-    /* Remove transitions that might interfere */
-    z-index: 10;
-    /* Ensure it's above other elements */
-    position: relative;
-}
-
-/* Typing indicator - ensure proper display */
-.typing-indicator {
-    position: relative;
-    display: flex !important;
-    /* Force flex display */
-    align-items: center;
-    flex-direction: column;
-    gap: 8px;
-    padding: 12px 18px;
-    background: var(--message-bot-bg);
     border-radius: 18px;
-    width: fit-content;
-    margin-right: auto;
-    margin-left: 48px;
-    border: 1px solid rgba(167, 139, 250, 0.25);
+    font-size: 14px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    opacity: 1 !important;
-    /* Force opacity */
-    z-index: 5;
-    animation: fadeInLeft 0.2s ease-out;
-}
-
-/* Create a container for the typing dots */
-.typing-dots {
+    z-index: 10;
+    transition: opacity 0.2s ease, transform 0.2s ease, 
+                max-height 0.3s ease, margin 0.3s ease, padding 0.3s ease;
     display: flex;
     align-items: center;
-    gap: 5px;
+    max-width: 80%;
+    max-height: 100px; /* Set an initial max-height for transition */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border: 1px solid rgba(167, 139, 250, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    align-self: flex-start;
+    animation: fadeInLeft 0.3s ease-out;
 }
 
-/* Adjust for different screen sizes */
-@media (max-width: 480px) {
-    .action-indicator {
-        font-size: 0.8rem;
-        padding: 4px 10px;
-        margin-bottom: 6px;
-    }
-}
-
-/* Faster typing pulse animation */
-.typing-pulse {
+.thinking-bar::before {
+    content: '';
     display: inline-block;
-    width: 3px;
-    height: 16px;
-    background-color: var(--accent-color);
-    margin: 0 3px;
-    border-radius: 2px;
-    animation: typingPulse 0.8s infinite ease-in-out;
-    box-shadow: 0 0 8px rgba(167, 139, 250, 0.4);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    margin-right: 8px;
+    animation: pulse 1.5s infinite ease-in-out;
 }
 
-@keyframes typingPulse {
+.thinking-bar::after {
+    content: '';
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-image: url('https://cdn.discordapp.com/avatars/717830171574403162/3ba757c892c384da23f0d9d5c15ae81c.png?size=512');
+    background-size: cover;
+    position: absolute;
+    left: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 2px solid rgba(167, 139, 250, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
 
-    0%,
-    100% {
-        transform: scaleY(1);
-        opacity: 0.6;
+@keyframes pulse {
+    0% {
+        opacity: 0.4;
+        transform: scale(0.8);
     }
-
     50% {
-        transform: scaleY(1.5);
         opacity: 1;
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 0.4;
+        transform: scale(0.8);
     }
 }
 
-/* Faster fade animations */
-@keyframes fadeInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-10px);
+@media (max-width: 768px) {
+    .thinking-bar {
+        font-size: 12px;
+        padding: 6px 12px;
+        margin-left: 40px; /* Slightly less margin on mobile */
     }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
+    
+    .thinking-bar::before {
+        width: 10px;
+        height: 10px;
+        margin-right: 6px;
+    }
+    
+    .thinking-bar::after {
+        width: 30px;
+        height: 30px;
+        left: -35px;
     }
 }
 
-@keyframes fadeInRight {
-    from {
-        opacity: 0;
-        transform: translateX(10px);
-    }
+/* User message styles */
+.message.user-message {
+    align-self: flex-end;
+    background-color: var(--message-user-bg);
+    color: var(--text-color);
+    border-radius: 18px 18px 0 18px;
+    margin-left: 20%;
+    /* Remove any transitions that might cause flickering */
+    transition: none;
+}
 
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+/* Remove any waiting class animations that might cause flickering */
+.message.user-message.waiting {
+    opacity: 1;
+    transition: none;
 }
