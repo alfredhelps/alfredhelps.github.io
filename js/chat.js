@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             try {
                 // Make API request with streaming enabled
-                const response = await fetch('http://localhost:3000/chat', {
+                const response = await fetch('https://alfred.privatedns.org/chat', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
