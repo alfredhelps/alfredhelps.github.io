@@ -1,3 +1,4 @@
+
 const SERVER_URL = "https://alfred.privatedns.org/chat"
 let sourceLinksTemplate
 
@@ -10,12 +11,24 @@ document.addEventListener('DOMContentLoaded', function () {
     const typingIndicator = document.getElementById('typing-indicator');
     const exampleQuestions = document.getElementById('example-questions');
     const questionChips = document.querySelectorAll('.question-chip');
-    const loaderWrapper = document.querySelector('.loader-wrapper');
+    const chatLoaderWrapper = document.getElementById('chat-loader-wrapper');
     const thinkingIndicatorContainer = document.getElementById('thinking-indicator-container');
     const thinkingBar = document.getElementById('thinking-bar');
     const editButtonTemplate = document.getElementById('edit-button-template');
     const stopButtonTemplate = document.getElementById('stop-button-template');
     sourceLinksTemplate = document.getElementById('source-links-template');
+
+    // Hide loader after content is loaded
+    window.addEventListener('load', function () {
+        setTimeout(function () {
+            if (chatLoaderWrapper) {
+                chatLoaderWrapper.classList.add('fade-out');
+                setTimeout(function () {
+                    chatLoaderWrapper.style.display = 'none';
+                }, 500);
+            }
+        }, 800); // Small delay for visual effect
+    });
 
     // Variables
     const messages = [];
@@ -28,32 +41,71 @@ document.addEventListener('DOMContentLoaded', function () {
     let stopGenerationContainer = null; // Reference to the stop generation button container
 
     // Function to show stop generation button
-    function showStopGenerationButton() {
-        // Remove any existing stop button
-        hideStopGenerationButton();
-
-        // Create container for stop button
-        stopGenerationContainer = document.createElement('div');
-        stopGenerationContainer.classList.add('stop-generation-container');
-
-        // Clone the stop button template
-        const stopButton = stopButtonTemplate.content.cloneNode(true).querySelector('.stop-generation-button');
-
-        // Add click event to stop button
-        stopButton.addEventListener('click', stopResponseGeneration);
-
-        // Add the button to the container
-        stopGenerationContainer.appendChild(stopButton);
-
-        // Add the container to the body (not chat messages) to ensure fixed positioning works
-        document.body.appendChild(stopGenerationContainer);
-    }
+    // function showStopGenerationButton() {
+    //     // Remove any existing stop button
+    //     hideStopGenerationButton();
+    //
+    //     // Create container for stop button
+    //     stopGenerationContainer = document.createElement('div');
+    //     stopGenerationContainer.classList.add('stop-generation-container');
+    //
+    //     // Clone the stop button template
+    //     const stopButton = stopButtonTemplate.content.cloneNode(true).querySelector('.stop-generation-button');
+    //
+    //     // Add click event to stop button
+    //     stopButton.addEventListener('click', stopResponseGeneration);
+    //
+    //     // Add the button to the container
+    //     stopGenerationContainer.appendChild(stopButton);
+    //
+    //     chatMessages.insertBefore(stopGenerationContainer, chatMessages.lastChild)
+    // }
 
     // Function to hide stop generation button
-    function hideStopGenerationButton() {
-        if (stopGenerationContainer && stopGenerationContainer.parentNode) {
-            stopGenerationContainer.parentNode.removeChild(stopGenerationContainer);
-            stopGenerationContainer = null;
+    // function hideStopGenerationButton() {
+    //     if (stopGenerationContainer && stopGenerationContainer.parentNode) {
+    //         stopGenerationContainer.parentNode.removeChild(stopGenerationContainer);
+    //         stopGenerationContainer = null;
+    //     }
+    // }
+
+    // Function to transform send button into stop button
+    function transformToStopButton() {
+        // Change the icon and add stop-generation class
+        sendButton.innerHTML = '<i class="fas fa-stop"></i>';
+        sendButton.classList.add('stop-generation');
+        sendButton.setAttribute('aria-label', 'Stop generation');
+
+        // Remove disabled class if it exists
+        sendButton.classList.remove('disabled');
+
+        // Change the click event temporarily
+        sendButton.removeEventListener('click', sendMessageHandler);
+        sendButton.addEventListener('click', stopResponseGeneration);
+    }
+
+    // Function to transform back to send button
+    function transformToSendButton() {
+        // Change back to paper plane icon and remove stop-generation class
+        sendButton.innerHTML = '<i class="fas fa-paper-plane"></i>';
+        sendButton.classList.remove('stop-generation');
+        sendButton.setAttribute('aria-label', 'Send message');
+
+        // Reset the click event
+        sendButton.removeEventListener('click', stopResponseGeneration);
+        sendButton.addEventListener('click', sendMessageHandler);
+
+        // Reset cooldown after a short delay
+        setTimeout(() => {
+            isOnCooldown = false;
+            sendButton.classList.remove('disabled');
+        }, 500);
+    }
+
+    // Store the original send message handler
+    function sendMessageHandler() {
+        if (!isOnCooldown) {
+            sendMessage();
         }
     }
 
@@ -64,15 +116,12 @@ document.addEventListener('DOMContentLoaded', function () {
             currentResponseController.abort();
             currentResponseController = null;
 
-            // Hide the stop button
-            hideStopGenerationButton();
-
             // Hide typing indicator and thinking bar
             hideTypingIndicator();
             hideThinkingBar();
 
             if (chatMessages.lastChild.classList.contains("bot-message")) {
-                chatMessages.removeChild(chatMessages.lastChild)
+                chatMessages.removeChild(chatMessages.lastChild);
             }
 
             // Add a message indicating the response was stopped
@@ -82,11 +131,8 @@ document.addEventListener('DOMContentLoaded', function () {
             chatMessages.appendChild(stoppedMessage);
             scrollToLastMessage();
 
-            // Reset cooldown
-            setTimeout(() => {
-                isOnCooldown = false;
-                sendButton.classList.remove('disabled');
-            }, 500); // Shorter cooldown after stopping
+            // Transform back to send button
+            transformToSendButton();
         }
     }
 
@@ -376,6 +422,9 @@ document.addEventListener('DOMContentLoaded', function () {
         // Add copy button to the message
         addCopyButton(messageDiv);
 
+        // Set the lastBotMessageDiv reference
+        lastBotMessageDiv = messageDiv;
+
         return { messageDiv, textContainer };
     }
 
@@ -403,7 +452,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const inputHeight = inputContainer.offsetHeight;
 
         // Add extra padding to account for shadows and ensure no overlap
-        const extraPadding = 30;
+        const extraPadding = 10;
         const totalPadding = inputHeight + extraPadding;
 
         // Apply padding to main and chat messages
@@ -423,11 +472,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add a resize event listener to handle orientation changes
     window.addEventListener('resize', function () {
         updateUIForScreenSize();
-
-        // On orientation change, ensure proper scrolling
-        if (lastBotMessageDiv || lastUserMessageDiv) {
-            setTimeout(scrollToLastMessage, 300);
-        }
     });
 
     // Function to regenerate response
@@ -436,7 +480,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Set cooldown
         isOnCooldown = true;
-        sendButton.classList.add('disabled');
+        transformToStopButton();
 
         // IMPORTANT: Remove the previous bot message if it exists
         // Find all bot messages and remove the last one
@@ -453,13 +497,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Show typing indicator
         showTypingIndicator();
-        scrollToLastMessage();
-
-        // Show stop generation button
-        showStopGenerationButton();
-
-        // Add a small delay to ensure the typing indicator is visible
-        await new Promise(resolve => setTimeout(resolve, 100));
 
         try {
             console.log("Sending regeneration request to server...");
@@ -624,8 +661,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Hide thinking bar if it's still showing
                 hideThinkingBar();
 
-                // Hide stop generation button
-                hideStopGenerationButton();
+                // Transform back to send button
+                transformToSendButton();
 
                 // Reset the response controller
                 currentResponseController = null;
@@ -648,6 +685,9 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error:', error);
             hideTypingIndicator();
             hideThinkingBar();
+
+            // Transform back to send button on error
+            transformToSendButton();
 
             const systemMessage = document.createElement('div');
             systemMessage.classList.add('system-message');
@@ -729,8 +769,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Hide loader after page loads
     window.addEventListener('load', function () {
         setTimeout(() => {
-            loaderWrapper.style.opacity = '0';
-            loaderWrapper.style.visibility = 'hidden';
             userInput.focus();
         }, 500);
     });
@@ -830,7 +868,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Set cooldown
             isOnCooldown = true;
-            sendButton.classList.add('disabled');
+            transformToStopButton();
 
             // Get the final text (possibly truncated)
             const finalText = userInput.value.trim();
@@ -864,14 +902,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 assistant: false
             });
 
-            // Scroll to the new message
-            scrollToLastMessage();
-
             // Show typing indicator
             showTypingIndicator();
-
-            // Show stop generation button
-            showStopGenerationButton();
 
             try {
                 // Create a new AbortController for this request
@@ -1038,8 +1070,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     // Hide thinking bar if it's still showing
                     hideThinkingBar();
 
-                    // Hide stop generation button
-                    hideStopGenerationButton();
+                    // Transform back to send button
+                    transformToSendButton();
 
                     // Reset the response controller
                     currentResponseController = null;
@@ -1109,11 +1141,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Event listeners
-    sendButton.addEventListener('click', function () {
-        if (!isOnCooldown) {
-            sendMessage();
-        }
-    });
+    sendButton.addEventListener('click', sendMessageHandler);
 
     // Remove the old keydown listener since we added it in setupTextareaAutoResize
 
@@ -1137,50 +1165,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 500);
 
     // Optimize for mobile performance
-    if (window.innerWidth <= 768) {
+    if (isMobile()) {
         // Disable animations
         document.body.classList.add('reduce-motion');
 
         // Use passive event listeners
         chatMessages.addEventListener('touchstart', function () { }, { passive: true });
         chatMessages.addEventListener('touchmove', function () { }, { passive: true });
-    }
-
-    // Function to update response info with typing animation
-    function updateResponseInfo(text) {
-        if (!text) {
-            responseInfo.innerHTML = '';
-            return;
-        }
-
-        // Clear previous content
-        responseInfo.innerHTML = '';
-
-        // Create typing container
-        const infoTypingContainer = document.createElement('span');
-        infoTypingContainer.classList.add('info-typing-container');
-        responseInfo.appendChild(infoTypingContainer);
-
-        // Typing animation for response info - slowed down a bit
-        let i = 0;
-        const infoSpeed = 5; // Slower typing speed (was 2)
-        const infoChunkSize = 2; // Smaller chunks for more visible typing (was 3)
-
-        function typeInfoText() {
-            if (i < text.length) {
-                const nextIndex = Math.min(i + infoChunkSize, text.length);
-                const currentText = text.substring(0, nextIndex);
-                infoTypingContainer.innerHTML = currentText + '<span class="info-cursor">|</span>';
-                i = nextIndex;
-
-                setTimeout(typeInfoText, infoSpeed);
-            } else {
-                // Remove cursor when done
-                infoTypingContainer.innerHTML = text;
-            }
-        }
-
-        typeInfoText();
     }
 
     // Add this function to handle auto-resizing of the textarea and text alignment
@@ -1292,6 +1283,9 @@ document.addEventListener('DOMContentLoaded', function () {
         textarea.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' && !e.shiftKey && !isOnCooldown) {
                 e.preventDefault();
+                if (isMobile()) {
+                    userInput.blur()
+                }
                 sendMessage();
             }
         });

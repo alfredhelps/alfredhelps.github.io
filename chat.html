@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,8 +13,7 @@
     <meta name="description" content="Test Alfred's chat capabilities directly in your browser">
     <meta property="og:title" content="Chat with Alfred">
     <meta property="og:description" content="Try Alfred's AI capabilities directly in your browser">
-    <meta property="og:image"
-        content="images/Alfred.png">
+    <meta property="og:image" content="images/Alfred.png">
     <title>Chat with AlfredHelps</title>
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,33 +22,107 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.css">
     <link rel="stylesheet" href="css/chat.css">
     <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/lib/highlight.min.js"></script>
     <style>
-        .chat-input .input-icon:hover {
-            color: var(--text-color);
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 10px rgba(167, 139, 250, 0.6);
+        /* Loading Animation for Chat */
+        .chat-loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
         }
-        
-        /* Override the transform on hover for all buttons in chat-input */
-        .chat-input button:hover {
-            transform: none;
-            box-shadow: 0 0 15px rgba(167, 139, 250, 0.6);
+
+        .chat-loader {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+
+        .chat-loader-circle {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            border-top-color: var(--primary-color);
+            animation: chat-spin 1.2s linear infinite;
+        }
+
+        .chat-loader-circle:nth-child(2) {
+            border: 4px solid transparent;
+            border-bottom-color: var(--secondary-color);
+            animation: chat-spin 1.8s linear infinite reverse;
+        }
+
+        .chat-loader-circle:nth-child(3) {
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            border: 4px solid transparent;
+            border-left-color: var(--accent-color);
+            animation: chat-spin 1.5s linear infinite;
+        }
+
+        .chat-loader-text {
+            position: absolute;
+            bottom: -55px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-color);
+            letter-spacing: 2px;
+            animation: chat-pulse-text 1.5s ease-in-out infinite;
+        }
+
+        .fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        @keyframes chat-spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes chat-pulse-text {
+            0%, 100% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
         }
     </style>
 </head>
 
 <body>
-    <!-- Loading Animation -->
-    <div class="loader-wrapper">
-        <div class="loader">
-            <div class="loader-circle"></div>
-            <div class="loader-circle"></div>
-            <div class="loader-circle"></div>
-            <div class="loader-text">LOADING</div>
+    <!-- Chat Loading Animation -->
+    <div class="chat-loader-wrapper" id="chat-loader-wrapper">
+        <div class="chat-loader">
+            <div class="chat-loader-circle"></div>
+            <div class="chat-loader-circle"></div>
+            <div class="chat-loader-circle"></div>
+            <div class="chat-loader-text">LOADING CHAT</div>
         </div>
     </div>
 
@@ -58,8 +130,7 @@
     <header>
         <div class="header-content">
             <a href="index.html" class="logo">
-                <img src="images/Alfred.png"
-                    alt="Alfred Logo">
+                <img src="images/Alfred.png" alt="Alfred Logo">
                 <span>AlfredHelps</span>
             </a>
         </div>
@@ -71,18 +142,17 @@
             <div class="chat-messages" id="chat-messages">
                 <!-- Bot welcome message -->
                 <div class="message bot-message">
-                    <img src="images/Alfred.png"
-                        alt="Alfred Avatar">
-                    Hello! I'm Alfred, your intelligent assistant. How can I help you today?
+                    <img src="images/Alfred.png" alt="Alfred Avatar">
+                    <p>Hello! I'm AlfredHelps, your intelligent assistant. How can I help you today?</p>
                 </div>
 
                 <!-- Example questions -->
                 <div class="example-questions" id="example-questions">
                     <p>Try asking:</p>
                     <div class="question-chips">
-                        <button class="question-chip">What can you do?</button>
-                        <button class="question-chip">Is 9.11 larger than 9.9?</button>
-                        <button class="question-chip">How do I add you to Discord?</button>
+                        <button class="question-chip" style="--index: 0">What can you do?</button>
+                        <button class="question-chip" style="--index: 1">Is 9.11 larger than 9.9?</button>
+                        <button class="question-chip" style="--index: 2">How do I add you to Discord?</button>
                     </div>
                 </div>
             </div>
@@ -100,7 +170,8 @@
     <div class="chat-input-container">
         <div class="chat-input">
             <div class="input-main">
-                <textarea id="user-input" rows="1" placeholder="Ask AlfredHelps" class="auto-resize-textarea"></textarea>
+                <textarea id="user-input" rows="1" placeholder="Ask AlfredHelps"
+                    class="auto-resize-textarea"></textarea>
                 <button id="send-button" aria-label="Send message" class="input-icon">
                     <i class="fas fa-paper-plane"></i>
                 </button>
@@ -138,12 +209,14 @@
     </template>
 
     <!-- Stop generation button template -->
+    <!-- 
     <template id="stop-button-template">
         <button class="stop-generation-button" aria-label="Stop generation">
             <i class="fas fa-stop"></i>
             <span>Stop generating</span>
         </button>
     </template>
+    -->
 
     <script src="js/chat.js"></script>
 </body>
