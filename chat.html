@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,6 +28,19 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.css">
     <link rel="stylesheet" href="css/chat.css">
     <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/lib/highlight.min.js"></script>
+    <style>
+        .chat-input .input-icon:hover {
+            color: var(--text-color);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 10px rgba(167, 139, 250, 0.6);
+        }
+        
+        /* Override the transform on hover for all buttons in chat-input */
+        .chat-input button:hover {
+            transform: none;
+            box-shadow: 0 0 15px rgba(167, 139, 250, 0.6);
+        }
+    </style>
 </head>
 
 <body>
@@ -85,10 +99,18 @@
     <!-- Chat Input -->
     <div class="chat-input-container">
         <div class="chat-input">
-            <textarea id="user-input" rows="1" placeholder="Ask Alfred" class="auto-resize-textarea"></textarea>
-            <button id="send-button" aria-label="Send message" class="input-icon">
-                <i class="fas fa-paper-plane"></i>
-            </button>
+            <div class="input-main">
+                <textarea id="user-input" rows="1" placeholder="Ask Alfred" class="auto-resize-textarea"></textarea>
+                <button id="send-button" aria-label="Send message" class="input-icon">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            <div class="input-tools">
+                <button id="reason-button" aria-label="Reason" class="tool-button">
+                    <i class="fas fa-brain"></i>
+                    <span>Reason</span>
+                </button>
+            </div>
         </div>
         <div class="disclaimer-text">Alfred can make mistakes, so double-check it</div>
     </div>
