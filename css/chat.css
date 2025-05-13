@@ -9,9 +9,12 @@
     --text-secondary: #cbd5e1;
     --border-color: rgba(167, 139, 250, 0.3);
     --shadow-color: rgba(0, 0, 0, 0.2);
-    --message-user-bg: #7c3aed; /* Solid color for user messages */
-    --message-bot-bg: #1e1b2c; /* Solid color for bot messages */
-    --input-bg: #1e1b2c; /* Solid color for input */
+    --message-user-bg: #7c3aed;
+    /* Solid color for user messages */
+    --message-bot-bg: #1e1b2c;
+    /* Solid color for bot messages */
+    --input-bg: #1e1b2c;
+    /* Solid color for input */
     --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     --font-mono: 'Roboto Mono', monospace;
 }
@@ -93,48 +96,41 @@ header {
     transform: scale(1.05);
 }
 
-/* Main chat area */
+/* Main chat area - drastically increase padding */
 main {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding-top: 60px; /* Match header height */
-    padding-bottom: 160px; /* Increased padding to prevent overlap */
+    padding-top: 60px;
+    /* Match header height */
+    padding-bottom: 300px;
+    /* Drastically increased padding */
     position: relative;
 }
 
-/* Chat messages container */
+/* Chat messages container - drastically increase bottom padding */
 .chat-messages {
     flex: 1;
     overflow-y: auto;
     padding: 20px;
-    padding-bottom: 120px; /* Increase bottom padding to prevent overlap with input */
+    padding-bottom: 280px;
+    /* Drastically increased padding */
     display: flex;
-    flex: 1;
     flex-direction: column;
     gap: 20px;
     scroll-behavior: smooth;
 }
 
-/* Mobile adjustments for main content and messages */
+/* Mobile adjustments with even more padding */
 @media (max-width: 768px) {
     main {
-        padding-bottom: 180px; /* Increase padding on mobile */
+        padding-bottom: 350px;
+        /* Even more padding on mobile */
     }
-    
+
     .chat-messages {
-        padding-bottom: 160px; /* Increase bottom padding on mobile */
-    }
-    
-    /* Adjust message spacing */
-    .message.bot-message {
-        margin-bottom: 50px; /* Ensure enough space below bot messages */
-    }
-    
-    /* Adjust spacing for consecutive bot messages */
-    .message.bot-message + .message.bot-message {
-        margin-top: -15px; /* Reduce space between consecutive messages */
-        margin-bottom: 50px; /* But maintain bottom margin */
+        padding-bottom: 330px;
+        /* Even more padding on mobile */
     }
 }
 
@@ -191,58 +187,102 @@ main {
     }
 }
 
-.bot-message {
-    background: linear-gradient(135deg, rgba(30, 27, 44, 0.8), rgba(30, 27, 44, 0.6));
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(167, 139, 250, 0.2);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+/* Bot message styling - completely transparent with no glow effects */
+.message.bot-message {
+    background: transparent;
+    border: none;
+    box-shadow: none;
     align-self: flex-start;
-    border-bottom-left-radius: 4px;
-    margin-right: 15%;
-    padding-left: 54px; /* Increased padding to create more space */
-    animation: fadeInLeft 0.3s ease-out;
+    border-radius: 0;
+    margin-right: 0;
+    margin-left: 0;
+    padding-left: 54px;
+    animation: none;
     font-weight: 400;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.95);
+    max-width: 100%;
+    width: 100%;
+    transition: none;
+    /* Remove transitions */
 }
 
-@keyframes fadeInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+/* Remove hover effects */
+.message.bot-message:hover {
+    border-color: transparent;
+    box-shadow: none;
+    background: transparent;
 }
 
+/* Bot message content styling */
+.bot-message .typing-text-container {
+    font-size: 1.1rem;
+    /* Larger font size */
+    line-height: 1.6;
+    /* Improved line height */
+    color: rgba(255, 255, 255, 0.95);
+    /* Brighter text */
+    max-width: 100%;
+    /* Allow full width */
+}
+
+/* Bot avatar styling - no glow */
 .bot-message img {
-    width: 32px; /* Slightly smaller avatar */
-    height: 32px; /* Slightly smaller avatar */
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     position: absolute;
-    left: 12px; /* Adjusted position */
-    top: 14px; /* Centered vertically */
-    border: 2px solid rgba(167, 139, 250, 0.4);
-    box-shadow: 0 0 15px rgba(167, 139, 250, 0.3);
-    animation: pulseAvatar 4s infinite ease-in-out;
+    left: 12px;
+    top: 14px;
+    border: 1px solid rgba(167, 139, 250, 0.2);
+    box-shadow: none;
+    animation: none;
+    transition: none;
+    /* Remove transitions */
 }
 
+/* Bot avatar hover - no effects */
+.bot-message img:hover {
+    box-shadow: none;
+    transform: none;
+    filter: none;
+}
+
+/* Remove any remaining animations */
+.bot-message * {
+    animation: none !important;
+}
+
+/* Only keep fade-in for new text chunks */
+.new-text-chunk {
+    animation: fadeInChunk 0.4s ease-out forwards !important;
+}
+
+/* Ensure no glow on code blocks */
+.bot-message pre {
+    box-shadow: none;
+    border: 1px solid rgba(30, 27, 44, 0.8);
+}
+
+/* Ensure no glow on links */
+.bot-message a {
+    text-shadow: none;
+    box-shadow: none;
+}
+
+.bot-message a:hover {
+    text-shadow: none;
+    box-shadow: none;
+}
+
+/* Remove avatar pulse animation */
 @keyframes pulseAvatar {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(167, 139, 250, 0.4);
-    }
 
-    70% {
-        transform: scale(1.05);
-        box-shadow: 0 0 0 10px rgba(167, 139, 250, 0);
-    }
-
+    0%,
     100% {
         transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(167, 139, 250, 0);
+        box-shadow: none;
     }
 }
 
@@ -252,14 +292,15 @@ main {
     align-items: center;
     gap: 10px;
     padding: 12px 18px 12px 12px;
-    background: var(--message-bot-bg);
+    background: transparent;
     border-radius: 18px;
     width: fit-content;
     margin-right: auto;
     position: relative;
-    border: 1px solid var(--border-color);
+    border: none;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 60px; /* Add space below typing indicator to prevent overlap */
+    margin-bottom: 60px;
+    /* Add space below typing indicator to prevent overlap */
 }
 
 .typing-avatar {
@@ -313,7 +354,8 @@ main {
 .cursor {
     display: inline-block;
     width: 2px;
-    height: 1em;
+    height: 1.2em;
+    /* Taller cursor */
     background-color: var(--text-color);
     margin-left: 2px;
     animation: blink 1s infinite;
@@ -437,8 +479,10 @@ main {
     left: 0;
     right: 0;
     padding: 16px 20px 16px;
-    background: #0a0710; /* Darker, more elegant background */
-    z-index: 100;
+    background: #0a0710;
+    /* Darker, more elegant background */
+    z-index: 1000;
+    /* Increased z-index */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -449,19 +493,20 @@ main {
 /* Mobile-specific input adjustments */
 @media (max-width: 768px) {
     .chat-input-container {
-        padding: 12px 16px 20px; /* Increase bottom padding for iOS */
+        padding: 12px 16px 20px;
+        /* Increase bottom padding for iOS */
     }
-    
+
     /* Add iOS-specific fix for safe area */
     @supports (-webkit-touch-callout: none) {
         .chat-input-container {
             padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
         }
-        
+
         main {
             padding-bottom: calc(180px + env(safe-area-inset-bottom, 0px));
         }
-        
+
         .chat-messages {
             padding-bottom: calc(160px + env(safe-area-inset-bottom, 0px));
         }
@@ -486,8 +531,10 @@ main {
     display: flex;
     align-items: center;
     width: 100%;
-    position: relative; /* For absolute positioning of counter */
-    margin-bottom: 10px; /* Add space for the counter */
+    position: relative;
+    /* For absolute positioning of counter */
+    margin-bottom: 10px;
+    /* Add space for the counter */
 }
 
 .input-tools {
@@ -524,8 +571,56 @@ main {
     border-color: var(--secondary-color);
 }
 
-.tool-button:hover {
-    background: rgba(255, 255, 255, 0.1);
+/* Remove all hover effects on mobile */
+@media (max-width: 768px) {
+    .tool-button:hover {
+        background: none;
+        color: rgba(255, 255, 255, 0.7);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Ensure active state is preserved even when hovering on mobile */
+    .tool-button.active:hover {
+        background: var(--secondary-color);
+        color: var(--text-color);
+        border-color: var(--secondary-color);
+    }
+
+    .tool-button span {
+        display: none;
+        /* Hide text on mobile */
+    }
+
+    .tool-button {
+        padding: 4px 8px;
+    }
+
+    .input-tools {
+        padding-top: 4px;
+    }
+}
+
+/* Only apply hover effects on desktop */
+@media (min-width: 769px) {
+    .tool-button:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .tool-button span {
+        display: none;
+        /* Hide text on mobile */
+    }
+
+    .tool-button {
+        padding: 4px 8px;
+    }
+
+    .input-tools {
+        padding-top: 4px;
+    }
 }
 
 /* Update textarea styles to work with new layout */
@@ -542,9 +637,10 @@ main {
     line-height: 1.5;
     max-height: 120px;
     overflow-y: auto;
-    text-align: center;
-    scrollbar-width: none; /* Firefox */
-    transition: none; /* Remove any transition that might affect text alignment */
+    scrollbar-width: none;
+    /* Firefox */
+    transition: none;
+    /* Remove any transition that might affect text alignment */
 }
 
 .disclaimer-text {
@@ -559,13 +655,14 @@ main {
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .tool-button span {
-        display: none; /* Hide text on mobile */
+        display: none;
+        /* Hide text on mobile */
     }
-    
+
     .tool-button {
         padding: 4px 8px;
     }
-    
+
     .input-tools {
         padding-top: 4px;
     }
@@ -624,20 +721,20 @@ main {
     .chat-input-container {
         padding: 12px 16px 20px;
     }
-    
+
     .chat-input {
         padding: 6px 10px;
     }
-    
+
     .chat-input .auto-resize-textarea {
         font-size: 0.95rem;
     }
-    
+
     .chat-input .input-icon {
         width: 32px;
         height: 32px;
     }
-    
+
     main {
         padding-bottom: 80px;
     }
@@ -647,20 +744,20 @@ main {
     .chat-input-container {
         padding: 12px 16px;
     }
-    
+
     .chat-input {
         padding: 6px 12px;
     }
-    
+
     .chat-input .auto-resize-textarea {
         font-size: 0.9rem;
     }
-    
+
     .chat-input button {
         width: 30px;
         height: 30px;
     }
-    
+
     main {
         padding-bottom: 70px;
     }
@@ -686,13 +783,15 @@ main {
     font-weight: 400;
     letter-spacing: 0.02em;
     position: fixed;
-    bottom: 160px; /* Increased to match thinking indicator */
+    bottom: 160px;
+    /* Increased to match thinking indicator */
     left: 0;
     right: 0;
     background: linear-gradient(to bottom, transparent, var(--bg-dark) 40%);
     padding-top: 20px;
     z-index: 90;
-    pointer-events: none; /* Allow clicks to pass through */
+    pointer-events: none;
+    /* Allow clicks to pass through */
 }
 
 /* Info typing animation */
@@ -759,6 +858,24 @@ main {
     padding-left: 24px;
 }
 
+/* Improve code block readability */
+.bot-message pre {
+    background: rgba(30, 27, 44, 0.8);
+    /* Semi-transparent background */
+    border-radius: 8px;
+    margin: 12px 0;
+    padding: 16px;
+    overflow-x: auto;
+    max-width: 100%;
+    /* Ensure code blocks don't overflow */
+}
+
+.bot-message code {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+}
+
+/* Improve link styling */
 .message a {
     color: #d8b4fe;
     text-decoration: none;
@@ -860,14 +977,16 @@ main {
 /* Thinking indicator container - repositioned */
 .thinking-indicator-container {
     position: fixed;
-    bottom: 160px; /* Increased to prevent overlap with input */
+    bottom: 160px;
+    /* Increased to prevent overlap with input */
     left: 0;
     right: 0;
     z-index: 99;
     display: flex;
     justify-content: center;
     padding: 8px 0;
-    pointer-events: none; /* Allow clicks to pass through */
+    pointer-events: none;
+    /* Allow clicks to pass through */
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -875,13 +994,15 @@ main {
 /* Mobile adjustments for thinking indicator */
 @media (max-width: 768px) {
     .thinking-indicator-container {
-        bottom: 180px; /* Adjusted for mobile */
+        bottom: 180px;
+        /* Adjusted for mobile */
     }
 }
 
 /* Thinking bar - elegant solid design */
 .thinking-bar {
-    background: var(--primary-color); /* Solid color from the theme */
+    background: var(--primary-color);
+    /* Solid color from the theme */
     border-radius: 20px;
     padding: 8px 18px;
     display: flex;
@@ -915,10 +1036,12 @@ main {
         opacity: 0.6;
         transform: scale(0.8);
     }
+
     50% {
         opacity: 1;
         transform: scale(1.1);
     }
+
     100% {
         opacity: 0.6;
         transform: scale(0.8);
@@ -928,20 +1051,21 @@ main {
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .thinking-indicator-container {
-        bottom: 150px; /* Adjusted for mobile */
+        bottom: 150px;
+        /* Adjusted for mobile */
     }
-    
+
     .thinking-bar {
         padding: 6px 14px;
         max-width: 250px;
     }
-    
+
     .thinking-bar::before {
         width: 8px;
         height: 8px;
         margin-right: 8px;
     }
-    
+
     .thinking-text {
         font-size: 12px;
     }
@@ -960,8 +1084,8 @@ main {
 
 /* Bot message styles - solid color */
 .message.bot-message {
-    background: var(--message-bot-bg);
-    border: 1px solid var(--border-color);
+    background: transparent;
+    border: none;
     border-radius: 18px 18px 18px 0;
     margin-right: 20%;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -969,40 +1093,38 @@ main {
     transition: all 0.3s ease;
 }
 
-.message.bot-message:hover {
-    border-color: rgba(167, 139, 250, 0.4);
-    box-shadow: 0 4px 20px rgba(167, 139, 250, 0.2);
-}
-
-/* Copy button for bot messages */
+/* Copy button for bot messages - improve transition */
 .copy-button {
     position: absolute;
     bottom: -40px;
-    left: 50%;
-    transform: translateX(-50%) translateY(10px);
+    right: 50%;
+    transform: translateX(50%) translateY(10px);
     background: var(--bg-light);
-    color: var(--text-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    width: auto;
+    height: auto;
     padding: 6px 14px;
-    font-size: 0.85rem;
-    cursor: pointer;
-    opacity: 0;
-    transition: all 0.3s ease;
+    border-radius: 20px;
     display: flex;
     align-items: center;
     gap: 6px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    /* Initially hidden */
     z-index: 5;
+    font-size: 0.85rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.message.bot-message.has-copy-button:hover .copy-button {
+    opacity: 1;
+    transform: translateX(50%) translateY(0);
 }
 
 .copy-button i {
     font-size: 0.9rem;
-}
-
-.message.bot-message:hover .copy-button {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
 }
 
 .copy-button:hover {
@@ -1012,7 +1134,8 @@ main {
 
 /* Copy success animation */
 .copy-button.copied {
-    background: #10B981; /* Success green color */
+    background: #10B981;
+    /* Success green color */
     color: white;
 }
 
@@ -1022,7 +1145,7 @@ main {
 }
 
 /* Adjust spacing for consecutive bot messages */
-.message.bot-message + .message.bot-message {
+.message.bot-message+.message.bot-message {
     margin-top: -25px;
 }
 
@@ -1033,12 +1156,12 @@ main {
         padding: 4px 12px;
         font-size: 0.8rem;
     }
-    
+
     .message.bot-message {
         margin-bottom: 40px;
     }
-    
-    .message.bot-message + .message.bot-message {
+
+    .message.bot-message+.message.bot-message {
         margin-top: -20px;
     }
 }
@@ -1061,7 +1184,8 @@ main {
     gap: 6px;
     cursor: pointer;
     transition: all 0.2s ease;
-    opacity: 0; /* Initially hidden */
+    opacity: 0;
+    /* Initially hidden */
     z-index: 5;
     font-size: 0.85rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -1073,7 +1197,8 @@ main {
 
 /* Only show edit button for messages with the has-edit-button class */
 .user-message.has-edit-button:hover .edit-message-button {
-    opacity: 1; /* Show on hover */
+    opacity: 1;
+    /* Show on hover */
     transform: translateX(50%) translateY(0);
 }
 
@@ -1088,7 +1213,7 @@ main {
 }
 
 /* Adjust spacing for consecutive user messages */
-.message.user-message + .message.user-message {
+.message.user-message+.message.user-message {
     margin-top: -25px;
 }
 
@@ -1099,12 +1224,12 @@ main {
         padding: 4px 12px;
         font-size: 0.8rem;
     }
-    
+
     .message.user-message {
         margin-bottom: 40px;
     }
-    
-    .message.user-message + .message.user-message {
+
+    .message.user-message+.message.user-message {
         margin-top: -20px;
     }
 }
@@ -1151,16 +1276,18 @@ main {
     background: rgba(167, 139, 250, 0.5);
 }
 
-/* Source links styling */
+/* Source links styling - move from top-right to bottom */
 .source-links-container {
-    margin-top: 10px;
+    position: static;
+    display: block;
+    margin-top: 15px;
+    width: 100%;
+    background: rgba(26, 20, 38, 0.7);
+    border-radius: 8px;
     padding: 8px 12px;
-    background: rgba(15, 10, 20, 0.4);
-    border-radius: 10px;
+    font-size: 0.9rem;
     border: 1px solid rgba(167, 139, 250, 0.2);
-    font-size: 0.85rem;
-    transition: all 0.3s ease;
-    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .source-links-header {
@@ -1189,8 +1316,8 @@ main {
 
 .source-links-list {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+    flex-direction: column;
+    gap: 6px;
     max-height: 200px;
     overflow-y: auto;
     transition: max-height 0.3s ease, opacity 0.3s ease;
@@ -1200,6 +1327,26 @@ main {
     max-height: 0;
     opacity: 0;
     margin-top: 0;
+}
+
+/* Adjust bot message to remove right padding */
+.message.bot-message {
+    padding-right: 16px;
+    /* Reset padding */
+    position: relative;
+}
+
+/* Mobile adjustments for source links - already positioned correctly */
+@media (max-width: 768px) {
+    .source-links-container {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+
+    .source-link {
+        padding: 2px 6px;
+        font-size: 0.75rem;
+    }
 }
 
 .source-link {
@@ -1223,7 +1370,7 @@ main {
         padding: 6px 10px;
         font-size: 0.8rem;
     }
-    
+
     .source-link {
         padding: 2px 6px;
         font-size: 0.75rem;
@@ -1270,7 +1417,7 @@ main {
     .tool-button span {
         display: none;
     }
-    
+
     .tool-button {
         padding: 6px;
     }
@@ -1387,18 +1534,24 @@ main {
     word-wrap: break-word;
     word-break: break-word;
     hyphens: auto;
-    padding-left: 54px; /* Increased padding to create more space */
-    position: relative; /* Ensure proper positioning context */
+    padding-left: 54px;
+    /* Increased padding to create more space */
+    position: relative;
+    /* Ensure proper positioning context */
 }
 
 /* Bot avatar styling - fix positioning */
 .bot-message img {
-    width: 32px; /* Slightly smaller avatar */
-    height: 32px; /* Slightly smaller avatar */
+    width: 32px;
+    /* Slightly smaller avatar */
+    height: 32px;
+    /* Slightly smaller avatar */
     border-radius: 50%;
     position: absolute;
-    left: 12px; /* Adjusted position */
-    top: 14px; /* Centered vertically */
+    left: 12px;
+    /* Adjusted position */
+    top: 14px;
+    /* Centered vertically */
     border: 2px solid rgba(167, 139, 250, 0.4);
     box-shadow: 0 0 15px rgba(167, 139, 250, 0.3);
     animation: pulseAvatar 4s infinite ease-in-out;
@@ -1412,9 +1565,12 @@ main {
     word-break: break-word;
     hyphens: auto;
     max-width: 100%;
-    min-width: 0; /* Prevent flex item from overflowing */
-    position: relative; /* Ensure proper stacking context */
-    z-index: 1; /* Ensure text is above other elements */
+    min-width: 0;
+    /* Prevent flex item from overflowing */
+    position: relative;
+    /* Ensure proper stacking context */
+    z-index: 1;
+    /* Ensure text is above other elements */
 }
 
 /* Message styling - general improvements */
@@ -1448,23 +1604,25 @@ main {
 
 /* Bot message styling - improve mobile layout */
 .message.bot-message {
-    background: var(--message-bot-bg);
+    background: transparent;
     color: var(--text-color);
     margin-right: auto;
     margin-left: 10px;
-    border: 1px solid var(--border-color);
+    border: none;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
+    display: block;
     align-items: flex-start;
     gap: 12px;
     max-width: 85%;
-    width: auto;
+    max-width: 100%;
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;
     hyphens: auto;
-    padding-left: 54px; /* Space for avatar */
-    position: relative; /* Ensure proper positioning context */
+    padding-left: 54px;
+    /* Space for avatar */
+    position: relative;
+    /* Ensure proper positioning context */
 }
 
 /* Bot avatar styling - fix positioning */
@@ -1483,29 +1641,37 @@ main {
 /* Mobile-specific adjustments for bot messages */
 @media (max-width: 768px) {
     .message.bot-message {
-        padding-top: 44px; /* Move content below the avatar */
-        padding-left: 16px; /* Reduce left padding */
+        padding-top: 44px;
+        /* Move content below the avatar */
+        padding-left: 16px;
+        /* Reduce left padding */
     }
-    
+
     .bot-message img {
-        width: 28px; /* Slightly smaller avatar on mobile */
+        width: 28px;
+        /* Slightly smaller avatar on mobile */
         height: 28px;
-        left: 50%; /* Center the avatar */
-        top: 10px; /* Position at the top */
-        transform: translateX(-50%); /* Center horizontally */
-        border-width: 1px; /* Thinner border */
+        left: 50%;
+        /* Center the avatar */
+        top: 10px;
+        /* Position at the top */
+        transform: translateX(-50%);
+        /* Center horizontally */
+        border-width: 1px;
+        /* Thinner border */
     }
-    
+
     /* Disable avatar animation on mobile for better performance */
     .bot-message img {
         animation: none;
     }
-    
+
     /* Adjust spacing for consecutive bot messages */
-    .message.bot-message + .message.bot-message {
-        margin-top: -15px; /* Reduce space between consecutive messages */
+    .message.bot-message+.message.bot-message {
+        margin-top: -15px;
+        /* Reduce space between consecutive messages */
     }
-    
+
     /* Adjust copy button position for mobile */
     .copy-button {
         bottom: -30px;
@@ -1530,13 +1696,13 @@ body.mobile-view .message.bot-message {
         padding: 12px 14px;
         max-width: 90%;
     }
-    
+
     /* Adjust message spacing */
     .chat-messages {
         gap: 16px;
         padding: 16px;
     }
-    
+
     /* Make code blocks more readable on mobile */
     .message pre {
         padding: 12px;
@@ -1545,16 +1711,15 @@ body.mobile-view .message.bot-message {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
     }
-    
+
     .message code {
         font-size: 0.85rem;
     }
-    
+
     /* Improve tap targets */
-    .copy-button, 
-    .edit-message-button {
+    .copy-button {
         min-height: 30px;
-        min-width: 80px;
+        min-width: 100px;
     }
 }
 
@@ -1587,7 +1752,7 @@ body.keyboard-open .chat-messages {
     .message:last-child {
         margin-bottom: 80px !important;
     }
-    
+
     body.keyboard-open .message:last-child {
         margin-bottom: 100px !important;
     }
@@ -1642,10 +1807,78 @@ body.keyboard-open .chat-messages {
         font-size: 0.7rem;
         bottom: -18px;
     }
-    
+
     .char-limit-warning {
         bottom: 60px;
         font-size: 0.8rem;
         padding: 6px 12px;
+    }
+}
+
+/* Add fade-in animation for text chunks */
+@keyframes fadeInChunk {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Style for the newly added text chunk */
+.new-text-chunk {
+    animation: fadeInChunk 0.4s ease-out forwards;
+    display: inline;
+}
+
+/* Stop generation button - fixed position */
+.stop-generation-container {
+    position: fixed;
+    bottom: 100px; /* Position above the input area */
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 1000; /* Ensure it's above other elements */
+    pointer-events: auto; /* Make sure it's clickable */
+    transition: opacity 0.3s ease;
+    opacity: 1;
+}
+
+.stop-generation-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: rgba(40, 40, 40, 0.9);
+    color: var(--text-color);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.stop-generation-button:hover {
+    background-color: rgba(60, 60, 60, 0.95);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.stop-generation-button i {
+    font-size: 12px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .stop-generation-container {
+        bottom: 120px; /* Adjust for mobile */
+    }
+    
+    .stop-generation-button {
+        padding: 6px 12px;
+        font-size: 12px;
     }
 }

@@ -1,4 +1,4 @@
-const URL = "https://alfred.privatedns.org/chat"
+const SERVER_URL = "https://alfred.privatedns.org/chat"
 let sourceLinksTemplate
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const thinkingIndicatorContainer = document.getElementById('thinking-indicator-container');
     const thinkingBar = document.getElementById('thinking-bar');
     const editButtonTemplate = document.getElementById('edit-button-template');
+    const stopButtonTemplate = document.getElementById('stop-button-template');
     sourceLinksTemplate = document.getElementById('source-links-template');
-    let currentThinkingAction = null;
 
     // Variables
     const messages = [];
@@ -24,11 +24,114 @@ document.addEventListener('DOMContentLoaded', function () {
     let lastBotMessageDiv = null;
     const CooldownTime = 2000; // 2 second cooldown between messages
     let isReasoningEnabled = false;
+    let currentResponseController = null; // To store the AbortController for the current response
+    let stopGenerationContainer = null; // Reference to the stop generation button container
+
+    // Function to show stop generation button
+    function showStopGenerationButton() {
+        // Remove any existing stop button
+        hideStopGenerationButton();
+
+        // Create container for stop button
+        stopGenerationContainer = document.createElement('div');
+        stopGenerationContainer.classList.add('stop-generation-container');
+
+        // Clone the stop button template
+        const stopButton = stopButtonTemplate.content.cloneNode(true).querySelector('.stop-generation-button');
+
+        // Add click event to stop button
+        stopButton.addEventListener('click', stopResponseGeneration);
+
+        // Add the button to the container
+        stopGenerationContainer.appendChild(stopButton);
+
+        // Add the container to the body (not chat messages) to ensure fixed positioning works
+        document.body.appendChild(stopGenerationContainer);
+    }
+
+    // Function to hide stop generation button
+    function hideStopGenerationButton() {
+        if (stopGenerationContainer && stopGenerationContainer.parentNode) {
+            stopGenerationContainer.parentNode.removeChild(stopGenerationContainer);
+            stopGenerationContainer = null;
+        }
+    }
+
+    // Function to stop response generation
+    function stopResponseGeneration() {
+        if (currentResponseController) {
+            // Abort the fetch request
+            currentResponseController.abort();
+            currentResponseController = null;
+
+            // Hide the stop button
+            hideStopGenerationButton();
+
+            // Hide typing indicator and thinking bar
+            hideTypingIndicator();
+            hideThinkingBar();
+
+            if (chatMessages.lastChild.classList.contains("bot-message")) {
+                chatMessages.removeChild(chatMessages.lastChild)
+            }
+
+            // Add a message indicating the response was stopped
+            const stoppedMessage = document.createElement('div');
+            stoppedMessage.classList.add('system-message');
+            stoppedMessage.textContent = 'Response generation stopped.';
+            chatMessages.appendChild(stoppedMessage);
+            scrollToLastMessage();
+
+            // Reset cooldown
+            setTimeout(() => {
+                isOnCooldown = false;
+                sendButton.classList.remove('disabled');
+            }, 500); // Shorter cooldown after stopping
+        }
+    }
+
+    // Add system message style
+    function addSystemMessageStyle() {
+        const style = document.createElement('style');
+        style.textContent = `
+            .system-message {
+                text-align: center;
+                padding: 8px 16px;
+                margin: 10px auto;
+                background-color: rgba(255, 255, 255, 0.1);
+                border-radius: 8px;
+                font-size: 14px;
+                color: var(--text-secondary);
+                max-width: 80%;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // Call this when the page loads
+    addSystemMessageStyle();
+
+    // Add this event listener to detect manual scrolling
+    chatMessages.addEventListener('scroll', function () {
+        isManualScrolling = true;
+        // Reset the flag after scrolling stops
+        clearTimeout(window.scrollTimeout);
+        window.scrollTimeout = setTimeout(() => {
+            isManualScrolling = false;
+        }, 100);
+    });
 
     // Toggle reasoning mode
-    reasonButton.addEventListener('click', function () {
+    reasonButton.addEventListener('click', function (e) {
+        // Prevent default behavior
+        e.preventDefault();
+
+        // Toggle reasoning mode
         isReasoningEnabled = !isReasoningEnabled;
         reasonButton.classList.toggle('active', isReasoningEnabled);
+
+        // Refocus the input
+        userInput.focus();
     });
 
     // Function to add copy button to bot messages
@@ -54,13 +157,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
 
-            // If we couldn't find it in the array, fall back to the text content
-            if (!markdownContent) {
-                // Get text content from the message, excluding the button text
-                const textContainer = messageDiv.querySelector('.typing-text-container');
-                markdownContent = textContainer ? textContainer.textContent.trim() : messageDiv.textContent.trim();
-            }
-
             // Copy to clipboard
             navigator.clipboard.writeText(markdownContent).then(() => {
                 // Show success state
@@ -83,8 +179,15 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
-        // Add the copy button to the message
+        // Add the copy button to the message but don't make it visible yet
         messageDiv.appendChild(copyButton);
+
+        // IMPORTANT: Don't add the has-copy-button class immediately
+        // Instead, wait for a small delay to allow CSS transitions to work
+        // This is the key change to make the animation smooth
+        setTimeout(() => {
+            messageDiv.classList.add("has-copy-button");
+        }, 100); // Slightly longer delay to ensure the transition works
     }
 
     // Function to add edit button to user message
@@ -97,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function () {
         editButton.style.display = 'flex';
 
         // Add click event to edit button
-        editButton.addEventListener('click', function() {
+        editButton.addEventListener('click', function () {
             if (isOnCooldown) return;
 
             // Enter edit mode
@@ -115,17 +218,6 @@ document.addEventListener('DOMContentLoaded', function () {
             textarea.classList.add('edit-message-textarea');
             textarea.value = messageText.length > MAX_CHARS ? messageText.substring(0, MAX_CHARS) : messageText;
             textarea.setAttribute('maxlength', MAX_CHARS.toString());
-
-            // Create character counter
-            const charCounter = document.createElement('div');
-            charCounter.classList.add('char-counter', 'edit-char-counter');
-            const remaining = MAX_CHARS - textarea.value.length;
-            charCounter.textContent = `${remaining} characters remaining`;
-            
-            // Add warning class if approaching limit
-            if (remaining < 100) {
-                charCounter.classList.add('warning');
-            }
 
             // Create action buttons
             const actions = document.createElement('div');
@@ -145,21 +237,8 @@ document.addEventListener('DOMContentLoaded', function () {
             // Clear the message div and add the textarea, counter and actions
             messageDiv.innerHTML = '';
             messageDiv.appendChild(textarea);
-            messageDiv.appendChild(charCounter);
             messageDiv.appendChild(actions);
 
-            // Function to update character counter
-            function updateCharCounter() {
-                const remaining = MAX_CHARS - textarea.value.length;
-                charCounter.textContent = `${remaining} characters remaining`;
-                
-                // Change color when approaching limit
-                if (remaining < 100) {
-                    charCounter.classList.add('warning');
-                } else {
-                    charCounter.classList.remove('warning');
-                }
-            }
 
             // Function to show character limit warning
             function showCharLimitWarning() {
@@ -181,14 +260,12 @@ document.addEventListener('DOMContentLoaded', function () {
             function resizeTextarea() {
                 textarea.style.height = 'auto';
                 textarea.style.height = Math.min(300, Math.max(80, textarea.scrollHeight)) + 'px';
-                
+
                 // Check character limit
                 if (textarea.value.length > MAX_CHARS) {
                     textarea.value = textarea.value.substring(0, MAX_CHARS);
                     showCharLimitWarning();
                 }
-                
-                updateCharCounter();
             }
 
             // Initial resize
@@ -201,7 +278,7 @@ document.addEventListener('DOMContentLoaded', function () {
             textarea.focus();
 
             // Add event listeners to buttons
-            cancelButton.addEventListener('click', function() {
+            cancelButton.addEventListener('click', function () {
                 messageDiv.innerHTML = originalContent;
                 messageDiv.classList.remove('editing');
 
@@ -211,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
 
-            saveButton.addEventListener('click', function() {
+            saveButton.addEventListener('click', function () {
                 const newText = textarea.value.trim();
                 if (newText && newText !== messageText) {
                     // Update the message in the UI
@@ -285,20 +362,20 @@ document.addEventListener('DOMContentLoaded', function () {
     function createBotMessage() {
         const messageDiv = document.createElement('div');
         messageDiv.classList.add('message', 'bot-message');
-        
+
         const botAvatar = document.createElement('img');
         botAvatar.src = "images/Alfred.png";
         botAvatar.alt = "Alfred Avatar";
         messageDiv.appendChild(botAvatar);
-        
+
         // Create a container for the text
         const textContainer = document.createElement('div');
         textContainer.classList.add('typing-text-container');
         messageDiv.appendChild(textContainer);
-        
+
         // Add copy button to the message
         addCopyButton(messageDiv);
-        
+
         return { messageDiv, textContainer };
     }
 
@@ -311,39 +388,42 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateUIForScreenSize() {
         if (isMobile()) {
             document.body.classList.add('mobile-view');
-            
-            // Ensure proper spacing when switching to mobile
-            const botMessages = document.querySelectorAll('.message.bot-message');
-            botMessages.forEach(msg => {
-                msg.style.marginBottom = '50px';
-            });
-            
-            // Adjust the last message to ensure it's not covered by input
-            if (lastBotMessageDiv) {
-                lastBotMessageDiv.style.marginBottom = '60px';
-            }
         } else {
             document.body.classList.remove('mobile-view');
-            
-            // Reset margins when switching to desktop
-            const botMessages = document.querySelectorAll('.message.bot-message');
-            botMessages.forEach(msg => {
-                msg.style.marginBottom = '45px';
-            });
         }
-        
-        // Force a scroll update to ensure the last message is visible
-        scrollToLastMessage();
+
+        // Ensure proper spacing after UI updates
+        ensureProperSpacing();
     }
 
-    // Call this function on page load and resize
-    window.addEventListener('load', updateUIForScreenSize);
-    window.addEventListener('resize', updateUIForScreenSize);
+    // Add this function to ensure proper spacing between messages and input
+    function ensureProperSpacing() {
+        // Get the height of the input container
+        const inputContainer = document.querySelector('.chat-input-container');
+        const inputHeight = inputContainer.offsetHeight;
+
+        // Add extra padding to account for shadows and ensure no overlap
+        const extraPadding = 30;
+        const totalPadding = inputHeight + extraPadding;
+
+        // Apply padding to main and chat messages
+        const main = document.querySelector('main');
+        const chatMessages = document.querySelector('.chat-messages');
+
+        main.style.paddingBottom = `${totalPadding}px`;
+        chatMessages.style.paddingBottom = `${totalPadding - 20}px`;
+
+        console.log(`Applied padding: ${totalPadding}px to prevent overlap`);
+    }
+
+    // Call this function on load and resize
+    window.addEventListener('load', ensureProperSpacing);
+    window.addEventListener('resize', ensureProperSpacing);
 
     // Add a resize event listener to handle orientation changes
-    window.addEventListener('resize', function() {
+    window.addEventListener('resize', function () {
         updateUIForScreenSize();
-        
+
         // On orientation change, ensure proper scrolling
         if (lastBotMessageDiv || lastUserMessageDiv) {
             setTimeout(scrollToLastMessage, 300);
@@ -375,6 +455,9 @@ document.addEventListener('DOMContentLoaded', function () {
         showTypingIndicator();
         scrollToLastMessage();
 
+        // Show stop generation button
+        showStopGenerationButton();
+
         // Add a small delay to ensure the typing indicator is visible
         await new Promise(resolve => setTimeout(resolve, 100));
 
@@ -382,8 +465,12 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log("Sending regeneration request to server...");
             console.log("Messages being sent:", JSON.stringify(messages));
 
+            // Create a new AbortController for this request
+            currentResponseController = new AbortController();
+            const signal = currentResponseController.signal;
+
             // Make API request with streaming enabled
-            const response = await fetch(URL, {
+            const response = await fetch(SERVER_URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -392,6 +479,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     history: messages,
                     thinking: isReasoningEnabled
                 }),
+                signal: signal // Add the abort signal
             });
 
             if (!response.ok) {
@@ -405,37 +493,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const reader = response.body.getReader();
             const decoder = new TextDecoder();
             let fullResponse = '';
-            let isTyping = false;
-            let typingQueue = '';
             let hasStartedResponding = false;
-            const typingSpeed = 5; // Adjust typing speed (lower = faster)
             let messageSources = [];
-
-            // Function to simulate typing animation
-            function typeNextChunk() {
-                if (typingQueue.length === 0) {
-                    isTyping = false;
-                    return;
-                }
-
-                isTyping = true;
-
-                // Type a few characters at a time for better performance
-                const chunkSize = window.innerWidth <= 768 ? 10 : 5; // Larger chunks on mobile
-                const nextChunk = typingQueue.substring(0, chunkSize);
-                typingQueue = typingQueue.substring(chunkSize);
-
-                fullResponse += nextChunk;
-                textContainer.innerHTML = marked.parse(fullResponse) + '<span class="cursor">|</span>';
-                scrollToLastMessage();
-
-                // Random delay for more natural typing
-                const randomDelay = window.innerWidth <= 768 ?
-                    typingSpeed + Math.random() * 5 : // Faster on mobile
-                    typingSpeed + Math.random() * 15; // Normal on desktop
-
-                setTimeout(typeNextChunk, randomDelay);
-            }
 
             // Process the stream
             while (true) {
@@ -450,19 +509,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 for (const line of lines) {
                     if (!line.trim()) continue;
 
-                    console.log(line);
                     try {
                         const result = processStreamLine(line);
-                        
+
                         switch (result.type) {
                             case 'thinking':
                                 showThinkingBar(result.data);
                                 break;
-                                
+
                             case 'source':
                                 messageSources.push(result.data);
                                 break;
-                                
+
                             case 'text':
                                 // If this is the first text chunk, replace typing indicator with message
                                 if (!hasStartedResponding) {
@@ -470,27 +528,56 @@ document.addEventListener('DOMContentLoaded', function () {
                                     hideTypingIndicator();
                                     chatMessages.appendChild(messageDiv);
                                 }
-                                
-                                // Add to typing queue
-                                typingQueue += result.data;
-                                
-                                // Start typing animation if not already typing
-                                if (!isTyping) {
-                                    typeNextChunk();
+
+                                // Process the text chunk
+                                let textChunk = result.data;
+
+                                // Replace escaped newlines with actual newlines
+                                textChunk = textChunk.replace(/\\n/g, '\n');
+
+                                // Add the text to the full response
+                                fullResponse += textChunk;
+
+                                // Get the HTML content from marked
+                                const markedContent = marked.parse(fullResponse);
+
+                                // Update the HTML with the full response
+                                textContainer.innerHTML = markedContent;
+
+                                // Find all text nodes in the container
+                                const textNodes = [];
+                                function findTextNodes(node) {
+                                    if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== '') {
+                                        textNodes.push(node);
+                                    } else {
+                                        for (let i = 0; i < node.childNodes.length; i++) {
+                                            findTextNodes(node.childNodes[i]);
+                                        }
+                                    }
+                                }
+                                findTextNodes(textContainer);
+
+                                // Apply fade-in effect to the last text node (newest content)
+                                if (textNodes.length > 0) {
+                                    const lastTextNode = textNodes[textNodes.length - 1];
+                                    const span = document.createElement('span');
+                                    span.className = 'new-text-chunk';
+                                    span.textContent = lastTextNode.textContent;
+                                    lastTextNode.parentNode.replaceChild(span, lastTextNode);
                                 }
                                 break;
-                                
+
                             case 'tool':
                                 // Show thinking bar if there's an action
                                 if (result.data[0] && result.data[0].action) {
                                     showThinkingBar(result.data[0].action);
                                 }
-                                
+
                                 // Handle source if present
                                 if (result.data[0] && result.data[0].source) {
                                     messageSources.push(result.data[0].source);
                                 }
-                                
+
                                 // Handle image attachment if present
                                 if (result.data[0] && result.data[0].attachImage) {
                                     // Create image element
@@ -498,7 +585,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     imageElement.src = result.data[0].attachImage;
                                     imageElement.alt = "AI Generated Image";
                                     imageElement.classList.add('attached-image');
-                                    
+
                                     // Add image to the message
                                     if (messageDiv) {
                                         // Create or get image container
@@ -508,9 +595,9 @@ document.addEventListener('DOMContentLoaded', function () {
                                             imageContainer.classList.add('image-container');
                                             messageDiv.appendChild(imageContainer);
                                         }
-                                        
+
                                         imageContainer.appendChild(imageElement);
-                                        
+
                                         // Scroll to make sure the image is visible
                                         scrollToLastMessage();
                                     }
@@ -530,45 +617,25 @@ document.addEventListener('DOMContentLoaded', function () {
                 textContainer.innerHTML = '<em>No response received. Please try again.</em>';
             }
 
-            // Make sure all remaining text is typed out
-            if (typingQueue.length > 0) {
-                // Wait for typing to finish
-                const checkTyping = setInterval(() => {
-                    if (!isTyping && typingQueue.length === 0) {
-                        clearInterval(checkTyping);
-                        finishResponse();
-                    }
-                }, 100);
-            } else {
-                finishResponse();
-            }
+            // Finish response processing
+            finishResponse();
 
             function finishResponse() {
                 // Hide thinking bar if it's still showing
                 hideThinkingBar();
 
-                // Add the complete message to our history
-                if (fullResponse) {
-                    messages.push({
-                        content: fullResponse,
-                        assistant: true
-                    });
+                // Hide stop generation button
+                hideStopGenerationButton();
 
-                    // Final render of the message with markdown
-                    textContainer.innerHTML = marked.parse(fullResponse);
+                // Reset the response controller
+                currentResponseController = null;
 
+                // If we got a response, add sources if available
+                if (hasStartedResponding) {
                     // Add source links if available
                     if (messageSources.length > 0) {
                         addSourceLinks(messageDiv, messageSources);
-                        messageSources = [];
                     }
-
-                    // Add subtle highlight animation after typing completes
-                    messageDiv.style.transition = "box-shadow 0.3s ease";
-                    messageDiv.style.boxShadow = "0 0 10px rgba(167, 139, 250, 0.4)";
-                    setTimeout(() => {
-                        messageDiv.style.boxShadow = "0 2px 8px rgba(0, 0, 0, 0.1)";
-                    }, 500);
 
                     // Save reference to the bot message
                     lastBotMessageDiv = messageDiv;
@@ -576,8 +643,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     // If no response was received, show an error message
                     textContainer.innerHTML = '<em>No response received. Please try again.</em>';
                 }
-
-                scrollToLastMessage();
             }
         } catch (error) {
             console.error('Error:', error);
@@ -741,7 +806,7 @@ document.addEventListener('DOMContentLoaded', function () {
     async function sendMessage() {
         const text = userInput.value.trim();
         const MAX_CHARS = 1000; // Set 1,000 character limit
-        
+
         if (text && !isOnCooldown) {
             // Check character limit
             if (text.length > MAX_CHARS) {
@@ -750,26 +815,26 @@ document.addEventListener('DOMContentLoaded', function () {
                 warningMsg.classList.add('char-limit-warning');
                 warningMsg.textContent = 'Message truncated to 1,000 characters';
                 warningMsg.style.opacity = '1';
-                
+
                 document.body.appendChild(warningMsg);
-                
+
                 // Fade out and remove the warning message
                 setTimeout(() => {
                     warningMsg.style.opacity = '0';
                     setTimeout(() => warningMsg.remove(), 500);
                 }, 1500);
-                
+
                 // Truncate the text
                 userInput.value = text.substring(0, MAX_CHARS);
             }
-            
+
             // Set cooldown
             isOnCooldown = true;
             sendButton.classList.add('disabled');
 
             // Get the final text (possibly truncated)
             const finalText = userInput.value.trim();
-            
+
             // Clear input field immediately
             userInput.value = '';
 
@@ -805,9 +870,16 @@ document.addEventListener('DOMContentLoaded', function () {
             // Show typing indicator
             showTypingIndicator();
 
+            // Show stop generation button
+            showStopGenerationButton();
+
             try {
+                // Create a new AbortController for this request
+                currentResponseController = new AbortController();
+                const signal = currentResponseController.signal;
+
                 // Make API request with streaming enabled
-                const response = await fetch(URL, {
+                const response = await fetch(SERVER_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -816,6 +888,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         history: messages.slice(-30),
                         thinking: isReasoningEnabled
                     }),
+                    signal: signal // Add the abort signal
                 });
 
                 if (!response.ok) {
@@ -830,84 +903,96 @@ document.addEventListener('DOMContentLoaded', function () {
                 const reader = response.body.getReader();
                 const decoder = new TextDecoder();
                 let fullResponse = '';
-                let isTyping = false;
-                let typingQueue = '';
                 let hasStartedResponding = false;
-                const typingSpeed = 5; // Adjust typing speed (lower = faster)
                 let messageSources = [];
-
-                // Function to simulate typing animation
-                function typeNextChunk() {
-                    if (typingQueue.length === 0) {
-                        isTyping = false;
-                        return;
-                    }
-
-                    isTyping = true;
-
-                    // Type a few characters at a time for better performance
-                    const chunkSize = window.innerWidth <= 768 ? 10 : 5; // Larger chunks on mobile
-                    const nextChunk = typingQueue.substring(0, chunkSize);
-                    typingQueue = typingQueue.substring(chunkSize);
-
-                    fullResponse += nextChunk;
-                    textContainer.innerHTML = marked.parse(fullResponse) + '<span class="cursor">|</span>';
-                    scrollToLastMessage();
-
-                    // Random delay for more natural typing
-                    const randomDelay = window.innerWidth <= 768 ?
-                        typingSpeed + Math.random() * 5 : // Faster on mobile
-                        typingSpeed + Math.random() * 15; // Normal on desktop
-
-                    setTimeout(typeNextChunk, randomDelay);
-                }
 
                 // Process the stream
                 while (true) {
                     const { done, value } = await reader.read();
                     if (done) break;
 
-                    // Decode the chunk
+                    // Decode the chunk and split by lines
                     const chunk = decoder.decode(value, { stream: true });
+                    const lines = chunk.split('\n');
 
-                    // Process each line in the chunk
-                    const lines = chunk.split('\n').filter(line => line.trim());
-
+                    // Process each line
                     for (const line of lines) {
+                        if (!line.trim()) continue;
+
                         try {
-                            // Handle data based on prefix
-                            // Check if line starts with 'data: ' or not
-                            let dataLine = line;
-                            if (line.startsWith('data: ')) {
-                                dataLine = line.substring(6);
-                            }
+                            const result = processStreamLine(line);
 
-                            // Skip empty lines
-                            if (!dataLine.trim()) continue;
+                            switch (result.type) {
+                                case 'thinking':
+                                    showThinkingBar(result.data);
+                                    break;
 
-                            // Handle different data types
-                            if (dataLine.startsWith('2:')) {
-                                // Tools used data
-                                try {
-                                    const toolsData = JSON.parse(dataLine.substring(2));
-                                    console.log(toolsData[0]);
+                                case 'source':
+                                    messageSources.push(result.data);
+                                    break;
 
+                                case 'text':
+                                    // If this is the first text chunk, replace typing indicator with message
+                                    if (!hasStartedResponding) {
+                                        hasStartedResponding = true;
+                                        hideTypingIndicator();
+                                        chatMessages.appendChild(messageDiv);
+                                    }
+
+                                    // Process the text chunk
+                                    let textChunk = result.data;
+
+                                    // Replace escaped newlines with actual newlines
+                                    textChunk = textChunk.replace(/\\n/g, '\n');
+
+                                    // Add the text to the full response
+                                    fullResponse += textChunk;
+
+                                    // Get the HTML content from marked
+                                    const markedContent = marked.parse(fullResponse);
+
+                                    // Update the HTML with the full response
+                                    textContainer.innerHTML = markedContent;
+
+                                    // Find all text nodes in the container
+                                    const textNodes = [];
+                                    function findTextNodes(node) {
+                                        if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== '') {
+                                            textNodes.push(node);
+                                        } else {
+                                            for (let i = 0; i < node.childNodes.length; i++) {
+                                                findTextNodes(node.childNodes[i]);
+                                            }
+                                        }
+                                    }
+                                    findTextNodes(textContainer);
+
+                                    // Apply fade-in effect to the last text node (newest content)
+                                    if (textNodes.length > 0) {
+                                        const lastTextNode = textNodes[textNodes.length - 1];
+                                        const span = document.createElement('span');
+                                        span.className = 'new-text-chunk';
+                                        span.textContent = lastTextNode.textContent;
+                                        lastTextNode.parentNode.replaceChild(span, lastTextNode);
+                                    }
+                                    break;
+
+                                case 'tool':
                                     // Show thinking bar if there's an action
-                                    if (toolsData[0] && toolsData[0].action) {
-                                        showThinkingBar(toolsData[0].action);
+                                    if (result.data[0] && result.data[0].action) {
+                                        showThinkingBar(result.data[0].action);
                                     }
 
                                     // Handle source if present
-                                    if (toolsData[0] && toolsData[0].source) {
-                                        // Add to sources array
-                                        messageSources.push(toolsData[0].source);
+                                    if (result.data[0] && result.data[0].source) {
+                                        messageSources.push(result.data[0].source);
                                     }
 
                                     // Handle image attachment if present
-                                    if (toolsData[0] && toolsData[0].attachImage) {
+                                    if (result.data[0] && result.data[0].attachImage) {
                                         // Create image element
                                         const imageElement = document.createElement('img');
-                                        imageElement.src = toolsData[0].attachImage;
+                                        imageElement.src = result.data[0].attachImage;
                                         imageElement.alt = "AI Generated Image";
                                         imageElement.classList.add('attached-image');
 
@@ -927,103 +1012,51 @@ document.addEventListener('DOMContentLoaded', function () {
                                             scrollToLastMessage();
                                         }
                                     }
-                                } catch (e) {
-                                    console.error('Error processing tools data:', e);
-                                }
-                            } else if (dataLine.startsWith('0:')) {
-                                // Response text chunk - don't hide thinking bar yet
-                                // Just show the message if it's the first chunk
-                                if (!hasStartedResponding) {
-                                    hasStartedResponding = true;
-
-                                    // Hide typing indicator and show message div
-                                    hideTypingIndicator();
-                                    chatMessages.appendChild(messageDiv);
-                                }
-
-                                // Rest of the existing code for handling text chunks
-                                let textChunk = dataLine.substring(2);
-
-                                // Remove double quotes at start and end if they exist
-                                if (textChunk.startsWith('"') && textChunk.endsWith('"')) {
-                                    textChunk = textChunk.substring(1, textChunk.length - 1);
-                                }
-
-                                // Replace escaped newlines with actual newlines
-                                textChunk = textChunk.replace(/\\n/g, '\n');
-
-                                // Add to typing queue
-                                typingQueue += textChunk;
-
-                                // Start typing animation if not already typing
-                                if (!isTyping) {
-                                    typeNextChunk();
-                                }
-                            } else if (dataLine.startsWith('t:')) {
-                                // Thinking update
-                                const thinkingUpdate = dataLine.substring(2);
-                                showThinkingBar(thinkingUpdate);
-                            } else if (dataLine.startsWith('s:')) {
-                                // Source reference
-                                try {
-                                    const sourceData = JSON.parse(dataLine.substring(2));
-                                    messageSources.push(sourceData);
-                                } catch (e) {
-                                    console.error('Error parsing source data:', e);
-                                }
+                                    break;
                             }
-                            // Ignore e: and d: lines as they're just metadata
                         } catch (e) {
                             console.error('Error processing line:', e, line);
                         }
                     }
                 }
 
+
                 // If we never got a response, hide the typing indicator
                 if (!hasStartedResponding) {
                     hideTypingIndicator();
                     chatMessages.appendChild(messageDiv);
-                }
-
-                // Make sure all remaining text is typed out
-                if (typingQueue.length > 0) {
-                    // Wait for typing to finish
-                    const checkTyping = setInterval(() => {
-                        if (!isTyping && typingQueue.length === 0) {
-                            clearInterval(checkTyping);
-                            finishResponse();
-                        }
-                    }, 100);
                 } else {
-                    finishResponse();
+                    messages.push({
+                        content: fullResponse,
+                        assistant: true
+                    })
                 }
+                // Finish response processing
+                finishResponse();
 
                 function finishResponse() {
                     // Hide thinking bar if it's still showing
                     hideThinkingBar();
 
-                    // Add the complete message to our history
-                    messages.push({
-                        content: fullResponse,
-                        assistant: true
-                    });
+                    // Hide stop generation button
+                    hideStopGenerationButton();
 
-                    // Final render of the message with markdown
-                    textContainer.innerHTML = marked.parse(fullResponse);
-                    scrollToLastMessage();
+                    // Reset the response controller
+                    currentResponseController = null;
 
-                    // Add source links if available
-                    if (messageSources.length > 0) {
-                        addSourceLinks(messageDiv, messageSources);
-                        messageSources = [];
+                    // If we got a response, add sources if available
+                    if (hasStartedResponding) {
+                        // Add source links if available
+                        if (messageSources.length > 0) {
+                            addSourceLinks(messageDiv, messageSources);
+                        }
+
+                        // Save reference to the bot message
+                        lastBotMessageDiv = messageDiv;
+                    } else {
+                        // If no response was received, show an error message
+                        textContainer.innerHTML = '<em>No response received. Please try again.</em>';
                     }
-
-                    // Add subtle highlight animation after typing completes
-                    messageDiv.style.transition = "box-shadow 0.3s ease";
-                    messageDiv.style.boxShadow = "0 0 10px rgba(167, 139, 250, 0.4)";
-                    setTimeout(() => {
-                        messageDiv.style.boxShadow = "0 2px 8px rgba(0, 0, 0, 0.1)";
-                    }, 500);
                 }
             } catch (error) {
                 console.error('Error:', error);
@@ -1031,10 +1064,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 hideThinkingBar(); // Hide thinking bar on error
                 userMessageDiv.classList.remove('waiting');
 
-                const systemMessage = document.createElement('div');
-                systemMessage.classList.add('system-message');
-                systemMessage.textContent = 'Sorry, there was an error processing your request. Please try again.';
-                chatMessages.appendChild(systemMessage);
+                console.log(error.toString())
+
+                if (!error.toString().includes("aborted")) {
+                    const systemMessage = document.createElement('div');
+                    systemMessage.classList.add('system-message');
+                    systemMessage.textContent = 'Sorry, there was an error processing your request. Please try again.';
+                    chatMessages.appendChild(systemMessage);
+                }
                 scrollToLastMessage();
             }
 
@@ -1089,11 +1126,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
-
-    function updateVh() {
-        scrollToLastMessage()
-    }
-    window.addEventListener('resize', updateVh);
 
 
 
@@ -1168,19 +1200,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Toggle text alignment based on content
             if (textarea.value.trim() === '') {
-                textarea.style.textAlign = 'center';
                 sendButton.classList.remove('active');
             } else {
-                textarea.style.textAlign = 'left';
                 sendButton.classList.add('active');
             }
-            
+
             // Check character limit
             if (textarea.value.length > MAX_CHARS) {
                 textarea.value = textarea.value.substring(0, MAX_CHARS);
                 showCharLimitWarning();
             }
-            
+
             // Update character counter if it exists
             updateCharCounter(textarea);
         }
@@ -1190,21 +1220,21 @@ document.addEventListener('DOMContentLoaded', function () {
         charCounter.classList.add('char-counter');
         charCounter.style.display = 'none'; // Initially hidden
         textarea.parentNode.appendChild(charCounter);
-        
+
         // Function to update character counter
         function updateCharCounter(textareaElement) {
             const counter = textareaElement.parentNode.querySelector('.char-counter');
             if (counter) {
                 const remaining = MAX_CHARS - textareaElement.value.length;
                 counter.textContent = `${remaining} characters remaining`;
-                
+
                 // Show counter when text is entered
                 if (textareaElement.value.length > 0) {
                     counter.style.display = 'block';
                 } else {
                     counter.style.display = 'none';
                 }
-                
+
                 // Change color when approaching limit
                 if (remaining < 100) {
                     counter.classList.add('warning');
@@ -1213,7 +1243,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
         }
-        
+
         // Function to show character limit warning
         function showCharLimitWarning() {
             const warningMsg = document.createElement('div');
@@ -1234,16 +1264,12 @@ document.addEventListener('DOMContentLoaded', function () {
         resizeTextarea();
 
         // Resize on input
-        textarea.addEventListener('input', function() {
+        textarea.addEventListener('input', function () {
             resizeTextarea();
         });
 
         // Handle focus/blur for placeholder alignment
-        textarea.addEventListener('focus', function() {
-            if (textarea.value.trim() === '') {
-                // Immediately change to left alignment when focused
-                textarea.style.textAlign = 'left';
-            }
+        textarea.addEventListener('focus', function () {
             // Show character counter on focus
             const counter = textarea.parentNode.querySelector('.char-counter');
             if (counter && textarea.value.length > 0) {
@@ -1251,7 +1277,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        textarea.addEventListener('blur', function() {
+        textarea.addEventListener('blur', function () {
             if (textarea.value.trim() === '') {
                 textarea.style.textAlign = 'center';
             }
@@ -1263,13 +1289,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         // Handle Enter key to send message (Shift+Enter for new line)
-        textarea.addEventListener('keydown', function(e) {
+        textarea.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' && !e.shiftKey && !isOnCooldown) {
                 e.preventDefault();
                 sendMessage();
             }
         });
-        
+
         // Set max length attribute
         textarea.setAttribute('maxlength', MAX_CHARS.toString());
     }
@@ -1281,23 +1307,23 @@ document.addEventListener('DOMContentLoaded', function () {
     function setupIOSKeyboardFix() {
         // Only apply on iOS devices
         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-        
+
         if (isIOS) {
             // When input is focused, add a class to adjust positioning
-            userInput.addEventListener('focus', function() {
+            userInput.addEventListener('focus', function () {
                 document.body.classList.add('keyboard-open');
                 // Scroll to ensure the input is visible
                 setTimeout(scrollToLastMessage, 300);
             });
-            
+
             // When input loses focus, remove the class
-            userInput.addEventListener('blur', function() {
+            userInput.addEventListener('blur', function () {
                 document.body.classList.remove('keyboard-open');
             });
-            
+
             // Handle orientation changes on iOS
-            window.addEventListener('orientationchange', function() {
-                setTimeout(function() {
+            window.addEventListener('orientationchange', function () {
+                setTimeout(function () {
                     updateUIForScreenSize();
                     scrollToLastMessage();
                 }, 500);
@@ -1308,62 +1334,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Call this function in your DOMContentLoaded event
     setupIOSKeyboardFix();
 });
-
-// Function to add copy button to bot messages
-function addCopyButton(messageDiv) {
-    // Create copy button
-    const copyButton = document.createElement('button');
-    copyButton.classList.add('copy-button');
-    copyButton.innerHTML = '<i class="fas fa-copy"></i> Copy text';
-
-    // Add click event to copy button
-    copyButton.addEventListener('click', function (e) {
-        e.stopPropagation(); // Prevent event bubbling
-
-        // Find the corresponding message in the messages array
-        // to get the original markdown content
-        let markdownContent = '';
-
-        // Try to find the message in the messages array
-        for (let i = messages.length - 1; i >= 0; i--) {
-            if (messages[i].assistant && messageDiv === lastBotMessageDiv) {
-                markdownContent = messages[i].content;
-                break;
-            }
-        }
-
-        // If we couldn't find it in the array, fall back to the text content
-        if (!markdownContent) {
-            // Get text content from the message, excluding the button text
-            const textContainer = messageDiv.querySelector('.typing-text-container');
-            markdownContent = textContainer ? textContainer.textContent.trim() : messageDiv.textContent.trim();
-        }
-
-        // Copy to clipboard
-        navigator.clipboard.writeText(markdownContent).then(() => {
-            // Show success state
-            copyButton.classList.add('copied');
-            copyButton.innerHTML = '<i class="fas fa-check"></i> Copied!';
-
-            // Reset after 2 seconds
-            setTimeout(() => {
-                copyButton.classList.remove('copied');
-                copyButton.innerHTML = '<i class="fas fa-copy"></i> Copy text';
-            }, 2000);
-        }).catch(err => {
-            console.error('Failed to copy text: ', err);
-            copyButton.innerHTML = '<i class="fas fa-times"></i> Failed to copy';
-
-            // Reset after 2 seconds
-            setTimeout(() => {
-                copyButton.innerHTML = '<i class="fas fa-copy"></i> Copy text';
-            }, 2000);
-        });
-    });
-
-    // Add the copy button to the message
-    messageDiv.appendChild(copyButton);
-}
 
 // Function to add source links to a message
 function addSourceLinks(messageDiv, sources) {
@@ -1409,13 +1379,8 @@ function addSourceLinks(messageDiv, sources) {
 
         // Extract filename or domain from the URL
         let displayText = source;
-        try {
-            const url = new URL(source);
-            displayText = url.hostname || url.pathname.split('/').pop();
-        } catch (e) {
-            // If not a valid URL, just use the last part of the path
-            displayText = source.split('/').pop();
-        }
+        const url = new URL(source);
+        displayText = url.hostname;
 
         sourceLink.textContent = displayText;
         sourceLinksList.appendChild(sourceLink);
