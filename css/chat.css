@@ -620,13 +620,6 @@ main {
     }
 }
 
-/* Only apply hover effects on desktop */
-@media (min-width: 769px) {
-    .tool-button:hover {
-        background: rgba(255, 255, 255, 0.1);
-    }
-}
-
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .tool-button span {
@@ -1507,10 +1500,6 @@ main {
     background: var(--secondary-color);
     color: var(--text-color);
     border-color: var(--secondary-color);
-}
-
-.tool-button:hover {
-    background: rgba(255, 255, 255, 0.1);
 }
 
 /* Responsive adjustments */
