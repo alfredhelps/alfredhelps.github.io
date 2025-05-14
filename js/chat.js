@@ -1,6 +1,7 @@
 
 const SERVER_URL = "https://alfred.privatedns.org/chat"
 let sourceLinksTemplate
+let noTrack = false
 
 document.addEventListener('DOMContentLoaded', function () {
     // DOM Elements
@@ -15,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const thinkingIndicatorContainer = document.getElementById('thinking-indicator-container');
     const thinkingBar = document.getElementById('thinking-bar');
     const editButtonTemplate = document.getElementById('edit-button-template');
-    const stopButtonTemplate = document.getElementById('stop-button-template');
     sourceLinksTemplate = document.getElementById('source-links-template');
 
     // Hide loader after content is loaded
@@ -514,7 +514,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 body: JSON.stringify({
                     history: messages,
-                    thinking: isReasoningEnabled
+                    thinking: isReasoningEnabled,
+                    noTrack
                 }),
                 signal: signal // Add the abort signal
             });
@@ -728,6 +729,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Check for query parameters
     const urlParams = new URLSearchParams(window.location.search);
     const initialQuestion = urlParams.get('q');
+    const noTrackQuery = urlParams.get("notrack")
 
     // If there's an initial question from the URL, use it after a short delay
     if (initialQuestion) {
@@ -744,6 +746,8 @@ document.addEventListener('DOMContentLoaded', function () {
             sendMessage();
         }, 1000); // Short delay to ensure everything is loaded
     }
+
+    if (noTrackQuery === "true") noTrack = true
 
     // Configure marked.js
     const renderer = new marked.Renderer();
@@ -918,7 +922,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     body: JSON.stringify({
                         history: messages.slice(-30),
-                        thinking: isReasoningEnabled
+                        thinking: isReasoningEnabled,
+                        noTrack
                     }),
                     signal: signal // Add the abort signal
                 });
