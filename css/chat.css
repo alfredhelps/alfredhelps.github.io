@@ -228,7 +228,7 @@ main {
 }
 
 /* Bot avatar styling - no glow */
-.bot-message img {
+.bot-message .bot-avatar {
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -395,7 +395,7 @@ main {
     }
 
     /* Reduce other animations for better performance */
-    .bot-message img {
+    .bot-message .bot-avatar {
         animation: none;
         /* Disable avatar pulse on mobile */
     }
@@ -1631,7 +1631,7 @@ main {
 }
 
 /* Bot avatar styling - fix positioning */
-.bot-message img {
+.bot-message .bot-avatar {
     width: 32px;
     /* Slightly smaller avatar */
     height: 32px;
@@ -1721,7 +1721,7 @@ main {
 }
 
 /* Bot avatar styling - fix positioning */
-.bot-message img {
+.bot-message .bot-avatar {
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -1742,7 +1742,7 @@ main {
         /* Reduce left padding */
     }
 
-    .bot-message img {
+    .bot-message .bot-avatar {
         width: 28px;
         /* Slightly smaller avatar on mobile */
         height: 28px;
@@ -1757,7 +1757,7 @@ main {
     }
 
     /* Disable avatar animation on mobile for better performance */
-    .bot-message img {
+    .bot-message .bot-avatar {
         animation: none;
     }
 

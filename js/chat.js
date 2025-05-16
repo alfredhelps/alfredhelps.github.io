@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const CooldownTime = 2000; // 2 second cooldown between messages
     let isReasoningEnabled = false;
     let currentResponseController = null; // To store the AbortController for the current response
-    let stopGenerationContainer = null; // Reference to the stop generation button container
 
     // Function to show stop generation button
     // function showStopGenerationButton() {
@@ -412,6 +411,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const botAvatar = document.createElement('img');
         botAvatar.src = "images/Alfred.png";
         botAvatar.alt = "Alfred Avatar";
+        botAvatar.classList.add('bot-avatar');
         messageDiv.appendChild(botAvatar);
 
         // Create a container for the text
@@ -533,6 +533,8 @@ document.addEventListener('DOMContentLoaded', function () {
             let fullResponse = '';
             let hasStartedResponding = false;
             let messageSources = [];
+            let toolCalls = []
+            let toolResults = []
 
             // Process the stream
             while (true) {
@@ -557,6 +559,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
                             case 'source':
                                 messageSources.push(result.data);
+                                break;
+
+                            case 'toolCall':
+                                toolCalls.push(result.data)
+                                break;
+
+                            case 'toolResult':
+                                toolResults.push(result.data)
                                 break;
 
                             case 'text':
@@ -674,6 +684,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (messageSources.length > 0) {
                         addSourceLinks(messageDiv, messageSources);
                     }
+
+                    messages.push({
+                        content: fullResponse,
+                        assistant: true,
+                        toolCalls,
+                        toolResults
+                    })
 
                     // Save reference to the bot message
                     lastBotMessageDiv = messageDiv;
@@ -942,6 +959,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 let fullResponse = '';
                 let hasStartedResponding = false;
                 let messageSources = [];
+                let toolResults = []
+                let toolCalls = []
 
                 // Process the stream
                 while (true) {
@@ -966,6 +985,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
                                 case 'source':
                                     messageSources.push(result.data);
+                                    break;
+
+                                case 'toolCall':
+                                    toolCalls.push(result.data)
+                                    break;
+
+                                case 'toolResult':
+                                    toolResults.push(result.data)
                                     break;
 
                                 case 'text':
@@ -1065,8 +1092,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 } else {
                     messages.push({
                         content: fullResponse,
-                        assistant: true
+                        assistant: true,
+                        toolCalls,
+                        toolResults
                     })
+
+                    console.log(messages)
                 }
                 // Finish response processing
                 finishResponse();
@@ -1434,6 +1465,22 @@ function processStreamLine(line, hasStartedResponding, typingQueue, messageSourc
         try {
             const toolsData = JSON.parse(dataLine.substring(2));
             return { type: 'tool', data: toolsData };
+        } catch (e) {
+            console.error('Error processing tools data:', e);
+            return { type: 'error', error: e };
+        }
+    } else if (dataLine.startsWith("9:")) {
+        try {
+            const toolsData = JSON.parse(dataLine.substring(2));
+            return { type: 'toolCall', data: toolsData };
+        } catch (e) {
+            console.error('Error processing tools data:', e);
+            return { type: 'error', error: e };
+        }
+    } else if (dataLine.startsWith("a:")) {
+        try {
+            const toolsData = JSON.parse(dataLine.substring(2));
+            return { type: 'toolResult', data: toolsData };
         } catch (e) {
             console.error('Error processing tools data:', e);
             return { type: 'error', error: e };
