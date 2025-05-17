@@ -408,11 +408,25 @@ document.addEventListener('DOMContentLoaded', function () {
         const messageDiv = document.createElement('div');
         messageDiv.classList.add('message', 'bot-message');
 
+        // Create avatar container
+        const avatarContainer = document.createElement('div');
+        avatarContainer.classList.add('avatar-container');
+        
+        // Add bot avatar
         const botAvatar = document.createElement('img');
         botAvatar.src = "images/Alfred.png";
         botAvatar.alt = "Alfred Avatar";
         botAvatar.classList.add('bot-avatar');
-        messageDiv.appendChild(botAvatar);
+        avatarContainer.appendChild(botAvatar);
+        
+        // Add bot name
+        const botName = document.createElement('div');
+        botName.classList.add('bot-name');
+        botName.textContent = "AlfredHelps";
+        avatarContainer.appendChild(botName);
+        
+        // Add avatar container to message
+        messageDiv.appendChild(avatarContainer);
 
         // Create a container for the text
         const textContainer = document.createElement('div');
@@ -1096,8 +1110,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         toolCalls,
                         toolResults
                     })
-
-                    console.log(messages)
                 }
                 // Finish response processing
                 finishResponse();
@@ -1305,9 +1317,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         textarea.addEventListener('blur', function () {
-            if (textarea.value.trim() === '') {
-                textarea.style.textAlign = 'center';
-            }
             // Hide character counter on blur
             const counter = textarea.parentNode.querySelector('.char-counter');
             if (counter) {

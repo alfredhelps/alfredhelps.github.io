@@ -14,7 +14,7 @@
     <meta property="og:title" content="Chat with Alfred">
     <meta property="og:description" content="Try Alfred's AI capabilities directly in your browser">
     <meta property="og:image" content="images/Alfred.png">
-    <title>Chat with AlfredHelps</title>
+    <title>AlfredHelps | Chat</title>
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -142,8 +142,13 @@
             <div class="chat-messages" id="chat-messages">
                 <!-- Bot welcome message -->
                 <div class="message bot-message">
-                    <img src="images/Alfred.png" alt="Alfred Avatar" class="bot-avatar">
-                    <p>Hello! I'm AlfredHelps, your intelligent assistant. How can I help you today?</p>
+                    <div class="avatar-container">
+                        <img src="images/Alfred.png" alt="Alfred Avatar" class="bot-avatar">
+                        <div class="bot-name">AlfredHelps</div>
+                    </div>
+                    <div class="typing-text-container">
+                        <p>Hello! I'm AlfredHelps, your intelligent assistant. How can I help you today?</p>
+                    </div>
                 </div>
 
                 <!-- Example questions -->
@@ -170,7 +175,7 @@
     <div class="chat-input-container">
         <div class="chat-input">
             <div class="input-main">
-                <textarea id="user-input" rows="1" placeholder="Ask AlfredHelps"
+                <textarea id="user-input" rows="1" placeholder="Ask Anything."
                     class="auto-resize-textarea"></textarea>
                 <button id="send-button" aria-label="Send message" class="input-icon">
                     <i class="fas fa-paper-plane"></i>
