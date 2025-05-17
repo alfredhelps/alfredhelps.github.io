@@ -99,15 +99,19 @@
             0% {
                 transform: rotate(0deg);
             }
+
             100% {
                 transform: rotate(360deg);
             }
         }
 
         @keyframes chat-pulse-text {
-            0%, 100% {
+
+            0%,
+            100% {
                 opacity: 0.6;
             }
+
             50% {
                 opacity: 1;
             }
@@ -135,6 +139,43 @@
             </a>
         </div>
     </header>
+
+    <!-- Sidebar for desktop view -->
+    <div class="desktop-sidebar" id="desktop-sidebar">
+        <div class="sidebar-section">
+            <h3>About AlfredHelps</h3>
+            <p>Your intelligent AI assistant that helps with questions, tasks, and information.</p>
+        </div>
+
+        <div class="sidebar-section">
+            <h3>Features</h3>
+            <ul class="feature-list">
+                <li><i class="fas fa-brain"></i> Advanced reasoning capabilities</li>
+                <li><i class="fas fa-search"></i> Information retrieval</li>
+                <li><i class="fas fa-code"></i> Code assistance</li>
+            </ul>
+        </div>
+
+        <div class="sidebar-section">
+            <h3>Tips</h3>
+            <div class="tip-card">
+                <i class="fas fa-lightbulb tip-icon"></i>
+                <p>Use the Reason button for complex problems requiring step-by-step thinking.</p>
+            </div>
+            <div class="tip-card">
+                <i class="fas fa-keyboard tip-icon"></i>
+                <p>Press Enter to send your message. Use Shift+Enter for a new line.</p>
+            </div>
+        </div>
+
+        <div class="sidebar-footer">
+            <p>© 2025 AlfredHelps</p>
+            <div class="sidebar-links">
+                <a href="tos.html" target="_blank"><i class="fas fa-file-contract"></i> Terms of Service</a>
+                <a href="privacy.html" target="_blank"><i class="fas fa-shield-alt"></i> Privacy Policy</a>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Chat Area -->
     <main>
@@ -173,22 +214,24 @@
 
     <!-- Chat Input -->
     <div class="chat-input-container">
-        <div class="chat-input">
-            <div class="input-main">
-                <textarea id="user-input" rows="1" placeholder="Ask Anything."
-                    class="auto-resize-textarea"></textarea>
-                <button id="send-button" aria-label="Send message" class="input-icon">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
+        <div class="chat-input-wrapper">
+            <div class="chat-input">
+                <div class="input-main">
+                    <textarea id="user-input" rows="1" placeholder="Ask Anything."
+                        class="auto-resize-textarea"></textarea>
+                    <button id="send-button" aria-label="Send message" class="input-icon">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="input-tools">
+                    <button id="reason-button" aria-label="Reason" class="tool-button">
+                        <i class="fas fa-brain"></i>
+                        <span>Reason</span>
+                    </button>
+                </div>
             </div>
-            <div class="input-tools">
-                <button id="reason-button" aria-label="Reason" class="tool-button">
-                    <i class="fas fa-brain"></i>
-                    <span>Reason</span>
-                </button>
-            </div>
+            <div class="disclaimer-text">Alfred can make mistakes, so double-check it</div>
         </div>
-        <div class="disclaimer-text">Alfred can make mistakes, so double-check it</div>
     </div>
 
     <!-- Typing indicator (not in DOM initially) -->

@@ -1372,6 +1372,71 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Call this function in your DOMContentLoaded event
     setupIOSKeyboardFix();
+
+    // Handle sidebar visibility based on screen size
+    function handleSidebarVisibility() {
+        const sidebar = document.getElementById('desktop-sidebar');
+        const chatInputContainer = document.querySelector('.chat-input-container');
+        const thinkingIndicatorContainer = document.querySelector('.thinking-indicator-container');
+        
+        if (window.innerWidth >= 800) {
+            // Desktop view
+            sidebar.style.display = 'block';
+            
+            // Adjust main content area
+            document.querySelector('main').style.marginLeft = '280px';
+            
+            // Adjust header if needed
+            const headerContent = document.querySelector('header .header-content');
+            if (headerContent) {
+                headerContent.style.marginLeft = '280px';
+            }
+            
+            // Position chat input centered in the available space
+            chatInputContainer.style.width = 'calc(100% - 280px)';
+            chatInputContainer.style.marginLeft = '280px';
+            chatInputContainer.style.left = '0';
+            chatInputContainer.style.right = '0';
+            
+            // Adjust thinking indicator
+            if (thinkingIndicatorContainer) {
+                thinkingIndicatorContainer.style.width = 'calc(100% - 280px)';
+                thinkingIndicatorContainer.style.marginLeft = '280px';
+                thinkingIndicatorContainer.style.left = '0';
+                thinkingIndicatorContainer.style.right = '0';
+            }
+        } else {
+            // Mobile view
+            sidebar.style.display = 'none';
+            document.querySelector('main').style.marginLeft = '0';
+            
+            const headerContent = document.querySelector('header .header-content');
+            if (headerContent) {
+                headerContent.style.marginLeft = '0';
+            }
+            
+            // Reset chat input positioning
+            chatInputContainer.style.width = '100%';
+            chatInputContainer.style.marginLeft = '0';
+            chatInputContainer.style.left = '0';
+            chatInputContainer.style.right = '0';
+            
+            // Reset thinking indicator
+            if (thinkingIndicatorContainer) {
+                thinkingIndicatorContainer.style.width = '100%';
+                thinkingIndicatorContainer.style.marginLeft = '0';
+                thinkingIndicatorContainer.style.left = '0';
+                thinkingIndicatorContainer.style.right = '0';
+            }
+        }
+        
+        // Ensure proper spacing after layout changes
+        ensureProperSpacing();
+    }
+
+    // Call on page load and window resize
+    handleSidebarVisibility();
+    window.addEventListener('resize', handleSidebarVisibility);
 });
 
 // Function to add source links to a message
