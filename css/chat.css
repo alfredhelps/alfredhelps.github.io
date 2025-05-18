@@ -339,6 +339,7 @@ main {
 
     /* Center the bot name text on mobile */
     .bot-message .bot-name {
+        margin-top: 15px;
         text-align: center;
         font-size: 1.1rem;
         /* Slightly larger on mobile */

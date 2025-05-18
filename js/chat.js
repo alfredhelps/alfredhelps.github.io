@@ -1598,3 +1598,124 @@ function processStreamLine(line, hasStartedResponding, typingQueue, messageSourc
     // Default case for unrecognized data
     return { type: 'unknown', data: dataLine };
 }
+
+// Add smooth scroll behavior when new messages appear
+function scrollToBottom(smooth = true) {
+    const chatMessages = document.querySelector('.chat-messages');
+    chatMessages.scrollTo({
+        top: chatMessages.scrollHeight,
+        behavior: smooth ? 'smooth' : 'auto'
+    });
+}
+
+// Enhanced message appearance animation
+function addMessage(message, isUser = false) {
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('message', isUser ? 'user-message' : 'bot-message');
+    messageElement.innerHTML = message;
+    
+    // Add animation class
+    messageElement.style.opacity = '0';
+    messageElement.style.transform = 'translateY(20px)';
+    
+    document.querySelector('.chat-messages').appendChild(messageElement);
+    
+    // Trigger animation after a small delay
+    setTimeout(() => {
+        messageElement.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        messageElement.style.opacity = '1';
+        messageElement.style.transform = 'translateY(0)';
+        scrollToBottom();
+    }, 50);
+}
+
+// Improved typing animation
+function animateTyping(text, element, speed = 30) {
+    return new Promise((resolve) => {
+        let i = 0;
+        const chars = text.split('');
+        
+        function typeNextChar() {
+            if (i < chars.length) {
+                const char = chars[i];
+                const span = document.createElement('span');
+                span.textContent = char;
+                span.classList.add('new-chunk-animated');
+                element.appendChild(span);
+                i++;
+                
+                // Vary typing speed slightly for more natural effect
+                const variance = Math.random() * 20 - 10;
+                const delay = speed + variance;
+                
+                setTimeout(typeNextChar, delay);
+            } else {
+                resolve();
+            }
+        }
+        
+        typeNextChar();
+    });
+}
+
+// Enhanced textarea auto-resize with smooth animation
+function setupTextareaAutoResize() {
+    const textarea = document.getElementById('user-input');
+    const sendButton = document.getElementById('send-button');
+    const MAX_CHARS = 1000;
+    
+    textarea.addEventListener('input', function() {
+        // Reset height to auto to get the correct scrollHeight
+        this.style.height = 'auto';
+        
+        // Set the height to scrollHeight with a smooth transition
+        this.style.transition = 'height 0.2s ease';
+        this.style.height = Math.min(this.scrollHeight, 150) + 'px';
+        
+        // Update character counter
+        updateCharCounter(this.value.length, MAX_CHARS);
+        
+        // Enable/disable send button
+        sendButton.disabled = this.value.trim().length === 0;
+        sendButton.classList.toggle('disabled', this.value.trim().length === 0);
+    });
+}
+
+// Add parallax effect to background
+function setupParallaxEffect() {
+    if (window.innerWidth >= 768) { // Only on desktop
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            const main = document.querySelector('main');
+            main.style.backgroundPosition = `${x * 110}% ${y * 110}%`;
+        });
+    }
+}
+
+// Call this function when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    setupTextareaAutoResize();
+    setupParallaxEffect();
+    ensureProperSpacing();
+    
+    // Add modern touch to the page
+    document.body.classList.add('modern-theme');
+});
+
+// Ensure proper spacing between messages and input
+function ensureProperSpacing() {
+    const inputContainer = document.querySelector('.chat-input-container');
+    const inputHeight = inputContainer.offsetHeight;
+    const extraPadding = 20; // Increased for better spacing
+    const totalPadding = inputHeight + extraPadding;
+    
+    const main = document.querySelector('main');
+    const chatMessages = document.querySelector('.chat-messages');
+    
+    main.style.paddingBottom = `${totalPadding}px`;
+    chatMessages.style.paddingBottom = `${totalPadding - 10}px`;
+    
+    console.log(`Applied padding: ${totalPadding}px for modern spacing`);
+}
