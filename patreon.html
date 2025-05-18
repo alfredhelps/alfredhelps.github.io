@@ -1,10 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AlfredHelps Patreon Benefits - Unlock advanced AI models, custom personalities, unlimited usage and more">
+    <meta name="description"
+        content="AlfredHelps Patreon Benefits - Unlock advanced AI models, custom personalities, unlimited usage and more">
     <meta property="og:title" content="Patreon Benefits - AlfredHelps Bot">
     <meta property="og:description" content="Become a Patreon subscriber and unlock premium features for AlfredHelps">
     <meta property="og:image" content="images/Alfred.png">
@@ -26,24 +27,29 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
+            background:
                 radial-gradient(circle at 20% 30%, rgba(85, 43, 127, 0.15) 0%, transparent 50%),
                 radial-gradient(circle at 80% 70%, rgba(155, 109, 198, 0.1) 0%, transparent 50%);
             z-index: -1;
             animation: backgroundShift 20s ease infinite alternate;
         }
-        
+
         @keyframes backgroundShift {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 100% 100%; }
+            0% {
+                background-position: 0% 0%;
+            }
+
+            100% {
+                background-position: 100% 100%;
+            }
         }
-        
+
         /* Enhanced header styling */
         header {
             position: relative;
             overflow: hidden;
         }
-        
+
         header::after {
             content: '';
             position: absolute;
@@ -54,11 +60,11 @@
             background: linear-gradient(to top, var(--background), transparent);
             z-index: 1;
         }
-        
+
         .hero {
             position: relative;
         }
-        
+
         .hero::before {
             content: '';
             position: absolute;
@@ -73,32 +79,44 @@
             animation: pulseGlow 8s ease-in-out infinite alternate;
             z-index: -1;
         }
-        
+
         @keyframes pulseGlow {
-            0% { opacity: 0.5; transform: translateX(-50%) scale(1); }
-            100% { opacity: 0.8; transform: translateX(-50%) scale(1.3); }
+            0% {
+                opacity: 0.5;
+                transform: translateX(-50%) scale(1);
+            }
+
+            100% {
+                opacity: 0.8;
+                transform: translateX(-50%) scale(1.3);
+            }
         }
-        
+
         .hero h1 {
             text-shadow: 0 0 10px rgba(155, 109, 198, 0.5);
             animation: textGlow 3s ease-in-out infinite alternate;
         }
-        
+
         @keyframes textGlow {
-            0% { text-shadow: 0 0 10px rgba(155, 109, 198, 0.5); }
-            100% { text-shadow: 0 0 20px rgba(155, 109, 198, 0.8), 0 0 30px rgba(85, 43, 127, 0.4); }
+            0% {
+                text-shadow: 0 0 10px rgba(155, 109, 198, 0.5);
+            }
+
+            100% {
+                text-shadow: 0 0 20px rgba(155, 109, 198, 0.8), 0 0 30px rgba(85, 43, 127, 0.4);
+            }
         }
-        
+
         .bot-avatar {
             filter: drop-shadow(0 0 15px rgba(155, 109, 198, 0.6));
             transition: all 0.5s ease;
         }
-        
+
         .bot-avatar:hover {
             filter: drop-shadow(0 0 20px rgba(155, 109, 198, 0.8));
             transform: scale(1.05) rotate(5deg) !important;
         }
-        
+
         /* Enhanced card styling */
         .feature-card {
             transition: all 0.4s ease;
@@ -106,7 +124,7 @@
             overflow: hidden;
             position: relative;
         }
-        
+
         .feature-card::before {
             content: '';
             position: absolute;
@@ -118,37 +136,41 @@
             opacity: 0;
             transition: opacity 0.4s ease;
         }
-        
+
         .feature-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 8px 20px rgba(85, 43, 127, 0.2);
             border-color: rgba(155, 109, 198, 0.4);
         }
-        
+
         .feature-card:hover::before {
             opacity: 1;
         }
-        
+
         .feature-icon {
             position: relative;
             transition: all 0.5s ease;
         }
-        
+
         .feature-card:hover .feature-icon {
             transform: scale(1.2) translateY(-5px);
             color: var(--accent);
             text-shadow: 0 0 15px rgba(155, 109, 198, 0.6);
         }
-        
+
         /* Enhanced button styling */
-        .patreon-btn, .discord-btn, .invite-btn {
+        .patreon-btn,
+        .discord-btn,
+        .invite-btn {
             position: relative;
             overflow: hidden;
             transition: all 0.4s ease;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2), 0 3px 8px rgba(85, 43, 127, 0.2);
         }
-        
-        .patreon-btn::before, .discord-btn::before, .invite-btn::before {
+
+        .patreon-btn::before,
+        .discord-btn::before,
+        .invite-btn::before {
             content: '';
             position: absolute;
             top: -50%;
@@ -160,34 +182,39 @@
             transition: all 0.6s ease;
             opacity: 0;
         }
-        
-        .patreon-btn:hover, .discord-btn:hover, .invite-btn:hover {
+
+        .patreon-btn:hover,
+        .discord-btn:hover,
+        .invite-btn:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 5px 10px rgba(85, 43, 127, 0.3);
         }
-        
-        .patreon-btn:hover::before, .discord-btn:hover::before, .invite-btn:hover::before {
+
+        .patreon-btn:hover::before,
+        .discord-btn:hover::before,
+        .invite-btn:hover::before {
             opacity: 1;
             transform: rotate(45deg) translate(50%, 50%);
         }
-        
+
         /* Scroll reveal effect */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
         .section {
             position: relative;
             overflow: hidden;
         }
-        
+
         .section::before {
             content: '';
             position: absolute;
@@ -199,7 +226,7 @@
             opacity: 0.5;
             z-index: -1;
         }
-        
+
         .benefits-container {
             max-width: 1000px;
             margin: 0 auto;
@@ -211,13 +238,13 @@
             border: 1px solid rgba(155, 109, 198, 0.2);
             transition: all 0.4s ease;
         }
-        
+
         .benefits-container:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 8px 20px rgba(85, 43, 127, 0.2);
             border-color: rgba(155, 109, 198, 0.4);
         }
-        
+
         .benefits-image {
             width: 100%;
             max-width: 600px;
@@ -227,11 +254,11 @@
             display: block;
             transition: transform 0.3s ease;
         }
-        
+
         .benefits-image:hover {
             transform: scale(1.02);
         }
-        
+
         .cta-buttons {
             display: flex;
             gap: 1rem;
@@ -239,12 +266,12 @@
             margin-top: 2rem;
             flex-wrap: wrap;
         }
-        
+
         .glow-effect {
             position: relative;
             overflow: hidden;
         }
-        
+
         .glow-effect::after {
             content: '';
             position: absolute;
@@ -258,18 +285,18 @@
             pointer-events: none;
             z-index: -1;
         }
-        
+
         .glow-effect:hover::after {
             opacity: 1;
         }
-        
+
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
-        
+
         .feature-card {
             background: rgba(26, 20, 38, 0.8);
             border-radius: var(--border-radius);
@@ -278,19 +305,19 @@
             border: 1px solid rgba(155, 109, 198, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
+
         .feature-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
             border-color: rgba(155, 109, 198, 0.4);
         }
-        
+
         .feature-icon {
             font-size: 2.5rem;
             margin-bottom: 1rem;
             color: var(--accent);
         }
-        
+
         .patreon-btn {
             background: linear-gradient(135deg, #f96854, #e05d44);
             color: white;
@@ -304,13 +331,13 @@
             gap: 0.5rem;
             box-shadow: var(--shadow-md);
         }
-        
+
         .patreon-btn:hover {
             transform: translateY(-3px);
             box-shadow: var(--shadow-lg);
             color: white;
         }
-        
+
         .discord-btn {
             background: linear-gradient(135deg, #5865F2, #4752C4);
             color: white;
@@ -324,7 +351,7 @@
             gap: 0.5rem;
             box-shadow: var(--shadow-md);
         }
-        
+
         .discord-btn:hover {
             transform: translateY(-3px);
             box-shadow: var(--shadow-lg);
@@ -368,8 +395,8 @@
 
     <header>
         <div class="hero">
-            <img src="images/Alfred.png"
-                alt="AlfredHelps Bot Avatar" class="bot-avatar" style="animation: float 6s ease-in-out infinite;">
+            <img src="images/Alfred.png" alt="AlfredHelps Bot Avatar" class="bot-avatar"
+                style="animation: float 6s ease-in-out infinite;">
             <h1>Patreon Benefits</h1>
             <p>Unlock Premium Features for AlfredHelps</p>
         </div>
@@ -384,10 +411,8 @@
                 </div>
 
                 <div class="benefits-container glow-effect">
-                    <img src="images/patreon_benefits.png" 
-                         alt="AlfredHelps Patreon Benefits" 
-                         class="benefits-image">
-                    
+                    <img src="images/patreon_benefits.png" alt="AlfredHelps Patreon Benefits" class="benefits-image">
+
                     <div class="cta-buttons">
                         <a href="https://www.patreon.com/c/AlfredHelpsDC/membership" class="patreon-btn">
                             <i class="fab fa-patreon"></i> Become a Patron
@@ -404,31 +429,36 @@
                             <i class="fas fa-brain"></i>
                         </div>
                         <h3>Advanced AI Models</h3>
-                        <p>Access to GPT 4.1 Mini for sophisticated reasoning and problem solving. Unlock DeepSeek V3 for enhanced creative content generation.</p>
+                        <p>Unlock Grok 3 Mini - Outperforms GPT 4.1 Mini & DeepSeek V3.<br><br>Unlock GPT 4.1 Mini for
+                            sophisticated reasoning and problem
+                            solving.<br><br>Unlock DeepSeek V3 for enhanced creative content generation.</p>
                     </div>
-                    
+
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-theater-masks"></i>
                         </div>
                         <h3>Custom AI Personalities</h3>
-                        <p>Create unique AI assistants tailored to your preferences. Save and switch between different personalities for various tasks.</p>
+                        <p>Create unique AI assistants tailored to your preferences. Save and switch between different
+                            personalities for various tasks.</p>
                     </div>
-                    
+
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-infinity"></i>
                         </div>
                         <h3>Unlimited Usage</h3>
-                        <p>No voting restrictions or daily limits. Use Alfred for extended conversations without interruptions.</p>
+                        <p>No voting restrictions or daily limits. Use Alfred for extended conversations without
+                            interruptions.</p>
                     </div>
-                    
+
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-crown"></i>
                         </div>
                         <h3>VIP Community Status</h3>
-                        <p>Special Patreon role in our Support Server. Exclusive supporter badge displayed on your profile.</p>
+                        <p>Special Patreon role in our Support Server. Exclusive supporter badge displayed on your
+                            profile.</p>
                     </div>
                 </div>
             </div>
@@ -440,20 +470,21 @@
                     <h2>How to Claim Your Benefits</h2>
                     <p>Follow these simple steps to activate your Patreon perks</p>
                 </div>
-                
+
                 <div class="content-container">
                     <ol style="text-align: left; max-width: 600px; margin: 0 auto;">
-                        <li>Subscribe to our <a href="https://www.patreon.com/c/AlfredHelpsDC/membership">Patreon</a></li>
+                        <li>Subscribe to our <a href="https://www.patreon.com/c/AlfredHelpsDC/membership">Patreon</a>
+                        </li>
                         <li>Link your Discord account on Patreon</li>
                         <li>Join our <a href="http://discord.gg/tsGdPKygqZ">Support Server</a></li>
                         <li>Use the <code>/claim</code> command in Discord</li>
                         <li>Enjoy your premium features!</li>
                     </ol>
                 </div>
-                
-                <a href="https://www.patreon.com/c/AlfredHelpsDC/membership"
-                   class="invite-btn" style="font-size: 1.2rem; padding: 0.8rem 2rem; margin-top: 2rem;">
-                   Subscribe Now
+
+                <a href="https://www.patreon.com/c/AlfredHelpsDC/membership" class="invite-btn"
+                    style="font-size: 1.2rem; padding: 0.8rem 2rem; margin-top: 2rem;">
+                    Subscribe Now
                 </a>
             </div>
         </section>
@@ -476,4 +507,5 @@
 
     <script src="js/main.js"></script>
 </body>
+
 </html>
