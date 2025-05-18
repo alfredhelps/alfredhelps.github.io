@@ -18,6 +18,38 @@ document.addEventListener('DOMContentLoaded', function () {
     const editButtonTemplate = document.getElementById('edit-button-template');
     sourceLinksTemplate = document.getElementById('source-links-template');
 
+    // Add this to your DOMContentLoaded event listener
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const desktopSidebar = document.getElementById('desktop-sidebar');
+
+    // Function to toggle sidebar
+    function toggleSidebar() {
+        desktopSidebar.classList.toggle('collapsed');
+        document.body.classList.toggle('sidebar-collapsed');
+
+        // Update layout for other elements
+        handleSidebarVisibility();
+
+        // Save preference to localStorage
+        const isCollapsed = desktopSidebar.classList.contains('collapsed');
+        localStorage.setItem('sidebar-collapsed', isCollapsed);
+    }
+
+    // Add click event to sidebar toggle
+    sidebarToggle.addEventListener('click', toggleSidebar);
+
+    // Check for saved preference on page load
+    function loadSidebarPreference() {
+        const isCollapsed = localStorage.getItem('sidebar-collapsed') === 'true';
+        if (isCollapsed) {
+            desktopSidebar.classList.add('collapsed');
+            document.body.classList.add('sidebar-collapsed');
+        }
+    }
+
+    // Call on page load
+    loadSidebarPreference();
+
     // Hide loader after content is loaded
     window.addEventListener('load', function () {
         setTimeout(function () {
@@ -411,20 +443,20 @@ document.addEventListener('DOMContentLoaded', function () {
         // Create avatar container
         const avatarContainer = document.createElement('div');
         avatarContainer.classList.add('avatar-container');
-        
+
         // Add bot avatar
         const botAvatar = document.createElement('img');
         botAvatar.src = "images/Alfred.png";
         botAvatar.alt = "Alfred Avatar";
         botAvatar.classList.add('bot-avatar');
         avatarContainer.appendChild(botAvatar);
-        
+
         // Add bot name
         const botName = document.createElement('div');
         botName.classList.add('bot-name');
         botName.textContent = "AlfredHelps";
         avatarContainer.appendChild(botName);
-        
+
         // Add avatar container to message
         messageDiv.appendChild(avatarContainer);
 
@@ -1378,30 +1410,32 @@ document.addEventListener('DOMContentLoaded', function () {
         const sidebar = document.getElementById('desktop-sidebar');
         const chatInputContainer = document.querySelector('.chat-input-container');
         const thinkingIndicatorContainer = document.querySelector('.thinking-indicator-container');
-        
+        const isCollapsed = sidebar.classList.contains('collapsed');
+
         if (window.innerWidth >= 800) {
             // Desktop view
             sidebar.style.display = 'block';
-            
-            // Adjust main content area
-            document.querySelector('main').style.marginLeft = '280px';
-            
+
+            // Adjust main content area based on sidebar state
+            const sidebarWidth = isCollapsed ? '60px' : '280px';
+            document.querySelector('main').style.marginLeft = sidebarWidth;
+
             // Adjust header if needed
             const headerContent = document.querySelector('header .header-content');
             if (headerContent) {
-                headerContent.style.marginLeft = '280px';
+                headerContent.style.marginLeft = sidebarWidth;
             }
-            
+
             // Position chat input centered in the available space
-            chatInputContainer.style.width = 'calc(100% - 280px)';
-            chatInputContainer.style.marginLeft = '280px';
+            chatInputContainer.style.width = `calc(100% - ${sidebarWidth})`;
+            chatInputContainer.style.marginLeft = sidebarWidth;
             chatInputContainer.style.left = '0';
             chatInputContainer.style.right = '0';
-            
+
             // Adjust thinking indicator
             if (thinkingIndicatorContainer) {
-                thinkingIndicatorContainer.style.width = 'calc(100% - 280px)';
-                thinkingIndicatorContainer.style.marginLeft = '280px';
+                thinkingIndicatorContainer.style.width = `calc(100% - ${sidebarWidth})`;
+                thinkingIndicatorContainer.style.marginLeft = sidebarWidth;
                 thinkingIndicatorContainer.style.left = '0';
                 thinkingIndicatorContainer.style.right = '0';
             }
@@ -1409,18 +1443,18 @@ document.addEventListener('DOMContentLoaded', function () {
             // Mobile view
             sidebar.style.display = 'none';
             document.querySelector('main').style.marginLeft = '0';
-            
+
             const headerContent = document.querySelector('header .header-content');
             if (headerContent) {
                 headerContent.style.marginLeft = '0';
             }
-            
+
             // Reset chat input positioning
             chatInputContainer.style.width = '100%';
             chatInputContainer.style.marginLeft = '0';
             chatInputContainer.style.left = '0';
             chatInputContainer.style.right = '0';
-            
+
             // Reset thinking indicator
             if (thinkingIndicatorContainer) {
                 thinkingIndicatorContainer.style.width = '100%';
@@ -1429,7 +1463,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 thinkingIndicatorContainer.style.right = '0';
             }
         }
-        
+
         // Ensure proper spacing after layout changes
         ensureProperSpacing();
     }

@@ -2217,55 +2217,148 @@ body.mobile-view .message.bot-message {
     .message ul,
     .message ol {
         font-size: 0.9rem;
-        padding-left: 20px;
-        margin: 10px 0;
+    }
+}
+
+/* Desktop Sidebar Styles */
+.desktop-sidebar {
+    display: none;
+    /* Hidden by default */
+    width: 280px;
+    background-color: var(--bg-light);
+    border-right: 1px solid var(--border-color);
+    padding: 20px;
+    height: calc(100vh - 70px);
+    /* Adjust based on header height */
+    position: fixed;
+    top: 70px;
+    left: 0;
+    overflow-y: auto;
+    z-index: 10;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, width 0.3s ease;
+}
+
+/* Collapsed sidebar state */
+.desktop-sidebar.collapsed {
+    width: 60px;
+    padding: 20px 10px;
+    overflow: hidden;
+}
+
+.desktop-sidebar.collapsed .sidebar-section,
+.desktop-sidebar.collapsed .sidebar-footer {
+    display: none;
+}
+
+/* Sidebar toggle button */
+.sidebar-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    color: var(--accent-color);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 11;
+    transition: transform 0.3s ease, background 0.2s ease;
+}
+
+.sidebar-toggle:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.desktop-sidebar.collapsed .sidebar-toggle {
+    transform: rotate(180deg);
+}
+
+/* Adjust main content based on sidebar state */
+@media (min-width: 800px) {
+    .desktop-sidebar {
+        display: block;
     }
 
-    .message li {
-        margin-bottom: 6px;
+    /* Adjust main content to make room for sidebar */
+    main {
+        margin-left: 280px;
+        transition: margin-left 0.3s ease;
     }
 
-    .message blockquote {
-        font-size: 0.9rem;
-        padding: 0.4rem 0.8rem;
-        margin: 0.8rem 0;
+    header .header-content {
+        margin-left: 280px;
+        transition: margin-left 0.3s ease;
     }
 
-    .message hr {
-        margin: 18px 0;
+    /* Adjust for collapsed sidebar */
+    .desktop-sidebar.collapsed+main {
+        margin-left: 60px;
     }
 
-    .message hr::before {
-        width: 6px;
-        height: 6px;
+    body.sidebar-collapsed .chat-input-container {
+        width: calc(100% - 60px);
+        margin-left: 60px;
+        transition: width 0.3s ease, margin-left 0.3s ease;
     }
 
-    /* Make code blocks more readable on mobile */
-    .message pre {
-        padding: 10px;
-        margin: 10px 0;
-        font-size: 0.8rem;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+    body.sidebar-collapsed .thinking-indicator-container {
+        width: calc(100% - 60px);
+        margin-left: 60px;
+        transition: width 0.3s ease, margin-left 0.3s ease;
     }
+}
 
-    .message code {
-        font-size: 0.8rem;
-    }
 
-    /* Adjust table sizing for mobile */
-    .message table {
-        font-size: 0.85rem;
-        margin: 12px 0;
-    }
+.message li {
+    margin-bottom: 6px;
+}
 
-    .message th {
-        padding: 8px 12px;
-    }
+.message blockquote {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+    margin: 0.8rem 0;
+}
 
-    .message td {
-        padding: 6px 12px;
-    }
+.message hr {
+    margin: 18px 0;
+}
+
+.message hr::before {
+    width: 6px;
+    height: 6px;
+}
+
+/* Make code blocks more readable on mobile */
+.message pre {
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 0.8rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.message code {
+    font-size: 0.8rem;
+}
+
+/* Adjust table sizing for mobile */
+.message table {
+    font-size: 0.85rem;
+    margin: 12px 0;
+}
+
+.message th {
+    padding: 8px 12px;
+}
+
+.message td {
+    padding: 6px 12px;
 }
 
 /* Improve scrolling performance on mobile */
