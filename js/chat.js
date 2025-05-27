@@ -1,4 +1,4 @@
-const SERVER_URL = "http://localhost:3000/chat" // "https://alfred.privatedns.org/chat"
+const SERVER_URL = "https://alfred.privatedns.org/chat"
 let sourceLinksTemplate
 let noTrack = false
 
