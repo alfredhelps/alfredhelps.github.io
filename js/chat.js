@@ -1,5 +1,4 @@
-
-const SERVER_URL = "https://alfred.privatedns.org/chat"
+const SERVER_URL = "http://localhost:3000/chat" // "https://alfred.privatedns.org/chat"
 let sourceLinksTemplate
 let noTrack = false
 
@@ -1473,6 +1472,21 @@ document.addEventListener('DOMContentLoaded', function () {
     // Call on page load and window resize
     handleSidebarVisibility();
     window.addEventListener('resize', handleSidebarVisibility);
+
+    // Get user's city from timezone
+    function getCityFromTimezone() {
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        // Extract city from timezone (e.g., "America/New_York" -> "New York")
+        const city = timezone.split('/').pop()?.replace(/_/g, ' ') || 'your city';
+        return city;
+    }
+
+    // Update weather question with user's city
+    const weatherChip = document.querySelector('.question-chip[style="--index: 1"]');
+    if (weatherChip) {
+        const city = getCityFromTimezone();
+        weatherChip.textContent = `What's the weather today in ${city}?`;
+    }
 });
 
 // Function to add source links to a message
