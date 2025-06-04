@@ -566,6 +566,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 signal: signal // Add the abort signal
             });
 
+            // --- Maintenance check ---
+            if (response.status === 503) {
+                maintenanceCheck = true;
+                hideTypingIndicator();
+                hideThinkingBar();
+                const systemMessage = document.createElement('div');
+                systemMessage.classList.add('system-message');
+                systemMessage.textContent = 'The server is under maintenance. Please try again later.';
+                chatMessages.appendChild(systemMessage);
+                scrollToLastMessage();
+                return;
+            }
+
             if (!response.ok) {
                 throw new Error(`Network response was not ok: ${response.status}`);
             }
@@ -991,6 +1004,19 @@ document.addEventListener('DOMContentLoaded', function () {
                     }),
                     signal: signal // Add the abort signal
                 });
+
+                // --- Maintenance check ---
+                if (response.status === 503) {
+                    maintenanceCheck = true;
+                    hideTypingIndicator();
+                    hideThinkingBar();
+                    const systemMessage = document.createElement('div');
+                    systemMessage.classList.add('system-message');
+                    systemMessage.textContent = 'The server is under maintenance. Please try again later.';
+                    chatMessages.appendChild(systemMessage);
+                    scrollToLastMessage();
+                    return;
+                }
 
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
