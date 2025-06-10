@@ -1704,7 +1704,6 @@ function animateTyping(text, element, speed = 30) {
 function setupTextareaAutoResize() {
     const textarea = document.getElementById('user-input');
     const sendButton = document.getElementById('send-button');
-    const MAX_CHARS = 1000;
 
     textarea.addEventListener('input', function () {
         // Reset height to auto to get the correct scrollHeight
@@ -1713,9 +1712,6 @@ function setupTextareaAutoResize() {
         // Set the height to scrollHeight with a smooth transition
         this.style.transition = 'height 0.2s ease';
         this.style.height = Math.min(this.scrollHeight, 150) + 'px';
-
-        // Update character counter
-        updateCharCounter(this.value.length, MAX_CHARS);
 
         // Enable/disable send button
         sendButton.disabled = this.value.trim().length === 0;
@@ -1739,7 +1735,7 @@ function setupParallaxEffect() {
 // Call this function when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     setupTextareaAutoResize();
-    setupParallaxEffect();
+    // setupParallaxEffect();
     ensureProperSpacing();
 
     // Add modern touch to the page
