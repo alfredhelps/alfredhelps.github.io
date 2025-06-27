@@ -185,7 +185,7 @@ main {
     font-size: 1rem;
     line-height: 1.6;
     color: var(--text-color);
-    max-width: 100%;
+    max-width: 750px;
     width: 100%;
     position: relative;
     transition: background-color 0.2s ease;
@@ -1263,6 +1263,10 @@ main {
     .message ol {
         padding-left: 1.5em;
     }
+
+    .message th, td {
+        font-size: 10px !important;
+    }
 }
 
 /* Mobile-specific adjustments for bot messages */
@@ -1997,29 +2001,6 @@ body.mobile-view .message.bot-message {
     word-break: break-word;
     hyphens: auto;
     display: inline-block;
-}
-
-/* Bot message styling - fix overflow */
-.message.bot-message {
-    background: var(--message-bot-bg);
-    color: var(--text-color);
-    margin-right: auto;
-    margin-left: 10px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    max-width: 85%;
-    width: auto;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-word;
-    hyphens: auto;
-    padding-left: 54px;
-    /* Increased padding to create more space */
-    position: relative;
-    /* Ensure proper positioning context */
 }
 
 /* Bot avatar styling - fix positioning */
