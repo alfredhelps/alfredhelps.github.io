@@ -154,6 +154,7 @@ body {
     background-color: #242229;
     color: #fff;
     border-bottom-right-radius: 6px;
+    overflow: auto;
 }
 
 .bot-message {
