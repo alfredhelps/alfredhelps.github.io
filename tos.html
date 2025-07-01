@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,18 +9,52 @@
     <meta property="og:title" content="Terms of Service - AlfredHelps Bot">
     <meta property="og:description"
         content="AlfredHelps Bot Terms of Service - Understanding your rights and responsibilities when using Alfred">
-    <meta property="og:image"
-        content="images/Alfred.png">
+    <meta property="og:image" content="images/Alfred.png">
     <meta property="og:type" content="website">
-    <meta name="theme-color" content="#2e151f">
+    <meta name="theme-color" content="#111014">
     <title>Terms of Service - AlfredHelps</title>
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 0 2rem;
+            background: radial-gradient(ellipse at bottom, var(--bg-secondary) 0%, var(--bg-primary) 70%);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            text-shadow: 0 0 30px var(--glow-color);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 600px;
+            margin: 1rem auto 2rem;
+            color: var(--text-secondary);
+        }
         /* Premium background effect */
         body::before {
             content: '';
@@ -81,16 +114,6 @@
         @keyframes pulseGlow {
             0% { opacity: 0.5; transform: translateX(-50%) scale(1); }
             100% { opacity: 0.8; transform: translateX(-50%) scale(1.3); }
-        }
-        
-        .hero h1 {
-            text-shadow: 0 0 10px rgba(155, 109, 198, 0.5);
-            animation: textGlow 3s ease-in-out infinite alternate;
-        }
-        
-        @keyframes textGlow {
-            0% { text-shadow: 0 0 10px rgba(155, 109, 198, 0.5); }
-            100% { text-shadow: 0 0 20px rgba(155, 109, 198, 0.8), 0 0 30px rgba(85, 43, 127, 0.4); }
         }
         
         .bot-avatar {
@@ -227,14 +250,9 @@
 </head>
 
 <body>
-    <!-- Loading Animation -->
-    <div class="loader-wrapper">
-        <div class="loader">
-            <div class="loader-circle"></div>
-            <div class="loader-circle"></div>
-            <div class="loader-circle"></div>
-            <div class="loader-text">LOADING</div>
-        </div>
+    <div id="loader-wrapper">
+        <div class="loader"></div>
+        <span>Loading Assets...</span>
     </div>
 
     <nav>
@@ -259,10 +277,9 @@
         <div class="nav-overlay"></div>
     </nav>
 
-    <header>
-        <div class="hero">
-            <img src="images/Alfred.png"
-                alt="AlfredHelps Bot Avatar" class="bot-avatar" style="animation: float 6s ease-in-out infinite;">
+    <header class="hero">
+        <div id="particles-js"></div>
+        <div class="hero-content">
             <h1>Terms of Service</h1>
             <p>Understanding Your Rights and Responsibilities</p>
         </div>
@@ -275,7 +292,7 @@
                 <p>Last Updated: April 23, 2025</p>
 
                 <h3>1. Acceptance of Terms</h3>
-                <p>By adding Alfred to your Discord server or using any of AlfredHelps's features, you agree to be bound
+                <p>By adding Alfred to your Discord server or using any of Alfred's features, you agree to be bound
                     by these Terms of Service. If you do not agree to these terms, please do not use Alfred.</p>
 
                 <h3>2. Description of Service</h3>
@@ -286,17 +303,17 @@
                 <h3>3. User Conduct</h3>
                 <p>When using Alfred, you agree not to:</p>
                 <ul>
-                    <li>Use Alfred for any illegal purposes</li>
-                    <li>Generate or request content that violates Discord's Terms of Service</li>
-                    <li>Attempt to exploit, harm, or extract data from Alfred</li>
-                    <li>Use Alfred to spam, harass, or disrupt Discord servers</li>
-                    <li>Attempt to reverse engineer or access AlfredHelps's underlying code</li>
+                    <li>Use Alfred for any illegal purposes.</li>
+                    <li>Generate or request content that violates Discord's Terms of Service or is otherwise NSFW (Not Safe For Work).</li>
+                    <li>Attempt to exploit, harm, or extract data from Alfred.</li>
+                    <li>Use Alfred to spam, harass, or disrupt Discord servers.</li>
+                    <li>Attempt to reverse engineer or access Alfred's underlying code.</li>
                 </ul>
 
                 <h3>4. Content and Data</h3>
                 <p><strong>By using Alfred, you acknowledge and agree that stored messages MAY be reviewed to improve
-                        Alfred.</strong> We may collect and store conversations with Alfred to improve our services, and
-                    ensure compliance with these terms.</p>
+                        Alfred.</strong> We may collect and store conversations with Alfred to improve our services and
+                    ensure compliance with these terms. You can opt-out of message analysis for personalization at any time via the <strong>/user-settings</strong> command.</p>
 
                 <h3>5. Service Availability</h3>
                 <p>We strive to provide uninterrupted service, but Alfred may experience downtime for maintenance or due
@@ -308,10 +325,10 @@
 
                 <h3>7. Changes to Terms</h3>
                 <p>We may update these Terms of Service from time to time. Continued use of Alfred after any changes
-                    constitutes acceptance of the new terms.</p>
+                    constitutes acceptance of the new terms. We will notify you of significant changes via the bot's notification system.</p>
 
                 <h3>8. Contact</h3>
-                <p>If you have any questions about these Terms of Service, please contact us through our Discord support
+                <p>If you have any questions about these Terms of Service, please use the <strong>/feedback</strong> command or join our Discord support
                     server.</p>
             </div>
         </div>
@@ -332,7 +349,87 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="js/animations.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 50,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#8A2BE2"
+                },
+                "shape": {
+                    "type": "circle",
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#9932CC",
+                    "opacity": 0.2,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 0.5
+                        }
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
 </body>
 
 </html>

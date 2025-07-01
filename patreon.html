@@ -5,370 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="AlfredHelps Patreon Benefits - Unlock advanced AI models, custom personalities, unlimited usage and more">
-    <meta property="og:title" content="Patreon Benefits - AlfredHelps Bot">
-    <meta property="og:description" content="Become a Patreon subscriber and unlock premium features for AlfredHelps">
+        content="Support AlfredHelps on Patreon to unlock advanced AI models, custom personalities, unlimited usage and more.">
+    <meta property="og:title" content="Patreon - AlfredHelps Bot">
+    <meta property="og:description"
+        content="Support AlfredHelps on Patreon to unlock premium features.">
     <meta property="og:image" content="images/Alfred.png">
     <meta property="og:type" content="website">
-    <meta name="theme-color" content="#2e151f">
-    <title>Patreon Benefits - AlfredHelps</title>
+    <meta name="theme-color" content="#111014">
+    <title>Patreon - AlfredHelps</title>
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Premium background effect */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background:
-                radial-gradient(circle at 20% 30%, rgba(85, 43, 127, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(155, 109, 198, 0.1) 0%, transparent 50%);
-            z-index: -1;
-            animation: backgroundShift 20s ease infinite alternate;
-        }
-
-        @keyframes backgroundShift {
-            0% {
-                background-position: 0% 0%;
-            }
-
-            100% {
-                background-position: 100% 100%;
-            }
-        }
-
-        /* Enhanced header styling */
-        header {
-            position: relative;
-            overflow: hidden;
-        }
-
-        header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: linear-gradient(to top, var(--background), transparent);
-            z-index: 1;
-        }
-
-        .hero {
-            position: relative;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(155, 109, 198, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            filter: blur(30px);
-            animation: pulseGlow 8s ease-in-out infinite alternate;
-            z-index: -1;
-        }
-
-        @keyframes pulseGlow {
-            0% {
-                opacity: 0.5;
-                transform: translateX(-50%) scale(1);
-            }
-
-            100% {
-                opacity: 0.8;
-                transform: translateX(-50%) scale(1.3);
-            }
-        }
-
-        .hero h1 {
-            text-shadow: 0 0 10px rgba(155, 109, 198, 0.5);
-            animation: textGlow 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes textGlow {
-            0% {
-                text-shadow: 0 0 10px rgba(155, 109, 198, 0.5);
-            }
-
-            100% {
-                text-shadow: 0 0 20px rgba(155, 109, 198, 0.8), 0 0 30px rgba(85, 43, 127, 0.4);
-            }
-        }
-
-        .bot-avatar {
-            filter: drop-shadow(0 0 15px rgba(155, 109, 198, 0.6));
-            transition: all 0.5s ease;
-        }
-
-        .bot-avatar:hover {
-            filter: drop-shadow(0 0 20px rgba(155, 109, 198, 0.8));
-            transform: scale(1.05) rotate(5deg) !important;
-        }
-
-        /* Enhanced card styling */
-        .feature-card {
-            transition: all 0.4s ease;
-            border: 1px solid rgba(155, 109, 198, 0.2);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(155, 109, 198, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 8px 20px rgba(85, 43, 127, 0.2);
-            border-color: rgba(155, 109, 198, 0.4);
-        }
-
-        .feature-card:hover::before {
-            opacity: 1;
-        }
-
-        .feature-icon {
-            position: relative;
-            transition: all 0.5s ease;
-        }
-
-        .feature-card:hover .feature-icon {
-            transform: scale(1.2) translateY(-5px);
-            color: var(--accent);
-            text-shadow: 0 0 15px rgba(155, 109, 198, 0.6);
-        }
-
-        /* Enhanced button styling */
-        .patreon-btn,
-        .discord-btn,
-        .invite-btn {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2), 0 3px 8px rgba(85, 43, 127, 0.2);
-        }
-
-        .patreon-btn::before,
-        .discord-btn::before,
-        .invite-btn::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 60%);
-            transform: rotate(45deg);
-            transition: all 0.6s ease;
-            opacity: 0;
-        }
-
-        .patreon-btn:hover,
-        .discord-btn:hover,
-        .invite-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 5px 10px rgba(85, 43, 127, 0.3);
-        }
-
-        .patreon-btn:hover::before,
-        .discord-btn:hover::before,
-        .invite-btn:hover::before {
-            opacity: 1;
-            transform: rotate(45deg) translate(50%, 50%);
-        }
-
-        /* Scroll reveal effect */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .section {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(155, 109, 198, 0.05) 0%, transparent 70%);
-            opacity: 0.5;
-            z-index: -1;
-        }
-
-        .benefits-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 2rem;
-            background: rgba(26, 20, 38, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-lg);
-            border: 1px solid rgba(155, 109, 198, 0.2);
-            transition: all 0.4s ease;
-        }
-
-        .benefits-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 8px 20px rgba(85, 43, 127, 0.2);
-            border-color: rgba(155, 109, 198, 0.4);
-        }
-
-        .benefits-image {
-            width: 100%;
-            max-width: 600px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-md);
-            margin: 2rem auto;
-            display: block;
-            transition: transform 0.3s ease;
-        }
-
-        .benefits-image:hover {
-            transform: scale(1.02);
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .glow-effect {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .glow-effect::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(155, 109, 198, 0.4) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .glow-effect:hover::after {
-            opacity: 1;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .feature-card {
-            background: rgba(26, 20, 38, 0.8);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            box-shadow: var(--shadow-md);
-            border: 1px solid rgba(155, 109, 198, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            border-color: rgba(155, 109, 198, 0.4);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--accent);
-        }
-
-        .patreon-btn {
-            background: linear-gradient(135deg, #f96854, #e05d44);
-            color: white;
-            font-weight: 600;
-            padding: 1rem 2rem;
-            border-radius: var(--border-radius);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            box-shadow: var(--shadow-md);
-        }
-
-        .patreon-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
-            color: white;
-        }
-
-        .discord-btn {
-            background: linear-gradient(135deg, #5865F2, #4752C4);
-            color: white;
-            font-weight: 600;
-            padding: 1rem 2rem;
-            border-radius: var(--border-radius);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            box-shadow: var(--shadow-md);
-        }
-
-        .discord-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
-            color: white;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
-    <!-- Loading Animation -->
-    <div class="loader-wrapper">
-        <div class="loader">
-            <div class="loader-circle"></div>
-            <div class="loader-circle"></div>
-            <div class="loader-circle"></div>
-            <div class="loader-text">LOADING</div>
-        </div>
+    <div id="loader-wrapper">
+        <div class="loader"></div>
+        <span>Loading Assets...</span>
     </div>
 
     <nav>
@@ -393,12 +50,65 @@
         <div class="nav-overlay"></div>
     </nav>
 
-    <header>
-        <div class="hero">
-            <img src="images/Alfred.png" alt="AlfredHelps Bot Avatar" class="bot-avatar"
-                style="animation: float 6s ease-in-out infinite;">
-            <h1>Patreon Benefits</h1>
-            <p>Unlock Premium Features for AlfredHelps</p>
+    <style>
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 0 2rem;
+            background: radial-gradient(ellipse at bottom, var(--bg-secondary) 0%, var(--bg-primary) 70%);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            text-shadow: 0 0 30px var(--glow-color);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 600px;
+            margin: 1rem auto 2rem;
+            color: var(--text-secondary);
+        }
+
+        .patreon-button {
+            display: inline-block;
+            padding: 12px 28px;
+            margin-top: 1rem;
+            background-color: #ff424d;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .patreon-button:hover {
+            background-color: #ff6673;
+        }
+    </style>
+
+    <header class="hero">
+        <div id="particles-js"></div>
+        <div class="hero-content">
+            <h1>Patreon</h1>
+            <p>Support AlfredHelps and Unlock Premium Features</p>
+            <a href="https://www.patreon.com/c/AlfredHelpsDC/membership" class="invite-btn" target="_blank">Become a Patron</a>
         </div>
     </header>
 
@@ -406,86 +116,49 @@
         <section class="section">
             <div class="container">
                 <div class="section-title">
-                    <h2>Elevate Your Discord Experience</h2>
-                    <p>Become a Patreon subscriber and unlock exclusive features</p>
+                    <h2>Patreon Benefits</h2>
+                    <p>Elevate Your Discord Experience with These Exclusive Perks</p>
                 </div>
-
-                <div class="benefits-container glow-effect">
-                    <img src="images/patreon_benefits.png" alt="AlfredHelps Patreon Benefits" class="benefits-image">
-
-                    <div class="cta-buttons">
-                        <a href="https://www.patreon.com/c/AlfredHelpsDC/membership" class="patreon-btn">
-                            <i class="fab fa-patreon"></i> Become a Patron
-                        </a>
-                        <a href="http://discord.gg/tsGdPKygqZ" class="discord-btn">
-                            <i class="fab fa-discord"></i> Join Support Server
-                        </a>
-                    </div>
-                </div>
-
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-brain"></i>
-                        </div>
+                <div class="cards">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-brain"></i></div>
                         <h3>Advanced AI Models</h3>
-                        <p>Unlock Grok 3 Mini - Outperforms GPT 4.1 Mini & DeepSeek V3.<br><br>Unlock GPT 4.1 Mini for
-                            sophisticated reasoning and problem
-                            solving.<br><br>Unlock DeepSeek V3 for enhanced creative content generation.</p>
+                        <p>Unlock Grok 3 Mini, GPT 4.1 Mini, and DeepSeek V3 for sophisticated reasoning, problem-solving, and creative content generation.</p>
                     </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-theater-masks"></i>
-                        </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-theater-masks"></i></div>
                         <h3>Custom AI Personalities</h3>
-                        <p>Create unique AI assistants tailored to your preferences. Save and switch between different
-                            personalities for various tasks.</p>
+                        <p>Create, save, and switch between unique AI assistants tailored to your preferences and tasks.</p>
                     </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-infinity"></i>
-                        </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-infinity"></i></div>
                         <h3>Unlimited Usage</h3>
-                        <p>No voting restrictions or daily limits. Use Alfred for extended conversations without
-                            interruptions.</p>
+                        <p>Enjoy uninterrupted, extended conversations with no voting restrictions or daily limits.</p>
                     </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-crown"></i>
-                        </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-crown"></i></div>
                         <h3>VIP Community Status</h3>
-                        <p>Special Patreon role in our Support Server. Exclusive supporter badge displayed on your
-                            profile.</p>
+                        <p>Receive a special Patreon role in our Support Server and an exclusive supporter badge on your profile.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="section">
-            <div class="container" style="text-align: center;">
+            <div class="container">
                 <div class="section-title">
                     <h2>How to Claim Your Benefits</h2>
-                    <p>Follow these simple steps to activate your Patreon perks</p>
+                    <p>Follow these simple steps to activate your Patreon perks.</p>
                 </div>
-
-                <div class="content-container">
-                    <ol style="text-align: left; max-width: 600px; margin: 0 auto;">
-                        <li>Subscribe to our <a href="https://www.patreon.com/c/AlfredHelpsDC/membership">Patreon</a>
-                        </li>
-                        <li>Link your Discord account on Patreon</li>
-                        <li>Join our <a href="http://discord.gg/tsGdPKygqZ">Support Server</a></li>
-                        <li>Use the <code>/claim</code> command in Discord</li>
+                <div class="card" style="max-width: 600px; margin: 0 auto; text-align: left;">
+                    <ol style="padding-left: 20px; margin: 0;">
+                        <li>Subscribe to our <a href="https://www.patreon.com/c/AlfredHelpsDC/membership" target="_blank">Patreon</a>.</li>
+                        <li>Link your Discord account on Patreon.</li>
+                        <li>Join our <a href="http://discord.gg/tsGdPKygqZ" target="_blank">Support Server</a>.</li>
+                        <li>Use the <code>/claim</code> command in any channel Alfred can see.</li>
                         <li>Enjoy your premium features!</li>
                     </ol>
                 </div>
-
-                <a href="https://www.patreon.com/c/AlfredHelpsDC/membership" class="invite-btn"
-                    style="font-size: 1.2rem; padding: 0.8rem 2rem; margin-top: 2rem;">
-                    Subscribe Now
-                </a>
             </div>
         </section>
     </main>
@@ -505,7 +178,87 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="js/animations.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 50,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#8A2BE2"
+                },
+                "shape": {
+                    "type": "circle",
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#9932CC",
+                    "opacity": 0.2,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 0.5
+                        }
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
 </body>
 
 </html>

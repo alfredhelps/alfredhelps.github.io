@@ -3,274 +3,76 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,
-             initial-scale=1.0,
-             maximum-scale=1.0,
-             user-scalable=no,
-             viewport-fit=cover,
-             interactive-widget=resizes-content" />
-
-    <meta name="description" content="Test Alfred's chat capabilities directly in your browser">
-    <meta property="og:title" content="Chat with Alfred">
-    <meta property="og:description" content="Try Alfred's AI capabilities directly in your browser">
-    <meta property="og:image" content="images/Alfred.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="description" content="Chat with AlfredHelps, an advanced AI assistant, directly in your browser.">
+    <meta property="og:title" content="AlfredHelps | Live Chat">
+    <meta property="og:description" content="Experience the power of AlfredHelps AI. Engage in dynamic conversations, get instant answers, and explore the future of chat.">
+    <meta property="og:image" content="https://alfredhelps.github.io/images/Alfred.png">
+    <meta property="og:url" content="https://alfredhelps.github.io/chat.html">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#0D0F10">
     <title>AlfredHelps | Chat</title>
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     <link rel="stylesheet" href="css/chat.css">
-    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/lib/highlight.min.js"></script>
-    <style>
-        /* Loading Animation for Chat */
-        .chat-loader-wrapper {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--bg-dark);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-        }
-
-        .chat-loader {
-            position: relative;
-            width: 120px;
-            height: 120px;
-        }
-
-        .chat-loader-circle {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 4px solid transparent;
-            border-top-color: var(--primary-color);
-            animation: chat-spin 1.2s linear infinite;
-        }
-
-        .chat-loader-circle:nth-child(2) {
-            border: 4px solid transparent;
-            border-bottom-color: var(--secondary-color);
-            animation: chat-spin 1.8s linear infinite reverse;
-        }
-
-        .chat-loader-circle:nth-child(3) {
-            width: 80%;
-            height: 80%;
-            top: 10%;
-            left: 10%;
-            border: 4px solid transparent;
-            border-left-color: var(--accent-color);
-            animation: chat-spin 1.5s linear infinite;
-        }
-
-        .chat-loader-text {
-            position: absolute;
-            bottom: -55px;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-color);
-            letter-spacing: 2px;
-            animation: chat-pulse-text 1.5s ease-in-out infinite;
-        }
-
-        .fade-out {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        @keyframes chat-spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes chat-pulse-text {
-
-            0%,
-            100% {
-                opacity: 0.6;
-            }
-
-            50% {
-                opacity: 1;
-            }
-        }
-    </style>
 </head>
 
 <body>
-    <!-- Chat Loading Animation -->
-    <div class="chat-loader-wrapper" id="chat-loader-wrapper">
-        <div class="chat-loader">
-            <div class="chat-loader-circle"></div>
-            <div class="chat-loader-circle"></div>
-            <div class="chat-loader-circle"></div>
-            <div class="chat-loader-text">LOADING CHAT</div>
-        </div>
+    <div id="loader-wrapper">
+        <div class="loader"></div>
+        <span>Initializing Interface</span>
     </div>
 
-    <!-- Header -->
-    <header>
-        <div class="header-content">
-            <a href="index.html" class="logo">
-                <img src="images/Alfred.png" alt="Alfred Logo">
-                <span>AlfredHelps</span>
-            </a>
-        </div>
-    </header>
-
-    <!-- Sidebar for desktop view -->
-    <div class="desktop-sidebar" id="desktop-sidebar">
-        <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Toggle sidebar">
-            <i class="fas fa-chevron-left"></i>
-        </button>
-        <div class="sidebar-section">
-            <h3>About AlfredHelps</h3>
-            <p>Your intelligent AI assistant that helps with questions, tasks, and information.</p>
-        </div>
-
-        <div class="sidebar-section">
-            <h3>Features</h3>
-            <ul class="feature-list">
-                <li><i class="fas fa-brain"></i> Advanced reasoning capabilities</li>
-                <li><i class="fas fa-search"></i> Information retrieval</li>
-                <li><i class="fas fa-code"></i> Code assistance</li>
-            </ul>
-        </div>
-
-        <div class="sidebar-section">
-            <h3>Tips</h3>
-            <div class="tip-card">
-                <i class="fas fa-lightbulb tip-icon"></i>
-                <p>Use the Reason button for complex problems requiring step-by-step thinking.</p>
+    <div class="chat-layout">
+        <main class="chat-main">
+            <div class="chat-top-bar">
+                <h3>AlfredHelps</h3>
             </div>
-            <div class="tip-card">
-                <i class="fas fa-keyboard tip-icon"></i>
-                <p>Press Enter to send your message. Use Shift+Enter for a new line.</p>
-            </div>
-        </div>
-
-        <div class="sidebar-footer">
-            <p>© 2025 AlfredHelps</p>
-            <div class="sidebar-links">
-                <a href="tos.html" target="_blank"><i class="fas fa-file-contract"></i> Terms of Service</a>
-                <a href="privacy.html" target="_blank"><i class="fas fa-shield-alt"></i> Privacy Policy</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Chat Area -->
-    <main>
-        <div class="chat-container">
-            <div class="chat-messages" id="chat-messages">
-                <!-- Bot welcome message -->
-                <div class="message bot-message">
-                    <div class="avatar-container">
-                        <img src="images/Alfred.png" alt="Alfred Avatar" class="bot-avatar">
-                        <div class="bot-name">AlfredHelps</div>
-                    </div>
-                    <div class="typing-text-container">
-                        <p>Hello! I'm AlfredHelps, your intelligent assistant. How can I help you today?</p>
+            <div id="chat-messages" class="chat-messages">
+                <!-- Initial Welcome Message -->
+                <div class="message-wrapper">
+                    <div class="message bot-message initial-message">
+                        <div class="message-content">
+                            <p>Hello! I'm AlfredHelps. How can I assist you today?</p>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Example questions -->
+                <!-- Example Questions -->
                 <div class="example-questions" id="example-questions">
                     <p>Try asking:</p>
                     <div class="question-chips">
-                        <button class="question-chip" style="--index: 0">What can you do?</button>
-                        <button class="question-chip" style="--index: 1">What's the weather like today?</button>
-                        <button class="question-chip" style="--index: 2">How do I add you to Discord?</button>
+                        <button class="question-chip">What can you do?</button>
+                        <button class="question-chip">Tell me a fun fact.</button>
+                        <button class="question-chip">How do I add you to Discord?</button>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
 
-    <!-- Thinking indicator -->
-    <div class="thinking-indicator-container" id="thinking-indicator-container">
-        <div class="thinking-bar" id="thinking-bar">
-            <span class="thinking-text">Thinking...</span>
-        </div>
-    </div>
-
-    <!-- Chat Input -->
-    <div class="chat-input-container">
-        <div class="chat-input-wrapper">
-            <div class="chat-wrapper">
-                <div class="chat-input">
-                    <div class="input-main">
-                        <textarea id="user-input" rows="1" placeholder="Ask Anything."
-                            class="auto-resize-textarea"></textarea>
-                        <button id="send-button" aria-label="Send message" class="input-icon">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
+            <div class="chat-input-area">
+                <div class="chat-input-wrapper">
+                    <textarea id="user-input" placeholder="Ask me anything..." rows="1"></textarea>
+                    <button id="send-button" aria-label="Send message" disabled>
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+                </div>
+                <div class="input-footer">
+                    <div class="tool-toggle">
+                        <button id="reason-toggle" class="reason-icon-button" aria-label="Toggle advanced reasoning">
+                        <i class="fas fa-brain"></i>
+                    </button>
                     </div>
-                    <div class="input-tools">
-                        <button id="reason-button" aria-label="Reason" class="tool-button">
-                            <i class="fas fa-brain"></i>
-                            <span>Reason</span>
-                        </button>
-                    </div>
+                    <p class="disclaimer">Alfred can make mistakes. Consider checking important information.</p>
                 </div>
             </div>
-            <div class="disclaimer-text">Alfred can make mistakes, so double-check it</div>
-        </div>
+        </main>
     </div>
 
-    <!-- Typing indicator (not in DOM initially) -->
-    <div class="typing-indicator" id="typing-indicator" style="display: none;">
-        <div class="typing-dot"></div>
-        <div class="typing-dot"></div>
-        <div class="typing-dot"></div>
-    </div>
-
-    <!-- Edit button template (will be cloned and used) -->
-    <template id="edit-button-template">
-        <button class="edit-message-button" aria-label="Edit message">
-            <i class="fas fa-pencil-alt"></i>
-        </button>
-    </template>
-
-    <!-- Source links template (will be cloned and used) -->
-    <template id="source-links-template">
-        <div class="source-links-container">
-            <div class="source-links-header">Sources</div>
-            <div class="source-links-list"></div>
-        </div>
-    </template>
-
-    <!-- Stop generation button template -->
-    <!-- 
-    <template id="stop-button-template">
-        <button class="stop-generation-button" aria-label="Stop generation">
-            <i class="fas fa-stop"></i>
-            <span>Stop generating</span>
-        </button>
-    </template>
-    -->
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="js/chat.js"></script>
 </body>
 

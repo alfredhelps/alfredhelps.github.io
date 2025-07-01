@@ -1,163 +1,61 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Alfred - Your intelligent Discord assistant with multiple AI models, image generation, and smart search capabilities">
+    <meta name="description"
+        content="Alfred - Your intelligent Discord assistant with multiple AI models, image generation, and smart search capabilities">
     <meta property="og:title" content="Alfred - AI Discord Bot">
-    <meta property="og:description" content="Your Intelligent Discord Assistant with multiple AI models, image generation, and smart search capabilities">
+    <meta property="og:description"
+        content="Your Intelligent Discord Assistant with multiple AI models, image generation, and smart search capabilities">
     <meta property="og:image" content="images/Alfred.png">
     <meta property="og:type" content="website">
-    <meta name="theme-color" content="#2e151f">
+    <meta name="theme-color" content="#111014">
     <title>AlfredHelps - AI Discord Bot</title>
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Preload critical fonts -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
-    
-    <!-- Load Font Awesome with media="print" to make it non-render blocking -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* Simplified background effect for better performance */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 30%, rgba(85, 43, 127, 0.1) 0%, transparent 40%);
-            z-index: -1;
-            will-change: transform;
-            transform: translateZ(0);
+        :root {
+            --glow-color: rgba(138, 43, 226, 0.6);
         }
-        
-        /* Simplified header styling */
-        header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: linear-gradient(to top, var(--background), transparent);
+
+        body {
+            overflow-x: hidden;
+        }
+
+        .fancy-input-container {
+            position: relative;
             z-index: 1;
         }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(155, 109, 198, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            filter: blur(30px);
-            /* Removed animation */
-            z-index: -1;
-        }
-        
-        .hero h1 {
-            text-shadow: 0 0 10px rgba(155, 109, 198, 0.5);
-            /* Removed animation for better performance */
-        }
-        
-        .bot-avatar {
-            /* Using box-shadow instead of filter for better performance */
-            box-shadow: 0 0 15px rgba(155, 109, 198, 0.6);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            will-change: transform, box-shadow;
-            transform: translateZ(0);
-        }
-        
-        .bot-avatar:hover {
-            transform: scale(1.05) translateZ(0);
-            box-shadow: 0 0 25px rgba(155, 109, 198, 0.8);
-        }
-        
-        /* Simplified card styling */
-        .card {
-            transition: transform 0.3s ease;
-            border: 1px solid rgba(155, 109, 198, 0.2);
-            overflow: hidden;
-            position: relative;
-            will-change: transform;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .card-icon {
-            position: relative;
-            transition: transform 0.5s ease, color 0.5s ease;
-            will-change: transform;
-        }
-        
-        .card:hover .card-icon {
-            transform: scale(1.2) translateY(-5px);
-            color: var(--accent);
-        }
-        
-        /* Simplified button styling */
-        .invite-btn {
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-        
-        .invite-btn:hover {
-            transform: translateY(-3px);
-        }
-        
-        /* Removed unnecessary pseudo-element animations */
-        
-        /* Simplified scroll reveal effect */
-        @media (prefers-reduced-motion: no-preference) {
-            .fade-in {
-                opacity: 0;
-                transform: translateY(20px);
-                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-            }
-            
-            .fade-in.visible {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .section {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+
+        #fancy-chat-form input {
             width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(155, 109, 198, 0.05) 0%, transparent 70%);
-            opacity: 0.5;
-            z-index: -1;
+            padding: 16px 60px 16px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(155, 109, 198, 0.3);
+            background: rgba(36, 26, 51, 0.6);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
-        
-        /* Fancy Chat Box Styles - optimized */
-        .hero-chat-section {
-            padding: 40px 0;
-            background: linear-gradient(180deg, var(--background) 0%, var(--card-bg) 100%);
+
+        #fancy-chat-form input:focus {
+            outline: none;
+            border-color: rgba(155, 109, 198, 0.8);
+            box-shadow: 0 4px 20px rgba(155, 109, 198, 0.3);
         }
-        
+
+        #fancy-chat-form input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
         .fancy-chat-container {
             max-width: 700px;
             margin: 0 auto;
@@ -171,67 +69,71 @@
             transform: translateZ(0);
             will-change: transform, opacity;
         }
-        
-        .chat-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .chat-avatar {
-            margin-right: 15px;
-        }
-        
-        .chat-avatar img {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            box-shadow: 0 0 15px rgba(155, 109, 198, 0.6);
-            /* Removed animation */
-        }
-        
-        .chat-title h3 {
-            margin: 0;
-            font-size: 1.4rem;
-            color: white;
-            font-weight: 600;
-        }
-        
-        .chat-title p {
-            margin: 5px 0 0;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        .fancy-input-container {
-            position: relative;
-            z-index: 1;
-        }
-        
-        #fancy-chat-form input {
+
+        #particles-js {
+            position: absolute;
             width: 100%;
-            padding: 16px 60px 16px 20px;
-            border-radius: 12px;
-            border: 1px solid rgba(155, 109, 198, 0.3);
-            background: rgba(36, 26, 51, 0.6);
-            color: white;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
         }
-        
-        #fancy-chat-form input:focus {
-            outline: none;
-            border-color: rgba(155, 109, 198, 0.8);
-            box-shadow: 0 4px 20px rgba(155, 109, 198, 0.3);
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 0 2rem;
+            background: radial-gradient(ellipse at bottom, var(--bg-secondary) 0%, var(--bg-primary) 70%);
         }
-        
-        #fancy-chat-form input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            text-shadow: 0 0 30px var(--glow-color);
         }
-        
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 600px;
+            margin: 1rem auto 2rem;
+            color: var(--text-secondary);
+        }
+
+        .hero .invite-btn {
+            font-size: 1.2rem;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            box-shadow: 0 0 25px var(--glow-color);
+        }
+
+        .section {
+            padding: 8rem 0;
+        }
+
+        .section-title h2 {
+            font-size: 3.5rem;
+            font-weight: 800;
+        }
+
+        .card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-primary);
+        }
+
+
         .pulse-button {
             position: absolute;
             right: 8px;
@@ -249,12 +151,12 @@
             box-shadow: 0 2px 10px rgba(155, 109, 198, 0.5);
             will-change: transform;
         }
-        
+
         .pulse-button:hover {
             transform: translateY(-50%) scale(1.05);
             box-shadow: 0 5px 15px rgba(155, 109, 198, 0.7);
         }
-        
+
         .chat-examples {
             display: flex;
             flex-wrap: wrap;
@@ -264,7 +166,7 @@
             position: relative;
             z-index: 1;
         }
-        
+
         .example-chip {
             background: rgba(85, 43, 127, 0.3);
             border: 1px solid rgba(155, 109, 198, 0.3);
@@ -275,51 +177,26 @@
             cursor: pointer;
             transition: transform 0.2s ease, background-color 0.2s ease;
         }
-        
+
         .example-chip:hover {
             background: rgba(85, 43, 127, 0.5);
             border-color: rgba(155, 109, 198, 0.5);
             transform: translateY(-2px);
         }
-        
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .fancy-chat-container {
-                max-width: 90%;
-                padding: 20px;
-            }
-            
-            .chat-avatar img {
-                width: 40px;
-                height: 40px;
-            }
-            
-            .chat-title h3 {
-                font-size: 1.2rem;
-            }
-            
-            #fancy-chat-form input {
-                padding: 14px 50px 14px 15px;
-            }
-            
-            .pulse-button {
-                width: 38px;
-                height: 38px;
-            }
+
+        footer {
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
         }
     </style>
 </head>
+
 <body>
-    <!-- Loading Animation -->
-    <div class="loader-wrapper">
-        <div class="loader">
-            <div class="loader-circle"></div>
-            <div class="loader-circle"></div>
-            <div class="loader-circle"></div>
-            <div class="loader-text">LOADING</div>
-        </div>
+    <div id="loader-wrapper">
+        <div class="loader"></div>
+        <span>Loading Assets...</span>
     </div>
-    
+
     <nav>
         <div class="nav-container">
             <a href="index.html" class="logo">AlfredHelps</a>
@@ -335,129 +212,91 @@
                 <a href="chat.html">Chat</a>
                 <a href="tos.html">Terms</a>
                 <a href="privacy.html">Privacy</a>
-                <a href="https://discord.com/oauth2/authorize?client_id=717830171574403162&permissions=67584&integration_type=0&scope=bot" class="invite-btn">Add to Discord</a>
+                <a href="https://discord.com/oauth2/authorize?client_id=717830171574403162&permissions=67584&integration_type=0&scope=bot"
+                    class="invite-btn">Add to Discord</a>
             </div>
         </div>
         <div class="nav-overlay"></div>
     </nav>
 
-    <header>
-        <div class="hero">
-            <img src="images/Alfred.png"
-                 alt="AlfredHelps Bot Avatar"
-                 class="bot-avatar"
-                 style="animation: float 6s ease-in-out infinite;">
-            <h1>Meet AlfredHelps</h1>
-            <p>Your Intelligent Discord Assistant</p>
+    <header class="hero">
+        <div id="particles-js"></div>
+        <div class="hero-content">
+            <h1>The Future of Discord is Intelligent</h1>
+            <p>AlfredHelps brings the power of advanced AI models, image generation, and smart search directly to your
+                server.</p>
             <a href="https://discord.com/oauth2/authorize?client_id=717830171574403162&permissions=67584&integration_type=0&scope=bot"
-               class="invite-btn">Add to Server</a>
+                class="invite-btn">Launch Assistant</a>
         </div>
     </header>
 
-    <section class="hero-chat-section">
-        <div class="container">
-            <div class="fancy-chat-container">
-                <div class="chat-header">
-                    <div class="chat-avatar">
-                        <img src="images/Alfred.png" alt="Alfred Avatar">
-                    </div>
-                    <div class="chat-title">
-                        <h3>Ask Alfred Anything</h3>
-                        <p>Try it now - no login required</p>
-                    </div>
-                </div>
-                <form id="fancy-chat-form">
-                    <div class="fancy-input-container">
-                        <input type="text" id="fancy-question" placeholder="Type your question here...">
-                        <button type="submit" class="pulse-button">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </div>
-                </form>
-                <div class="chat-examples">
-                    <span class="example-chip" onclick="setQuestion('What can you do?')">What can you do?</span>
-                    <span class="example-chip" onclick="setQuestion('How do I add you to Discord?')">Add to Discord?</span>
-                    <span class="example-chip" onclick="setQuestion('Tell me a fun fact')">Fun fact</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <main>
+        <section class="section hero-chat-section">
+            <div class="container">
+                <div class="fancy-chat-container">
+                    <div class="chat-header">
+                        <div class="chat-title">
+                            <h3>Ask Alfred Anything</h3>
+                            <p style="color: var(--text-secondary);">Try it now - no login required</p>
+                        </div>
+                    </div>
+                    <form id="fancy-chat-form">
+                        <div class="fancy-input-container">
+                            <input type="text" id="fancy-question"
+                                placeholder="e.g., 'What can you do?'">
+                            <button type="submit" class="pulse-button">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </form>
+                    <div class="chat-examples">
+                        <span class="example-chip" onclick="setQuestion('What can you do?')">What can you do?</span>
+                        <span class="example-chip" onclick="setQuestion('How do I add you to Discord?')">Add to
+                            Discord?</span>
+                        <span class="example-chip" onclick="setQuestion('Tell me a fun fact')">Fun fact</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="section">
             <div class="container">
                 <div class="section-title">
-                    <h2>What Can Alfred Do?</h2>
-                    <p>Enhance your Discord experience with powerful AI capabilities</p>
+                    <h2>Core Capabilities</h2>
+                    <p>A suite of powerful tools to augment your server</p>
                 </div>
                 <div class="cards">
                     <div class="card">
-                        <div class="card-icon">
-                            <i class="fas fa-brain"></i>
-                        </div>
-                        <h3>Multiple AI Models</h3>
-                        <p>Choose from various AI models with different capabilities to suit your specific needs.</p>
+                        <div class="card-icon"><i class="fas fa-robot"></i></div>
+                        <h3>Multi-Model AI</h3>
+                        <p>Access a variety of cutting-edge AI models to get the best answers and creations.</p>
                     </div>
                     <div class="card">
-                        <div class="card-icon">
-                            <i class="fas fa-image"></i>
-                        </div>
+                        <div class="card-icon"><i class="fas fa-palette"></i></div>
                         <h3>Image Generation</h3>
-                        <p>Create stunning images from text descriptions with advanced AI image generation.</p>
+                        <p>Bring your ideas to life with stunning AI-generated images from simple text prompts.</p>
                     </div>
                     <div class="card">
-                        <div class="card-icon">
-                            <i class="fas fa-search"></i>
-                        </div>
-                        <h3>Smart Web Search</h3>
-                        <p>Get real-time information from the web with AlfredHelps's intelligent search capabilities.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" style="background-color: var(--card-bg);">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Why Choose Alfred?</h2>
-                    <p>The perfect AI companion for your Discord server</p>
-                </div>
-                <div class="cards">
-                    <div class="card">
-                        <div class="card-icon">
-                            <i class="fas fa-server"></i>
-                        </div>
-                        <h3>Server Integration</h3>
-                        <p>Seamlessly integrates with your Discord server with minimal setup and customizable settings.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">
-                            <i class="fas fa-comments"></i>
-                        </div>
-                        <h3>Context-Aware</h3>
-                        <p>Alfred maintains conversation history per channel for natural, flowing discussions.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                        <h3>Vision Support</h3>
-                        <p>Send images for AI analysis and get detailed descriptions and insights.</p>
+                        <div class="card-icon"><i class="fas fa-globe"></i></div>
+                        <h3>Intelligent Search</h3>
+                        <p>Get real-time, accurate information from the web summarized for your convenience.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="section">
-            <div class="container" style="text-align: center;">
+            <div class="container">
                 <div class="section-title">
-                    <h2>Ready to Transform Your Discord Experience?</h2>
-                    <p>Add AlfredHelps to your server today and unlock the power of AI</p>
+                    <h2>Ready to Upgrade Your Server?</h2>
+                    <p>Unlock the next generation of Discord interaction with one simple click.</p>
                 </div>
-                <a href="https://discord.com/oauth2/authorize?client_id=717830171574403162&permissions=67584&integration_type=0&scope=bot"
-                   class="invite-btn" style="font-size: 1.2rem; padding: 0.8rem 2rem; margin-top: 2rem;">
-                   Add AlfredHelps Now
-                </a>
+                <div style="text-align: center;">
+                    <a href="https://discord.com/oauth2/authorize?client_id=717830171574403162&permissions=67584&integration_type=0&scope=bot"
+                        class="invite-btn" style="font-size: 1.2rem; padding: 0.8rem 2rem; margin-top: 2rem;">
+                        Add AlfredHelps Now
+                    </a>
+                </div>
             </div>
         </section>
     </main>
@@ -477,29 +316,101 @@
         </div>
     </footer>
 
-    <!-- Load scripts with defer -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="js/animations.js" defer></script>
     <script src="js/main.js" defer></script>
-    
-    <!-- Preload hero image if needed -->
-    <link rel="preload" as="image" href="images/Alfred.png">
-</body>
     <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 50,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#8A2BE2"
+                },
+                "shape": {
+                    "type": "circle",
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#9932CC",
+                    "opacity": 0.2,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 0.5
+                        }
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                }
+            },
+            "retina_detect": true
+        });
+
         function setQuestion(text) {
             document.getElementById('fancy-question').value = text;
             document.getElementById('fancy-question').focus();
         }
-        
-        document.getElementById('fancy-chat-form').addEventListener('submit', function(e) {
+
+        document.getElementById('fancy-chat-form').addEventListener('submit', function (e) {
             e.preventDefault();
             const question = document.getElementById('fancy-question').value.trim();
             if (question) {
-                // Encode the question for URL safety
                 const encodedQuestion = encodeURIComponent(question);
-                // Redirect to chat.html with query parameter
                 window.location.href = `chat.html?q=${encodedQuestion}`;
             }
         });
     </script>
 </body>
+
 </html>

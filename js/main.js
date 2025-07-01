@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   // Loading animation
-  const loaderWrapper = document.querySelector('.loader-wrapper');
+  const loaderWrapper = document.getElementById('loader-wrapper');
   if (loaderWrapper) {
     // Fade out loader after page is fully loaded
     window.addEventListener('load', function () {
@@ -187,53 +187,4 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Apply enhanced animations
   setTimeout(applyEnhancedAnimations, 200);
-
-  // Parallax scrolling effect
-  function handleParallaxEffect() {
-    const parallaxElements = document.querySelectorAll('header, .section, .content-container');
-    
-    window.addEventListener('scroll', function() {
-      const scrollPosition = window.scrollY;
-      
-      parallaxElements.forEach(element => {
-        const distance = element.getBoundingClientRect().top;
-        const speed = 0.15;
-        
-        // Only apply effect when element is in viewport
-        if (distance < window.innerHeight && distance > -element.offsetHeight) {
-          const yPos = -(distance * speed);
-          element.style.backgroundPosition = `center ${yPos}px`;
-        }
-      });
-    });
-  }
-  
-  // Initialize parallax effect
-  handleParallaxEffect();
-  
-  // Add typing animation to hero paragraph
-  const heroParagraph = document.querySelector('.hero p');
-  if (heroParagraph) {
-    const text = heroParagraph.textContent;
-    heroParagraph.textContent = '';
-    
-    function typeWriter(text, i, fnCallback) {
-      if (i < text.length) {
-        heroParagraph.innerHTML = text.substring(0, i+1) + '<span class="cursor">|</span>';
-        
-        setTimeout(function() {
-          typeWriter(text, i + 1, fnCallback)
-        }, 50);
-      } else if (typeof fnCallback == 'function') {
-        setTimeout(fnCallback, 700);
-      }
-    }
-    
-    // Start the typing animation after a delay
-    setTimeout(function() {
-      typeWriter(text, 0, function() {
-        heroParagraph.innerHTML = text;
-      });
-    }, 1000);
-  }
 });
