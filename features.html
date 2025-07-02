@@ -69,7 +69,7 @@
             text-align: center;
             position: relative;
             padding: 0 2rem;
-            background: radial-gradient(ellipse at bottom, var(--bg-secondary) 0%, var(--bg-primary) 70%);
+            background: transparent;
         }
 
         .hero h1 {
@@ -84,6 +84,18 @@
             max-width: 600px;
             margin: 1rem auto 2rem;
             color: var(--text-secondary);
+        }
+
+        .card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-primary);
         }
     </style>
 
@@ -104,15 +116,13 @@
                 </div>
                 <div class="cards">
                     <div class="card">
-                        <div class="card-icon"><i class="fas fa-brain"></i></div>
-                        <h3>Multiple AI Models</h3>
-                        <p>Alfred offers a variety of AI models to suit your needs:</p>
+                        <div class="card-icon"><i class="fas fa-search-plus"></i></div>
+                        <h3>Deep Research</h3>
+                        <p>Go beyond simple answers with in-depth research on any topic.</p>
                         <ul>
-                            <li><strong>Default Model</strong> - Optimized for general assistance and everyday tasks
-                            </li>
-                            <li><strong>Advanced Models</strong> - Enhanced capabilities including vision support</li>
-                            <li><strong>Specialized Models</strong> - Tailored for specific use cases and conversation
-                                styles</li>
+                            <li><strong>Web Browsing:</strong> Access real-time information from the internet.</li>
+                            <li><strong>Multi-Source Synthesis:</strong> Gathers and combines data from various websites.</li>
+                            <li><strong>Comprehensive Summaries:</strong> Delivers detailed reports on your research topics.</li>
                         </ul>
                     </div>
                     <div class="card">
@@ -181,7 +191,6 @@
                         <div class="card-icon"><i class="fas fa-server"></i></div>
                         <h3>Server Settings</h3>
                         <ul>
-                            <li><strong>/create-personality</strong> - Create custom AI personalities</li>
                             <li><strong>/server-settings</strong> - Configure server-wide bot behavior</li>
                         </ul>
                     </div>
