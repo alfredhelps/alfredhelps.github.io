@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AlfredHelps Bot Documentation - Learn how to use all the features of Alfred.">
+    <meta property="og:title" content="Documentation - AlfredHelps Bot">
+    <meta property="og:description"
+        content="AlfredHelps Bot Documentation - Learn how to use all the features of Alfred.">
+    <meta property="og:image" content="images/Alfred.png">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#111014">
+    <title>Docs - AlfredHelps</title>
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+    <div id="loader-wrapper">
+        <div class="loader"></div>
+        <span>Loading Assets...</span>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">AlfredHelps</a>
+            <button class="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="features.html">Features</a>
+                <a href="documentation.html" class="active">Docs</a>
+                <a href="patreon.html">Patreon</a>
+                <a href="chat.html">Chat</a>
+                <a href="tos.html">Terms</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="https://discord.com/oauth2/authorize?client_id=717830171574403162&permissions=67584&integration_type=0&scope=bot"
+                    class="invite-btn">Add to Discord</a>
+            </div>
+        </div>
+        <div class="nav-overlay"></div>
+    </nav>
+
+    <style>
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 0 2rem;
+            background: transparent;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            text-shadow: 0 0 30px var(--glow-color);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 600px;
+            margin: 1rem auto 2rem;
+            color: var(--text-secondary);
+        }
+    </style>
+
+    <header class="hero">
+        <div id="particles-js"></div>
+        <div class="hero-content">
+            <h1>Documentation</h1>
+            <p>Your complete guide to using AlfredHelps</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="content-container">
+                <section id="how-it-works">
+                    <h2><i class="fas fa-magic"></i> How Alfred Works</h2>
+                    <p>Think of Alfred as a smart assistant with a toolbox. When you ask for something, Alfred's AI
+                        brain figures out the best tool for the job. It can search the web for the latest news, generate
+                        an image from your imagination, or just have a friendly chat. It learns from your conversations
+                        to give you a more personalized experience over time.</p>
+                </section>
+
+                <section id="getting-started">
+                    <h2><i class="fas fa-rocket"></i> Getting Started in 3 Easy Steps</h2>
+                    <h3>1. Add Alfred to Your Server</h3>
+                    <p>Click the "Add to Discord" button on our website or in Alfred's profile. You'll be asked to
+                        authorize it to join your server.</p>
+                    <h3>2. Choose Your AI's Vibe</h3>
+                    <p>The first time you talk to Alfred, it will ask you to choose a personality: a more formal,
+                        accurate AI or a more casual, fun one. You can change this anytime in
+                        <code>/user-settings</code>.</p>
+                    <h3>3. Start Chatting!</h3>
+                    <p>There are a few ways to talk to Alfred:</p>
+                    <ul>
+                        <li><strong>Mention:</strong> Simply <code>@AlfredHelps</code> in any channel.</li>
+                        <li><strong>Trigger Word:</strong> Just saying "alfred" in a message will get its attention
+                            (server admins can change this).</li>
+                        <li><strong>Slash Commands:</strong> Use commands like <code>/ask</code> for direct questions.
+                            This is the best way to use Alfred in DMs.</li>
+                        <li><strong>Sessions:</strong> Use <code>/session-start</code> to have Alfred reply to every
+                            message in a channel without needing to be mentioned. Perfect for brainstorming or Q&A!</li>
+                    </ul>
+                </section>
+
+                <section id="core-features">
+                    <h2><i class="fas fa-star"></i> Fun Things You Can Do</h2>
+                    <h3>AI Conversation & Personalization</h3>
+                    <ul>
+                        <li><strong>Pick Your AI:</strong> Use <code>/user-settings</code> to switch between AI
+                            personalities. The "Default" model is great for general use, while the "Fun Learning Buddy"
+                            offers a more humorous experience. Premium subscribers get access to our most powerful and
+                            creative models.</li>
+                        <li><strong>Set the Mood:</strong> In <code>/user-settings</code>, switch between "Casual Mode"
+                            for creative chats and "Serious Mode" for professional and precise answers.</li>
+                        <li><strong>Create Your Own AI (Premium):</strong> Subscribers can use
+                            <code>/create-personality</code> to build their own AI assistants with unique names,
+                            instructions, and behaviors.</li>
+                    </ul>
+                    <h3>Image Magic</h3>
+                    <ul>
+                        <li><strong>Generate Images:</strong> Use <code>/imagine</code> with a descriptive prompt to
+                            create AI-generated images in various styles.</li>
+                        <li><strong>Reimagine Existing Images:</strong> Right-click on any image and select `Apps >
+                            Reimagine`. Alfred will create a new image inspired by the original.</li>
+                        <li><strong>Describe What You See:</strong> Right-click an image and use `Apps > Describe` to
+                            get a detailed text description of the picture.</li>
+                    </ul>
+                    <h3>Powerful Tools</h3>
+                    <ul>
+                        <li><strong>Deep Research:</strong> Use <code>/deep-research [topic]</code> for a detailed
+                            report on any subject. Alfred will browse the web and summarize its findings for you.</li>
+                        <li><strong>Summarize Anything:</strong> Right-click on a long message or an image and use `Apps
+                            > Summarize` to get a quick summary.</li>
+                    </ul>
+                </section>
+
+                <section id="privacy-management">
+                    <h2><i class="fas fa-user-shield"></i> Your Data, Your Control</h2>
+                    <p>You have full control over your data.</p>
+                    <ul>
+                        <li><strong>Personalize Your Experience:</strong> The <code>/user-settings</code> command is
+                            your hub for personalization. You can also go to `Privacy Settings` to turn off message
+                            analysis, which helps Alfred learn your style.</li>
+                        <li><strong>Delete Your History:</strong> Use <code>/delete-history</code> to clear Alfred's
+                            memory in the current channel. Use <code>/delete-all-history</code> to permanently erase all
+                            of your stored messages everywhere.</li>
+                    </ul>
+                </section>
+
+                <section id="server-management">
+                    <h2><i class="fas fa-server"></i> For Server Admins</h2>
+                    <p>Admins with "Manage Server" permissions can use <code>/server-settings</code> to customize
+                        Alfred:</p>
+                    <ul>
+                        <li><strong>Family Friendly Mode:</strong> Keep conversations clean by restricting the bot to a
+                            family-friendly AI.</li>
+                        <li><strong>Custom Trigger Word:</strong> Change the word that activates Alfred (the default is
+                            "alfred").</li>
+                        <li><strong>General Chatter:</strong> Allow Alfred to occasionally join in on conversations to
+                            make the server more lively.</li>
+                    </ul>
+                </section>
+
+                <section id="subscriber-perks">
+                    <h2><i class="fas fa-gem"></i> Go Premium: Unlock Alfred's Full Potential</h2>
+                    <p>Supporting Alfred on Patreon unlocks a suite of powerful features:</p>
+                    <ul>
+                        <li><strong>No Daily Limits:</strong> Unlimited use of all features.</li>
+                        <li><strong>Exclusive AI Models:</strong> Access our most powerful and creative AI models.</li>
+                        <li><strong>Custom Personalities:</strong> Create and use your own unique AI assistants.</li>
+                        <li><strong>No Watermarks:</strong> Images generated with <code>/imagine</code> are
+                            watermark-free.</li>
+                        <li><strong>Image Upscaling & Enhancing:</strong> Improve image quality with
+                            <code>/image-upscale</code>.</li>
+                        <li><strong>Smarter Prompts:</strong> Let AI enhance your prompts in <code>/imagine</code> for
+                            better results.</li>
+                    </ul>
+                    <p>Use <code>/claim</code> to activate your perks after subscribing on Patreon!</p>
+                </section>
+
+                <section id="voting-limits">
+                    <h2><i class="fas fa-vote-yea"></i> Voting, Limits, and Support</h2>
+                    <p>To keep Alfred running smoothly for everyone, some features have daily limits for
+                        non-subscribers. We rely on community support to cover server costs.</p>
+                    <ul>
+                        <li><strong>Why are there limits?</strong> Running powerful AI models is expensive. Limits
+                            ensure that everyone gets a chance to use Alfred, while encouraging support from our most
+                            active users.</li>
+                        <li><strong>How to get more usage:</strong> You can unlock more features and remove daily limits
+                            by voting for Alfred on Top.gg. Use the <code>/vote</code> command to get your voting status
+                            and a link to vote.</li>
+                        <li><strong>The best way to support Alfred:</strong> Subscribing to our <a
+                                href="patreon.html">Patreon</a> is the best way to support the bot. You'll get unlimited
+                            access to all features, exclusive AI models, and more!</li>
+                    </ul>
+                </section>
+
+                <section id="faq">
+                    <h2><i class="fas fa-question-circle"></i> Troubleshooting & FAQ</h2>
+                    <p>Having trouble? Here are some common questions and answers.</p>
+                    <ul>
+                        <li><strong>Why isn't Alfred responding?</strong>
+                            <ul>
+                                <li>Make sure Alfred has permission to read and send messages in the channel.</li>
+                                <li>Check the server's trigger word in <code>/server-settings</code>.</li>
+                                <li>You might be on a cooldown for sending messages too quickly.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Why did I get an "interaction failed" error?</strong> This usually means Alfred is
+                            thinking and took a little too long to respond. Try your request again in a few moments.
+                        </li>
+                        <li><strong>How do I use the right-click commands (like Summarize or Reimagine)?</strong> On
+                            desktop, right-click a message or image. On mobile, tap and hold the message, then find the
+                            "Apps" option in the menu that appears.</li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">AlfredHelps</div>
+                <div class="footer-links">
+                    <a href="https://top.gg/bot/717830171574403162">Top.gg</a>
+                    <a href="http://discord.gg/tsGdPKygqZ">Support Server</a>
+                </div>
+                <div class="footer-copyright">
+                    &copy; 2025 AlfredHelps Bot. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="js/main.js" defer></script>
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 50,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#8A2BE2"
+                },
+                "shape": {
+                    "type": "circle",
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#9932CC",
+                    "opacity": 0.2,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 0.5
+                        }
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
+</body>
+
+</html>

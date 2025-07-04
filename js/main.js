@@ -89,7 +89,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Initial check for elements in viewport
   setTimeout(handleScrollAnimations, 100);
-
   // Check on scroll
   window.addEventListener('scroll', handleScrollAnimations);
 
