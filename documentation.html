@@ -11,7 +11,7 @@
     <meta property="og:image" content="images/Alfred.png">
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#111014">
-    <title>Docs - AlfredHelps</title>
+    <title>Documentation - AlfredHelps</title>
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -100,8 +100,9 @@
                 <section id="how-it-works">
                     <h2><i class="fas fa-magic"></i> How Alfred Works</h2>
                     <p>Think of Alfred as a smart assistant with a toolbox. When you ask for something, Alfred's AI
-                        brain figures out the best tool for the job. It can search the web for the latest news, generate
-                        an image from your imagination, or just have a friendly chat. It learns from your conversations
+                        brain figures out the best tool for the job. It can search the web, generate an image, or just
+                        chat. Beyond simply picking a tool, Alfred also taps into its long-term memory of your past
+                        conversations to give you smarter, more relevant answers. It learns from your conversations
                         to give you a more personalized experience over time.</p>
                 </section>
 
@@ -122,26 +123,37 @@
                             (server admins can change this).</li>
                         <li><strong>Slash Commands:</strong> Use commands like <code>/ask</code> for direct questions.
                             This is the best way to use Alfred in DMs.</li>
-                        <li><strong>Sessions:</strong> Use <code>/session-start</code> to have Alfred reply to every
-                            message in a channel without needing to be mentioned. Perfect for brainstorming or Q&A!</li>
                     </ul>
                 </section>
 
                 <section id="core-features">
-                    <h2><i class="fas fa-star"></i> Fun Things You Can Do</h2>
-                    <h3>AI Conversation & Personalization</h3>
+                    <h2><i class="fas fa-star"></i> Core Features & Commands</h2>
+
+                    <h3><i class="fas fa-brain"></i> Alfred's Long-Term Memory (RAG)</h3>
+                    <p>Ever feel like you have to repeat yourself to a bot? Not with Alfred. He uses a special system
+                        called Retrieval-Augmented Generation (RAG) to remember your past conversations. When you chat,
+                        Alfred intelligently searches your history for relevant context and uses it to provide smarter,
+                        more personalized answers. It's like having a conversation with a friend who actually remembers
+                        what you've talked about.</p>
                     <ul>
-                        <li><strong>Pick Your AI:</strong> Use <code>/user-settings</code> to switch between AI
-                            personalities. The "Default" model is great for general use, while the "Fun Learning Buddy"
-                            offers a more humorous experience. Premium subscribers get access to our most powerful and
-                            creative models.</li>
-                        <li><strong>Set the Mood:</strong> In <code>/user-settings</code>, switch between "Casual Mode"
-                            for creative chats and "Serious Mode" for professional and precise answers.</li>
-                        <li><strong>Create Your Own AI (Premium):</strong> Subscribers can use
-                            <code>/create-personality</code> to build their own AI assistants with unique names,
-                            instructions, and behaviors.</li>
+                        <li><strong>Automatic Context:</strong> Alfred automatically uses this memory in every
+                            conversation.</li>
+                        <li><strong>Search Your History:</strong> Use <code>/search-messages [query]</code> to have the
+                            AI search your entire conversation history for specific topics or keywords.</li>
                     </ul>
-                    <h3>Image Magic</h3>
+
+                    <h3><i class="fas fa-comments"></i> AI & Conversation</h3>
+                    <ul>
+                        <li><strong>Chat with Alfred:</strong> Use <code>/ask</code> or mention Alfred to start a
+                            conversation. You can even attach images for Alfred to analyze.</li>
+                        <li><strong>AI-Generated Profiles:</strong> Use <code>/overview</code> to see an AI-generated
+                            summary of your personality and chat habits.</li>
+                        <li><strong>Check Your Vibe:</strong> Use <code>/compatibility [user]</code> to see an
+                            AI-powered analysis of how well you and another user get along based on your chat styles.
+                        </li>
+                    </ul>
+
+                    <h3><i class="fas fa-palette"></i> Image Magic</h3>
                     <ul>
                         <li><strong>Generate Images:</strong> Use <code>/imagine</code> with a descriptive prompt to
                             create AI-generated images in various styles.</li>
@@ -149,13 +161,52 @@
                             Reimagine`. Alfred will create a new image inspired by the original.</li>
                         <li><strong>Describe What You See:</strong> Right-click an image and use `Apps > Describe` to
                             get a detailed text description of the picture.</li>
+                        <li><strong>Upscale Images (Premium):</strong> Use <code>/image-upscale</code> to increase the
+                            resolution and quality of an image.</li>
                     </ul>
-                    <h3>Powerful Tools</h3>
+
+                    <h3><i class="fas fa-tools"></i> Productivity & Tools</h3>
                     <ul>
                         <li><strong>Deep Research:</strong> Use <code>/deep-research [topic]</code> for a detailed
                             report on any subject. Alfred will browse the web and summarize its findings for you.</li>
                         <li><strong>Summarize Anything:</strong> Right-click on a long message or an image and use `Apps
                             > Summarize` to get a quick summary.</li>
+                    </ul>
+
+                    <h3><i class="fas fa-hourglass-half"></i> Session Management</h3>
+                    <ul>
+                        <li><strong>Start a Session:</strong> Use <code>/session-start</code> to have Alfred reply to
+                            every message in a channel without needing to be mentioned. Perfect for brainstorming or
+                            Q&A!</li>
+                        <li><strong>End a Session:</strong> Use <code>/session-end</code> to stop the continuous reply
+                            mode in a channel.</li>
+                    </ul>
+                </section>
+
+                <section id="personalization">
+                    <h2><i class="fas fa-user-cog"></i> Personalization & Profiles</h2>
+                    <ul>
+                        <li><strong>User Settings:</strong> The <code>/user-settings</code> command is your central hub.
+                            Here you can:
+                            <ul>
+                                <li>Pick your preferred AI model.</li>
+                                <li>Switch between "Casual" and "Serious" conversation modes.</li>
+                                <li>Manage your privacy settings.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Custom Personalities (Premium):</strong> Subscribers can build their own AI
+                            assistants.
+                            <ul>
+                                <li><code>/create-personality</code>: Design a new AI with a unique name, instructions,
+                                    and behavior.</li>
+                                <li><code>/list-personalities</code>: View all the custom AIs you've created.</li>
+                                <li><code>/delete-personality</code>: Remove a custom AI you no longer need.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Your Profile:</strong> Use <code>/profile</code> to see your stats, badges, and
+                            rank.</li>
+                        <li><strong>Notifications:</strong> Use <code>/notifications</code> to see updates from the
+                            developers and system messages.</li>
                     </ul>
                 </section>
 
@@ -163,12 +214,15 @@
                     <h2><i class="fas fa-user-shield"></i> Your Data, Your Control</h2>
                     <p>You have full control over your data.</p>
                     <ul>
-                        <li><strong>Personalize Your Experience:</strong> The <code>/user-settings</code> command is
-                            your hub for personalization. You can also go to `Privacy Settings` to turn off message
-                            analysis, which helps Alfred learn your style.</li>
+                        <li><strong>Personalization Opt-Out:</strong> In <code>/user-settings</code> > `Privacy
+                            Settings`, you can turn off the message analysis that Alfred uses to learn your style and
+                            generate your <code>/overview</code>.</li>
                         <li><strong>Delete Your History:</strong> Use <code>/delete-history</code> to clear Alfred's
                             memory in the current channel. Use <code>/delete-all-history</code> to permanently erase all
-                            of your stored messages everywhere.</li>
+                            of your stored messages everywhere. This also deletes your embedding data for the RAG
+                            system.</li>
+                        <li><strong>Export Your Data:</strong> Use <code>/export-history</code> to get a copy of your
+                            chat logs in the current channel.</li>
                     </ul>
                 </section>
 
@@ -183,6 +237,8 @@
                             "alfred").</li>
                         <li><strong>General Chatter:</strong> Allow Alfred to occasionally join in on conversations to
                             make the server more lively.</li>
+                        <li><strong>Reasoning:</strong> Enable or disable the AI showing its thought process in
+                            responses for the entire server.</li>
                     </ul>
                 </section>
 
@@ -191,16 +247,18 @@
                     <p>Supporting Alfred on Patreon unlocks a suite of powerful features:</p>
                     <ul>
                         <li><strong>No Daily Limits:</strong> Unlimited use of all features.</li>
-                        <li><strong>Exclusive AI Models:</strong> Access our most powerful and creative AI models.</li>
-                        <li><strong>Custom Personalities:</strong> Create and use your own unique AI assistants.</li>
+                        <li><strong>Exclusive AI Models:</strong> Access our most powerful and creative AI models like
+                            Grok 3 Mini.</li>
+                        <li><strong>Custom Personalities:</strong> Create, manage, and use your own unique AI
+                            assistants.</li>
                         <li><strong>No Watermarks:</strong> Images generated with <code>/imagine</code> are
                             watermark-free.</li>
                         <li><strong>Image Upscaling & Enhancing:</strong> Improve image quality with
-                            <code>/image-upscale</code>.</li>
+                            <code>/image-upscale</code> and advanced options in <code>/imagine</code>.</li>
                         <li><strong>Smarter Prompts:</strong> Let AI enhance your prompts in <code>/imagine</code> for
                             better results.</li>
                     </ul>
-                    <p>Use <code>/claim</code> to activate your perks after subscribing on Patreon!</p>
+                    <p>Use <code>/claim</code> or <code>/patreon</code> to activate your perks after subscribing!</p>
                 </section>
 
                 <section id="voting-limits">
