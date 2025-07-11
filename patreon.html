@@ -7,8 +7,7 @@
     <meta name="description"
         content="Support AlfredHelps on Patreon to unlock advanced AI models, custom personalities, unlimited usage and more.">
     <meta property="og:title" content="Patreon - AlfredHelps Bot">
-    <meta property="og:description"
-        content="Support AlfredHelps on Patreon to unlock premium features.">
+    <meta property="og:description" content="Support AlfredHelps on Patreon to unlock premium features.">
     <meta property="og:image" content="images/Alfred.png">
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#111014">
@@ -98,8 +97,43 @@
             transition: background-color 0.3s ease;
         }
 
+        .card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-primary);
+        }
+
         .patreon-button:hover {
             background-color: #ff6673;
+        }
+
+        .features-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 1.5rem;
+            text-align: left;
+        }
+
+        .features-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .features-list i {
+            color: var(--primary-color);
+            margin-right: 12px;
+            width: 20px;
+            /* Ensures alignment */
+            text-align: center;
         }
     </style>
 
@@ -108,7 +142,8 @@
         <div class="hero-content">
             <h1>Patreon</h1>
             <p>Support AlfredHelps and Unlock Premium Features</p>
-            <a href="https://www.patreon.com/c/AlfredHelpsDC/membership" class="invite-btn" target="_blank">Become a Patron</a>
+            <a href="https://www.patreon.com/c/AlfredHelpsDC/membership" class="invite-btn" target="_blank">Become a
+                Patron</a>
         </div>
     </header>
 
@@ -116,29 +151,32 @@
         <section class="section">
             <div class="container">
                 <div class="section-title">
-                    <h2>Patreon Benefits</h2>
+                    <h2>Patreon Tiers & Benefits</h2>
                     <p>Elevate Your Discord Experience with These Exclusive Perks</p>
                 </div>
                 <div class="cards">
                     <div class="card">
-                        <div class="card-icon"><i class="fas fa-brain"></i></div>
-                        <h3>Advanced AI Models</h3>
-                        <p>Unlock Grok 3 Mini, GPT 4.1 Mini, and DeepSeek V3 for sophisticated reasoning, problem-solving, and creative content generation.</p>
+                        <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Supporter Tier</h3>
+                        <p>A great starting point to enhance your Alfred experience.</p>
+                        <ul class="features-list">
+                            <li><i class="fas fa-arrow-up-9-1"></i> Increased Daily Limits</li>
+                            <li><i class="fas fa-vote-yea"></i> No More Vote Wall</li>
+                            <li><i class="fas fa-image"></i> No Watermarks on Generated Images</li>
+                        </ul>
                     </div>
                     <div class="card">
-                        <div class="card-icon"><i class="fas fa-theater-masks"></i></div>
-                        <h3>Custom AI Personalities</h3>
-                        <p>Create, save, and switch between unique AI assistants tailored to your preferences and tasks.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon"><i class="fas fa-infinity"></i></div>
-                        <h3>Unlimited Usage</h3>
-                        <p>Enjoy uninterrupted, extended conversations with no voting restrictions or daily limits.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon"><i class="fas fa-crown"></i></div>
-                        <h3>VIP Community Status</h3>
-                        <p>Receive a special Patreon role in our Support Server and an exclusive supporter badge on your profile.</p>
+                        <div class="card-icon"><i class="fas fa-rocket"></i></div>
+                        <h3>Pro Tier</h3>
+                        <p>Unlock the ultimate Alfred experience with unlimited access and exclusive features.</p>
+                        <ul class="features-list">
+                            <li><i class="fas fa-check"></i> All Supporter Tier Perks</li>
+                            <li><i class="fas fa-infinity"></i> Unlimited Usage</li>
+                            <li><i class="fas fa-brain"></i> Exclusive AI Models (Grok, GPT-4.1 Mini)</li>
+                            <li><i class="fas fa-theater-masks"></i> Custom AI Personalities</li>
+                            <li><i class="fas fa-expand-arrows-alt"></i> Image Upscaling & Enhancing</li>
+                            <li><i class="fas fa-magic"></i> AI Prompt Enhancing</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -152,7 +190,8 @@
                 </div>
                 <div class="card" style="max-width: 600px; margin: 0 auto; text-align: left;">
                     <ol style="padding-left: 20px; margin: 0;">
-                        <li>Subscribe to our <a href="https://www.patreon.com/c/AlfredHelpsDC/membership" target="_blank">Patreon</a>.</li>
+                        <li>Subscribe to our <a href="https://www.patreon.com/c/AlfredHelpsDC/membership"
+                                target="_blank">Patreon</a>.</li>
                         <li>Link your Discord account on Patreon.</li>
                         <li>Join our <a href="http://discord.gg/tsGdPKygqZ" target="_blank">Support Server</a>.</li>
                         <li>Use the <code>/claim</code> command in any channel Alfred can see.</li>
