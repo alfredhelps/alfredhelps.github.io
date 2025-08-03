@@ -7,7 +7,7 @@ async function init() {
 init();
 
 document.addEventListener('DOMContentLoaded', () => {
-    const SERVER_URL = "http://localhost:3000/chat"; // "https://alfred.privatedns.org/chat"
+    const SERVER_URL = "https://alfred.privatedns.org/chat";
     let noTrack = false;
 
     // DOM Elements
