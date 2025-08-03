@@ -1,5 +1,13 @@
+async function init() {
+    const fp = await FingerprintJS.load();
+    const { visitorId } = await fp.get();
+    window.__FINGERPRINT__ = visitorId;
+}
+
+init();
+
 document.addEventListener('DOMContentLoaded', () => {
-    const SERVER_URL = "https://alfred.privatedns.org/chat";
+    const SERVER_URL = "http://localhost:3000/chat"; // "https://alfred.privatedns.org/chat"
     let noTrack = false;
 
     // DOM Elements
@@ -108,11 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
             currentResponseController = new AbortController();
             const response = await fetch(SERVER_URL, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'X-Client-Fingerprint': window.__FINGERPRINT__, "X-Client-Timezone": Intl.DateTimeFormat().resolvedOptions().timeZone },
                 body: JSON.stringify({
                     history: messages.slice(-30),
-                    thinking: isReasoningEnabled, // Use the state variable
-                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    thinking: isReasoningEnabled,
                     noTrack
                 }),
                 signal: currentResponseController.signal
@@ -143,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let botMessageContent = '';
         let botMessageWrapper = null;
         let contentElement = null;
-        let collectedSources = []; 
+        let collectedSources = [];
 
         while (true) {
             const { done, value } = await reader.read();
@@ -153,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const lines = chunk.split('\n');
 
             for (const line of lines) {
-                if (line.startsWith('0:')) { 
+                if (line.startsWith('0:')) {
                     if (!botMessageWrapper) {
                         if (tempThinkingIndicator && tempThinkingIndicator.parentNode) {
                             tempThinkingIndicator.remove();
@@ -171,9 +178,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     botMessageContent += textChunk.replace(/\\n/g, '\n');
                     contentElement.innerHTML = marked.parse(botMessageContent);
                     hljs.highlightAll();
-                } else if (line.startsWith('2:')) { 
-                    if (tempThinkingIndicator) { 
-                         try {
+                } else if (line.startsWith('2:')) {
+                    if (tempThinkingIndicator) {
+                        try {
                             const thoughtData = JSON.parse(line.substring(2));
                             if (thoughtData[0] && thoughtData[0].action) {
                                 tempThinkingIndicator.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${thoughtData[0].action}`;
@@ -247,8 +254,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const messageWrapper = createMessageWrapper(role);
         const contentElement = messageWrapper.querySelector('.message-content');
         contentElement.innerHTML = marked.parse(content);
-        if(isError) messageWrapper.querySelector('.message').classList.add('error-message');
-        
+        if (isError) messageWrapper.querySelector('.message').classList.add('error-message');
+
         chatMessages.appendChild(messageWrapper);
 
         chatMessages.scrollTop = chatMessages.scrollHeight;
