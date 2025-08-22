@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
             topContainer.className = 'message-top-container';
 
             const avatar = document.createElement('img');
-            avatar.src = 'images/Alfred.png';
+            avatar.src = 'images/Alfred.webp';
             avatar.className = 'message-avatar';
             topContainer.appendChild(avatar);
 
