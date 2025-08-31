@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Page not found - AlfredHelps Bot">
-    <meta property="og:title" content="404 Not Found - AlfredHelps Bot">
-    <meta property="og:description" content="The page you are looking for does not exist.">
+    <meta name="description" content="Thank you for your purchase! Instructions to claim your credits for AlfredHelps.">
+    <meta property="og:title" content="Purchase Successful - AlfredHelps Bot">
+    <meta property="og:description" content="Thank you for your purchase! Find out how to claim your credits.">
     <meta property="og:image" content="images/Alfred.png">
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#111014">
-    <title>Docs - AlfredHelps</title>
+    <title>Purchase Successful - AlfredHelps</title>
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -76,21 +76,56 @@
             text-shadow: 0 0 30px var(--glow-color);
         }
 
+        .hero h1 .fa-check-circle {
+            color: var(--success);
+            text-shadow: 0 0 20px rgba(87, 242, 135, 0.6);
+        }
+
         .hero p {
             font-size: 1.5rem;
             max-width: 600px;
             margin: 1rem auto 2rem;
             color: var(--text-secondary);
         }
+
+        .code-box {
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 1rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin: 1rem 0;
+            display: inline-block;
+            box-shadow: var(--shadow-sm);
+        }
     </style>
 
     <header class="hero">
         <div id="particles-js"></div>
         <div class="hero-content">
-            <h1>404</h1>
-            <p>Page not found</p>
+            <h1><i class="fas fa-check-circle"></i> Thank You For Your Purchase!</h1>
+            <p>Your support helps keep Alfred running. Follow the steps below to claim your credits.</p>
         </div>
     </header>
+
+    <main>
+        <div class="container">
+            <div class="content-container" style="text-align: center;">
+                <h2><i class="fas fa-key"></i> Your Credit Code</h2>
+                <p>Please check the email you used to make the purchase. You will find your unique <strong>Credit
+                        Code</strong> (it
+                    may be called a "License Key" in the email).</p>
+
+                <h2><i class="fab fa-discord"></i> How to Claim</h2>
+                <p>Once you have your code, go to any channel where Alfred is present in Discord and use the following
+                    command:</p>
+                <div class="code-box">/claim-credits &lt;your-credit-code&gt;</div>
+                <p>Your credits will be added to your account instantly!</p>
+            </div>
+        </div>
+    </main>
 
     <footer>
         <div class="container">
@@ -120,7 +155,7 @@
                     }
                 },
                 "color": {
-                    "value": "#8A2BE2"
+                    "value": "#57F287"
                 },
                 "shape": {
                     "type": "circle",
@@ -145,7 +180,7 @@
                 "line_linked": {
                     "enable": true,
                     "distance": 150,
-                    "color": "#9932CC",
+                    "color": "#57F287",
                     "opacity": 0.2,
                     "width": 1
                 },
