@@ -11,134 +11,15 @@
         content="Learn how to use credits and subscriptions to access premium AI models and features in AlfredHelps.">
     <meta property="og:image" content="images/Alfred.png">
     <meta property="og:type" content="website">
-    <meta name="theme-color" content="#111014">
+    <meta name="theme-color" content="#030304">
     <title>Credits - AlfredHelps</title>
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/modern.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
-        }
-
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            padding: 0 2rem;
-            background: transparent;
-        }
-
-        .hero h1 {
-            font-weight: 900;
-            letter-spacing: -2px;
-            text-shadow: 0 0 30px var(--glow-color);
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            max-width: 600px;
-            margin: 1rem auto 2rem;
-            color: var(--text-secondary);
-        }
-
-        .card {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            text-align: left;
-        }
-
-        .card h3 {
-            text-align: center;
-        }
-
-        .card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--accent-primary);
-            display: block;
-            text-align: center;
-        }
-
-        .card ul {
-            list-style: none;
-            padding-left: 0;
-            margin-top: 1.5rem;
-            color: var(--text-secondary);
-        }
-
-        .card ul li {
-            margin-bottom: 0.8rem;
-            font-size: 1rem;
-            display: flex;
-            align-items: flex-start;
-        }
-
-        .card ul li i {
-            margin-right: 10px;
-            margin-top: 5px;
-            color: var(--accent-primary);
-        }
-
-        .card ul li strong {
-            color: var(--text-primary);
-        }
-
-        .faq-item {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .faq-question {
-            font-weight: 600;
-            font-size: 1.2rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out, padding-top 0.3s ease-out;
-            color: var(--text-secondary);
-            padding-left: 1.5rem;
-            border-left: 2px solid var(--accent-primary);
-            margin-top: 0;
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 200px;
-            /* Adjust as needed */
-            padding-top: 1rem;
-            margin-top: 1rem;
-        }
-
-        .faq-question .icon {
-            transition: transform 0.3s ease;
-        }
-
-        .faq-item.active .faq-question .icon {
-            transform: rotate(45deg);
-        }
-    </style>
 </head>
 
 <body>
@@ -225,12 +106,12 @@
                     <h2>Purchasing Credits</h2>
                     <p>Topping up your balance is easy. All purchases are handled securely through PayHip.</p>
                 </div>
-                <div class="content-container" style="text-align: center;">
+                <div class="content-container" style="text-align: center; background: rgba(10, 10, 12, 0.6); backdrop-filter: blur(20px);">
                     <h3>Pay-As-You-Go (PAYG)</h3>
                     <p>Perfect for trying out premium models or for infrequent use. You can top up your credit balance
                         at any time.</p>
                     <a target="_blank" href="https://payhip.com/b/CRfTj" class="invite-btn"
-                        style="font-size: 1.2rem; padding: 0.8rem 2rem; margin-top: 1rem;">Buy Credits</a>
+                        style="font-size: 1.2rem; padding: 0.8rem 2rem; margin-top: 1rem; display: inline-block;">Buy Credits</a>
                 </div>
             </div>
         </section>
@@ -276,15 +157,6 @@
                             use them.</p>
                     </div>
                 </div>
-                <!-- <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Can I use my subscription's monthly credits on any feature?</span>
-                        <span class="icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Yes! The credits you receive from your subscription are added to your main credit balance and can be used for any feature that requires credits, such as OpenRouter models.</p>
-                    </div>
-                </div> -->
             </div>
         </section>
     </main>
@@ -391,5 +263,4 @@
         });
     </script>
 </body>
-
 </html>
