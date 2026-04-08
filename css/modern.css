@@ -661,7 +661,7 @@ footer {
     border-radius: 100px;
     color: var(--text-main);
     text-decoration: none;
-    font-size: 0.9rem;
+    /* font-size: 0.9rem; */
     font-weight: 500;
     transition: all 0.3s ease;
 }
