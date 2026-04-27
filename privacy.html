@@ -21,15 +21,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
-<body>
+<body class="site-page legal-page">
     <div id="loader-wrapper">
         <div class="loader"></div>
-        <span>Loading Assets...</span>
+        <span>Preparing Alfred...</span>
     </div>
 
     <nav>
         <div class="nav-container">
-            <a href="index.html" class="logo">AlfredHelps</a>
+            <a href="index.html" class="logo home-logo" aria-label="AlfredHelps home">
+                <img src="./images/Alfred.png" alt="">
+                <span>AlfredHelps</span>
+            </a>
             <button class="hamburger" aria-label="Menu">
                 <span></span>
                 <span></span>
@@ -37,106 +40,129 @@
             </button>
             <div class="nav-links">
                 <a href="index.html">Home</a>
-                <a href="documentation.html">Docs</a>
+                <a href="documentation.html">Documentation</a>
+                <a href="http://discord.gg/tsGdPKygqZ" target="_blank">Support</a>
                 <a href="https://www.patreon.com/c/AlfredHelpsDC" target="_blank">Patreon</a>
-                <!-- <a href="credits.html">Credits</a> -->
-                <!-- <a href="chat.html">Chat</a> -->
                 <a href="tos.html">Terms</a>
                 <a href="privacy.html" class="active">Privacy</a>
                 <a href="https://discord.com/oauth2/authorize?client_id=717830171574403162&permissions=67584&integration_type=0&scope=bot"
-                    class="invite-btn">Add to Discord</a>
+                    class="invite-btn nav-invite"><i class="fab fa-discord"></i> Add to Discord</a>
             </div>
         </div>
         <div class="nav-overlay"></div>
     </nav>
 
-    <header class="hero">
-        <div id="particles-js"></div>
-        <div class="hero-content">
-            <h1>Privacy Policy</h1>
-            <p>How We Handle Your Data</p>
+    <header class="page-hero">
+        <div class="page-hero-inner">
+            <p class="eyebrow">Privacy</p>
+            <h1>How Alfred handles your data.</h1>
+            <p>What Alfred stores, why it stores it, and the controls you can use when you want history removed.</p>
+            <div class="legal-meta">
+                <span class="legal-stamp">Last updated: July 1, 2025</span>
+            </div>
         </div>
     </header>
 
-    <main>
+    <main class="page-main">
         <div class="container">
             <div class="content-container">
-                <h2>Privacy Policy</h2>
-                <p>Last Updated: July 1, 2025</p>
+                <section>
+                    <h2>Privacy Policy</h2>
+                    <p>Last updated: July 1, 2025</p>
+                </section>
 
-                <h3>1. Introduction</h3>
-                <p>This Privacy Policy explains how Alfred ("we", "us", "our") collects, uses, and protects your data
-                    when you use our Discord bot. We are committed to ensuring the privacy and security of your
-                    information.</p>
+                <section>
+                    <h3>1. Introduction</h3>
+                    <p>This Privacy Policy explains how Alfred ("we", "us", "our") collects, uses, and protects your
+                        data when you use our Discord bot. We are committed to ensuring the privacy and security of your
+                        information.</p>
+                </section>
 
-                <h3>2. Information We Collect</h3>
-                <p>When you use Alfred, we may collect the following information:</p>
-                <ul>
-                    <li><strong>User Data:</strong> Your Discord user ID, username, display name, and earned badges.
-                    </li>
-                    <li><strong>Server Data:</strong> Server ID and channel IDs where Alfred is used.</li>
-                    <li><strong>Conversation Data:</strong> Messages, images, and other attachments sent to Alfred, and
-                        Alfred's responses. This data is used to provide conversational context.</li>
-                    <li><strong>Settings Data:</strong> User and server preferences, such as your chosen AI model,
-                        custom personalities, and server-wide configurations.</li>
-                    <li><strong>Usage Data:</strong> We collect data on feature usage, such as the number of commands
-                        used or images generated, to monitor service limits.</li>
-                </ul>
+                <section>
+                    <h3>2. Information We Collect</h3>
+                    <p>When you use Alfred, we may collect the following information:</p>
+                    <ul>
+                        <li><strong>User Data:</strong> Your Discord user ID, username, display name, and earned badges.
+                        </li>
+                        <li><strong>Server Data:</strong> Server ID and channel IDs where Alfred is used.</li>
+                        <li><strong>Conversation Data:</strong> Messages, images, and other attachments sent to Alfred,
+                            and Alfred's responses. This data is used to provide conversational context.</li>
+                        <li><strong>Settings Data:</strong> User and server preferences, such as your chosen AI model,
+                            custom personalities, and server-wide configurations.</li>
+                        <li><strong>Usage Data:</strong> We collect data on feature usage, such as the number of
+                            commands used or images generated, to monitor service limits.</li>
+                    </ul>
+                </section>
 
-                <h3>3. How We Use Your Information</h3>
-                <p>We use the collected information for the following purposes:</p>
-                <ul>
-                    <li>Providing and maintaining Alfred's services.</li>
-                    <li>Improving and developing new features.</li>
-                    <li>Personalizing your experience (e.g., recommending an AI model based on your chat style.</li>
-                    <li>Analyzing usage patterns to optimize performance.</li>
-                    <li>Ensuring compliance with our Terms of Service.</li>
-                    <li>Responding to user support requests.</li>
-                </ul>
+                <section>
+                    <h3>3. How We Use Your Information</h3>
+                    <p>We use the collected information for the following purposes:</p>
+                    <ul>
+                        <li>Providing and maintaining Alfred's services.</li>
+                        <li>Improving and developing new features.</li>
+                        <li>Personalizing your experience (e.g., recommending an AI model based on your chat style.</li>
+                        <li>Analyzing usage patterns to optimize performance.</li>
+                        <li>Ensuring compliance with our Terms of Service.</li>
+                        <li>Responding to user support requests.</li>
+                    </ul>
+                </section>
 
-                <h3>4. Data Storage and Security</h3>
-                <p>We store your data on secure servers and implement appropriate security measures to protect against
-                    unauthorized access, alteration, disclosure, or destruction of your information. However, no method
-                    of transmission over the Internet or electronic storage is 100% secure.</p>
+                <section>
+                    <h3>4. Data Storage and Security</h3>
+                    <p>We store your data on secure servers and implement appropriate security measures to protect
+                        against unauthorized access, alteration, disclosure, or destruction of your information. However,
+                        no method of transmission over the Internet or electronic storage is 100% secure.</p>
+                </section>
 
-                <h3>5. Data Retention</h3>
-                <p>We retain conversation data to maintain context for ongoing conversations. You can delete your
-                    conversation history at any time using the <strong>/delete-history</strong> (for the current
-                    channel) and <strong>/delete-all-history</strong> (for all of your stored messages) commands.</p>
+                <section>
+                    <h3>5. Data Retention</h3>
+                    <p>We retain conversation data to maintain context for ongoing conversations. You can delete your
+                        conversation history at any time using the <strong>/delete-history</strong> (for the current
+                        channel) and <strong>/delete-all-history</strong> (for all of your stored messages) commands.</p>
+                </section>
 
-                <h3>6. Third-Party Services</h3>
-                <p>Alfred uses third-party services to enhance functionality. Your data may be shared with these
-                    services to perform specific tasks. These services include:</p>
-                <ul>
-                    <li><strong>AI Providers:</strong> For language processing and generation.</li>
-                    <li><strong>Image Services:</strong> For creating, hosting, and enhancing images.</li>
-                    <li><strong>Bot Listing Platforms:</strong> To manage our bot listing and verify votes.</li>
-                </ul>
-                <p>These third parties are obligated not to disclose or use your data for any other purpose.</p>
+                <section>
+                    <h3>6. Third-Party Services</h3>
+                    <p>Alfred uses third-party services to enhance functionality. Your data may be shared with these
+                        services to perform specific tasks. These services include:</p>
+                    <ul>
+                        <li><strong>AI Providers:</strong> For language processing and generation.</li>
+                        <li><strong>Image Services:</strong> For creating, hosting, and enhancing images.</li>
+                        <li><strong>Bot Listing Platforms:</strong> To manage our bot listing and verify votes.</li>
+                    </ul>
+                    <p>These third parties are obligated not to disclose or use your data for any other purpose.</p>
+                </section>
 
-                <h3>7. Your Rights</h3>
-                <p>You have the right to:</p>
-                <ul>
-                    <li>Access the personal data we hold about you.</li>
-                    <li>Request deletion of your stored messages using the <strong>/delete-all-history</strong> command.
-                    </li>
-                    <li>Manage your privacy settings, including opting out of message analysis for personalization, via
-                        the <strong>/user-settings</strong> command.</li>
-                    <li>Object to or request restriction of data processing.</li>
-                </ul>
+                <section>
+                    <h3>7. Your Rights</h3>
+                    <p>You have the right to:</p>
+                    <ul>
+                        <li>Access the personal data we hold about you.</li>
+                        <li>Request deletion of your stored messages using the <strong>/delete-all-history</strong>
+                            command.</li>
+                        <li>Manage your privacy settings, including opting out of message analysis for personalization,
+                            via the <strong>/user-settings</strong> command.</li>
+                        <li>Object to or request restriction of data processing.</li>
+                    </ul>
+                </section>
 
-                <h3>8. Children's Privacy</h3>
-                <p>Alfred is not intended for use by individuals under the age of 13, or the minimum age required by
-                    Discord in your country. We do not knowingly collect personal information from children.</p>
+                <section>
+                    <h3>8. Children's Privacy</h3>
+                    <p>Alfred is not intended for use by individuals under the age of 13, or the minimum age required by
+                        Discord in your country. We do not knowingly collect personal information from children.</p>
+                </section>
 
-                <h3>9. Changes to This Privacy Policy</h3>
-                <p>We may update our Privacy Policy from time to time. We will notify users of any significant changes
-                    through the bot's notification system.</p>
+                <section>
+                    <h3>9. Changes to This Privacy Policy</h3>
+                    <p>We may update our Privacy Policy from time to time. We will notify users of any significant
+                        changes through the bot's notification system.</p>
+                </section>
 
-                <h3>10. Contact Us</h3>
-                <p>If you have any questions about this Privacy Policy, please use the <strong>/feedback</strong>
-                    command or join our Discord support
-                    server.</p>
+                <section>
+                    <h3>10. Contact Us</h3>
+                    <p>If you have any questions about this Privacy Policy, please use the <strong>/feedback</strong>
+                        command or join our Discord support server.</p>
+                </section>
             </div>
         </div>
     </main>
@@ -146,6 +172,10 @@
             <div class="footer-content">
                 <div class="footer-logo">AlfredHelps</div>
                 <div class="footer-links">
+                    <a href="features.html">Features</a>
+                    <a href="documentation.html">Documentation</a>
+                    <a href="tos.html">Terms</a>
+                    <a href="privacy.html">Privacy</a>
                     <a href="https://top.gg/bot/717830171574403162" target="_blank">Top.gg</a>
                     <a href="http://discord.gg/tsGdPKygqZ" target="_blank">Support Server</a>
                 </div>
@@ -156,85 +186,6 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="js/main.js" defer></script>
-    <script>
-        particlesJS("particles-js", {
-            "particles": {
-                "number": {
-                    "value": 50,
-                    "density": {
-                        "enable": true,
-                        "value_area": 800
-                    }
-                },
-                "color": {
-                    "value": "#8A2BE2"
-                },
-                "shape": {
-                    "type": "circle",
-                },
-                "opacity": {
-                    "value": 0.5,
-                    "random": true,
-                    "anim": {
-                        "enable": true,
-                        "speed": 1,
-                        "opacity_min": 0.1,
-                        "sync": false
-                    }
-                },
-                "size": {
-                    "value": 3,
-                    "random": true,
-                    "anim": {
-                        "enable": false,
-                    }
-                },
-                "line_linked": {
-                    "enable": true,
-                    "distance": 150,
-                    "color": "#9932CC",
-                    "opacity": 0.2,
-                    "width": 1
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 2,
-                    "direction": "none",
-                    "random": false,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false,
-                }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": {
-                    "onhover": {
-                        "enable": true,
-                        "mode": "grab"
-                    },
-                    "onclick": {
-                        "enable": true,
-                        "mode": "push"
-                    },
-                    "resize": true
-                },
-                "modes": {
-                    "grab": {
-                        "distance": 140,
-                        "line_linked": {
-                            "opacity": 0.5
-                        }
-                    },
-                    "push": {
-                        "particles_nb": 4
-                    },
-                }
-            },
-            "retina_detect": true
-        });
-    </script>
 </body>
 </html>

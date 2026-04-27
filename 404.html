@@ -20,15 +20,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
-<body>
+<body class="site-page error-page">
     <div id="loader-wrapper">
         <div class="loader"></div>
-        <span>Loading Assets...</span>
+        <span>Preparing Alfred...</span>
     </div>
 
     <nav>
         <div class="nav-container">
-            <a href="index.html" class="logo">AlfredHelps</a>
+            <a href="index.html" class="logo home-logo" aria-label="AlfredHelps home">
+                <img src="./images/Alfred.png" alt="">
+                <span>AlfredHelps</span>
+            </a>
             <button class="hamburger" aria-label="Menu">
                 <span></span>
                 <span></span>
@@ -36,30 +39,42 @@
             </button>
             <div class="nav-links">
                 <a href="index.html">Home</a>
-                <a href="documentation.html">Docs</a>
+                <a href="documentation.html">Documentation</a>
+                <a href="http://discord.gg/tsGdPKygqZ" target="_blank">Support</a>
                 <a href="https://www.patreon.com/c/AlfredHelpsDC" target="_blank">Patreon</a>
                 <a href="tos.html">Terms</a>
                 <a href="privacy.html">Privacy</a>
                 <a href="https://discord.com/oauth2/authorize?client_id=717830171574403162&permissions=67584&integration_type=0&scope=bot"
-                    class="invite-btn">Add to Discord</a>
+                    class="invite-btn nav-invite"><i class="fab fa-discord"></i> Add to Discord</a>
             </div>
         </div>
         <div class="nav-overlay"></div>
     </nav>
 
-    <header class="hero">
-        <div id="particles-js"></div>
-        <div class="hero-content">
-            <h1>404</h1>
-            <p>Page not found</p>
+    <main class="page-main error-page-wrap">
+        <div class="container">
+            <section class="not-found-panel">
+                <div class="not-found-code">404</div>
+                <p class="eyebrow">Page missing</p>
+                <h1>Alfred lost the thread.</h1>
+                <p>The page you asked for is not here. The homepage, documentation, and support server are still within reach.</p>
+                <div class="hero-actions">
+                    <a href="index.html" class="secondary-btn">Go Home <i class="fas fa-arrow-right"></i></a>
+                    <a href="documentation.html" class="invite-btn">Read Docs</a>
+                </div>
+            </section>
         </div>
-    </header>
+    </main>
 
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">AlfredHelps</div>
                 <div class="footer-links">
+                    <a href="features.html">Features</a>
+                    <a href="documentation.html">Documentation</a>
+                    <a href="tos.html">Terms</a>
+                    <a href="privacy.html">Privacy</a>
                     <a href="https://top.gg/bot/717830171574403162" target="_blank">Top.gg</a>
                     <a href="http://discord.gg/tsGdPKygqZ" target="_blank">Support Server</a>
                 </div>
@@ -70,85 +85,6 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="js/main.js" defer></script>
-    <script>
-        particlesJS("particles-js", {
-            "particles": {
-                "number": {
-                    "value": 50,
-                    "density": {
-                        "enable": true,
-                        "value_area": 800
-                    }
-                },
-                "color": {
-                    "value": "#8A2BE2"
-                },
-                "shape": {
-                    "type": "circle",
-                },
-                "opacity": {
-                    "value": 0.5,
-                    "random": true,
-                    "anim": {
-                        "enable": true,
-                        "speed": 1,
-                        "opacity_min": 0.1,
-                        "sync": false
-                    }
-                },
-                "size": {
-                    "value": 3,
-                    "random": true,
-                    "anim": {
-                        "enable": false,
-                    }
-                },
-                "line_linked": {
-                    "enable": true,
-                    "distance": 150,
-                    "color": "#9932CC",
-                    "opacity": 0.2,
-                    "width": 1
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 2,
-                    "direction": "none",
-                    "random": false,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false,
-                }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": {
-                    "onhover": {
-                        "enable": true,
-                        "mode": "grab"
-                    },
-                    "onclick": {
-                        "enable": true,
-                        "mode": "push"
-                    },
-                    "resize": true
-                },
-                "modes": {
-                    "grab": {
-                        "distance": 140,
-                        "line_linked": {
-                            "opacity": 0.5
-                        }
-                    },
-                    "push": {
-                        "particles_nb": 4
-                    },
-                }
-            },
-            "retina_detect": true
-        });
-    </script>
 </body>
 </html>

@@ -22,114 +22,145 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
-<body>
+<body class="home-page">
     <div id="loader-wrapper">
         <div class="loader"></div>
-        <span>Loading Assets...</span>
+        <span>Preparing Alfred...</span>
     </div>
 
     <nav>
         <div class="nav-container">
-            <a href="index.html" class="logo">AlfredHelps</a>
+            <a href="index.html" class="logo home-logo" aria-label="AlfredHelps home">
+                <img src="./images/Alfred.png" alt="">
+                <span>AlfredHelps</span>
+            </a>
             <button class="hamburger" aria-label="Menu">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
             <div class="nav-links">
-                <a href="index.html" class="active">Home</a>
-                <a href="documentation.html">Docs</a>
+                <a href="#features">Features</a>
+                <a href="documentation.html">Documentation</a>
+                <a href="http://discord.gg/tsGdPKygqZ" target="_blank">Support</a>
                 <a href="https://www.patreon.com/c/AlfredHelpsDC" target="_blank">Patreon</a>
                 <a href="tos.html">Terms</a>
                 <a href="privacy.html">Privacy</a>
                 <a href="https://discord.com/oauth2/authorize?client_id=717830171574403162&permissions=67584&integration_type=0&scope=bot"
-                    class="invite-btn">Add to Discord</a>
+                    class="invite-btn nav-invite"><i class="fab fa-discord"></i> Add to Discord</a>
             </div>
         </div>
         <div class="nav-overlay"></div>
     </nav>
 
-    <header class="hero">
-        <div id="particles-js"></div>
-        <div class="hero-content">
+    <header class="hero alfred-hero">
+        <div class="hero-content home-hero-content">
             <div class="new-feature-pill">
-                <a href="documentation.html#how-it-works"><span class="new-badge">New</span> Base AI Models <i class="fas fa-microchip"></i></a>
+                <a href="documentation.html#how-it-works"><i class="fas fa-layer-group"></i> Context-aware Discord AI</a>
             </div>
-    
-            <h1>The Future of Discord is Intelligent</h1>
-            <p>AlfredHelps brings the power of advanced AI models, image generation, and smart search directly to your
-                server.</p>
-            <a href="https://discord.com/oauth2/authorize?client_id=717830171574403162&permissions=67584&integration_type=0&scope=bot"
-                class="invite-btn">Launch Assistant</a>
+
+            <h1>Alfred keeps up with the conversation.</h1>
+            <p>AI for Discord that reads the room, understands replies and images, remembers useful context, and answers without turning your server into a control panel.</p>
+            <div class="hero-actions">
+                <a href="https://discord.com/oauth2/authorize?client_id=717830171574403162&permissions=67584&integration_type=0&scope=bot"
+                    class="invite-btn"><i class="fab fa-discord"></i> Add to Discord</a>
+                <a href="#features" class="secondary-btn">See What It Does <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="hero-signal-row" aria-label="Alfred highlights">
+                <span><strong>1.8K+</strong> servers</span>
+                <span><strong>Images</strong> understood in chat</span>
+                <span><strong>Memory</strong> when it matters</span>
+            </div>
+        </div>
+
+        <div class="server-proof-panel" aria-label="Server trust highlight">
+            <div>
+                <p class="eyebrow">Trusted across busy Discord communities</p>
+                <h2>More than 1.8K servers use Alfred to make chat less chaotic.</h2>
+            </div>
+            <div class="server-stack" aria-hidden="true">
+                <span class="server-token token-purple"><img src="./images/Alfred.png" alt=""></span>
+                <span class="server-token token-gold">AI</span>
+                <span class="server-token token-green">GG</span>
+                <span class="server-token token-cyan">DEV</span>
+                <span class="server-token token-blue"><i class="fab fa-discord"></i></span>
+            </div>
         </div>
     </header>
 
     <main>
-        <section class="section hero-chat-section">
+        <section class="section discord-showcase" id="features">
             <div class="container">
-                <!-- <div class="fancy-chat-container">
-                    <div class="chat-header">
-                        <div class="chat-title">
-                            <h3>Ask Alfred Anything</h3>
-                            <p style="color: var(--text-secondary);">Try it now - no login required</p>
-                        </div>
-                    </div>
-                    <form id="fancy-chat-form">
-                        <div class="fancy-input-container">
-                            <input type="text" id="fancy-question"
-                                placeholder="e.g., 'What can you do?'">
-                            <button type="submit" class="pulse-button">
-                                <i class="fas fa-arrow-right"></i>
-                            </button>
-                        </div>
-                    </form>
-                    <div class="chat-examples">
-                        <span class="example-chip" onclick="setQuestion('What can you do?')">What can you do?</span>
-                        <span class="example-chip" onclick="setQuestion('How do I add you to Discord?')">Add to
-                            Discord?</span>
-                        <span class="example-chip" onclick="setQuestion('Tell me a fun fact')">Fun fact</span>
-                    </div>
-                </div> -->
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Core Capabilities</h2>
-                    <p>A suite of powerful tools to augment your server</p>
+                <div class="showcase-copy">
+                    <p class="eyebrow">Understands the messy parts</p>
+                    <h2>Replies, screenshots, links, and context land in one clean answer.</h2>
+                    <p>Alfred is built around Discord behavior instead of forcing people into forms. Mention it, reply to something, drop media, or ask a follow-up; the bot quietly pulls together what the AI needs.</p>
                 </div>
-                <div class="cards">
-                    <div class="card">
-                        <div class="card-icon"><i class="fas fa-robot"></i></div>
-                        <h3>Multi-Model AI</h3>
-                        <p>Access a variety of cutting-edge AI models to get the best answers and creations.</p>
+
+                <div class="discord-preview" aria-label="Preview of Alfred in Discord">
+                    <div class="preview-toolbar">
+                        <span class="toolbar-dot"></span>
+                        <span># general</span>
+                        <span>Alfred is responding</span>
                     </div>
-                    <div class="card">
-                        <div class="card-icon"><i class="fas fa-palette"></i></div>
-                        <h3>Image Generation</h3>
-                        <p>Bring your ideas to life with stunning AI-generated images from simple text prompts.</p>
+                    <div class="discord-message user-message">
+                        <div class="avatar avatar-text">M</div>
+                        <div class="message-body">
+                            <div class="message-meta">Mira <span>replied to an image</span></div>
+                            <div class="message-bubble compact">alfred, what is wrong with this layout?</div>
+                        </div>
                     </div>
-                    <div class="card">
-                        <div class="card-icon"><i class="fas fa-globe"></i></div>
-                        <h3>Intelligent Search</h3>
-                        <p>Get real-time, accurate information from the web summarized for your convenience.</p>
+                    <div class="discord-message alfred-message">
+                        <img class="avatar" src="./images/Alfred.png" alt="">
+                        <div class="message-body">
+                            <div class="message-meta">Alfred <span>looked at the image and recent replies</span></div>
+                            <div class="message-bubble">The cards are competing with the header. I would tighten the spacing, drop the heavy border, and make the primary action sit closer to the question.</div>
+                            <div class="tool-strip">
+                                <span><i class="fas fa-image"></i> image context</span>
+                                <span><i class="fas fa-reply"></i> reply target</span>
+                                <span><i class="fas fa-brain"></i> memory</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="section">
+        <section class="section capability-section">
             <div class="container">
                 <div class="section-title">
-                    <h2>Ready to Upgrade Your Server?</h2>
-                    <p>Unlock the next generation of Discord interaction with one simple click.</p>
+                    <h2>Built for the way Discord actually moves</h2>
+                    <p>Fast answers on the surface. A lot of quiet machinery underneath.</p>
                 </div>
-                <div style="text-align: center;">
+                <div class="cards home-cards">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-comments"></i></div>
+                        <h3>Conversation Aware</h3>
+                        <p>Alfred keeps channel context close, so follow-ups feel connected instead of starting over.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+                        <h3>Creative on Demand</h3>
+                        <p>Generate images, rework ideas, and turn loose prompts into something worth sharing.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-magnifying-glass"></i></div>
+                        <h3>Search When Needed</h3>
+                        <p>For questions that need fresh context, Alfred can search, read, and summarize the useful parts.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section final-cta">
+            <div class="container">
+                <div class="final-cta-panel">
+                    <div>
+                        <p class="eyebrow">Bring Alfred in</p>
+                        <h2>Give your server an assistant that feels native to chat.</h2>
+                    </div>
                     <a href="https://discord.com/oauth2/authorize?client_id=717830171574403162&permissions=67584&integration_type=0&scope=bot"
-                        class="invite-btn" style="font-size: 1.2rem; padding: 0.8rem 2rem; margin-top: 2rem;">
-                        Add AlfredHelps Now
-                    </a>
+                        class="invite-btn"><i class="fab fa-discord"></i> Add AlfredHelps</a>
                 </div>
             </div>
         </section>
@@ -140,8 +171,12 @@
             <div class="footer-content">
                 <div class="footer-logo">AlfredHelps</div>
                 <div class="footer-links">
-                    <a href="https://top.gg/bot/717830171574403162" target="_blank">Top.gg</a>
+                    <a href="features.html">Features</a>
+                    <a href="documentation.html">Documentation</a>
+                    <a href="tos.html">Terms</a>
+                    <a href="privacy.html">Privacy</a>
                     <a href="http://discord.gg/tsGdPKygqZ" target="_blank">Support Server</a>
+                    <a href="https://top.gg/bot/717830171574403162" target="_blank">Top.gg</a>
                 </div>
                 <div class="footer-copyright">
                     &copy; 2026 AlfredHelps Bot. All rights reserved.
@@ -150,106 +185,7 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="js/animations.js" defer></script>
     <script src="js/main.js" defer></script>
-    <script>
-        particlesJS("particles-js", {
-            "particles": {
-                "number": {
-                    "value": 50,
-                    "density": {
-                        "enable": true,
-                        "value_area": 800
-                    }
-                },
-                "color": {
-                    "value": "#8A2BE2"
-                },
-                "shape": {
-                    "type": "circle",
-                },
-                "opacity": {
-                    "value": 0.5,
-                    "random": true,
-                    "anim": {
-                        "enable": true,
-                        "speed": 1,
-                        "opacity_min": 0.1,
-                        "sync": false
-                    }
-                },
-                "size": {
-                    "value": 3,
-                    "random": true,
-                    "anim": {
-                        "enable": false,
-                    }
-                },
-                "line_linked": {
-                    "enable": true,
-                    "distance": 150,
-                    "color": "#9932CC",
-                    "opacity": 0.2,
-                    "width": 1
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 2,
-                    "direction": "none",
-                    "random": false,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false,
-                }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": {
-                    "onhover": {
-                        "enable": true,
-                        "mode": "grab"
-                    },
-                    "onclick": {
-                        "enable": true,
-                        "mode": "push"
-                    },
-                    "resize": true
-                },
-                "modes": {
-                    "grab": {
-                        "distance": 140,
-                        "line_linked": {
-                            "opacity": 0.5
-                        }
-                    },
-                    "push": {
-                        "particles_nb": 4
-                    },
-                }
-            },
-            "retina_detect": true
-        });
-
-        function setQuestion(text) {
-            if (document.getElementById('fancy-question')) {
-                document.getElementById('fancy-question').value = text;
-                document.getElementById('fancy-question').focus();
-            }
-        }
-
-        const fancyChatForm = document.getElementById('fancy-chat-form');
-        if (fancyChatForm) {
-            fancyChatForm.addEventListener('submit', function (e) {
-                e.preventDefault();
-                const question = document.getElementById('fancy-question').value.trim();
-                if (question) {
-                    const encodedQuestion = encodeURIComponent(question);
-                    window.location.href = `chat.html?q=${encodedQuestion}`;
-                }
-            });
-        }
-    </script>
 </body>
 
 </html>

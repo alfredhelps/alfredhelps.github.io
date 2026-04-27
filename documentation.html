@@ -21,21 +21,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
-<style>
-    a {
-        color: #8b5cf6;
-    }
-</style>
-
-<body>
+<body class="site-page docs-page">
     <div id="loader-wrapper">
         <div class="loader"></div>
-        <span>Loading Assets...</span>
+        <span>Preparing Alfred...</span>
     </div>
 
     <nav>
         <div class="nav-container">
-            <a href="index.html" class="logo">AlfredHelps</a>
+            <a href="index.html" class="logo home-logo" aria-label="AlfredHelps home">
+                <img src="./images/Alfred.png" alt="">
+                <span>AlfredHelps</span>
+            </a>
             <button class="hamburger" aria-label="Menu">
                 <span></span>
                 <span></span>
@@ -43,25 +40,33 @@
             </button>
             <div class="nav-links">
                 <a href="index.html">Home</a>
-                <a href="documentation.html" class="active">Docs</a>
+                <a href="documentation.html" class="active">Documentation</a>
+                <a href="http://discord.gg/tsGdPKygqZ" target="_blank">Support</a>
                 <a href="tos.html">Terms</a>
                 <a href="privacy.html">Privacy</a>
                 <a href="https://discord.com/oauth2/authorize?client_id=717830171574403162&permissions=67584&integration_type=0&scope=bot"
-                    class="invite-btn">Add to Discord</a>
+                    class="invite-btn nav-invite"><i class="fab fa-discord"></i> Add to Discord</a>
             </div>
         </div>
         <div class="nav-overlay"></div>
     </nav>
 
-    <header class="hero">
-        <div id="particles-js"></div>
-        <div class="hero-content">
-            <h1>Documentation</h1>
-            <p>Your complete guide to using AlfredHelps</p>
+    <header class="page-hero">
+        <div class="page-hero-inner">
+            <p class="eyebrow">Documentation</p>
+            <h1>Alfred's operating manual.</h1>
+            <p>Everything important in one place: how Alfred responds, what it can see, and which commands unlock the deeper tools.</p>
+            <div class="page-quick-links" aria-label="Documentation shortcuts">
+                <a href="#how-it-works">How it works</a>
+                <a href="#getting-started">Getting started</a>
+                <a href="#core-features">Core features</a>
+                <a href="#privacy-management">Privacy controls</a>
+                <a href="#subscriber-perks">Premium</a>
+            </div>
         </div>
     </header>
 
-    <main>
+    <main class="page-main">
         <div class="container">
             <div class="content-container">
                 <section id="how-it-works">
@@ -299,6 +304,10 @@
             <div class="footer-content">
                 <div class="footer-logo">AlfredHelps</div>
                 <div class="footer-links">
+                    <a href="features.html">Features</a>
+                    <a href="documentation.html">Documentation</a>
+                    <a href="tos.html">Terms</a>
+                    <a href="privacy.html">Privacy</a>
                     <a href="https://top.gg/bot/717830171574403162" target="_blank">Top.gg</a>
                     <a href="http://discord.gg/tsGdPKygqZ" target="_blank">Support Server</a>
                 </div>
@@ -309,86 +318,7 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="js/main.js" defer></script>
-    <script>
-        particlesJS("particles-js", {
-            "particles": {
-                "number": {
-                    "value": 50,
-                    "density": {
-                        "enable": true,
-                        "value_area": 800
-                    }
-                },
-                "color": {
-                    "value": "#8A2BE2"
-                },
-                "shape": {
-                    "type": "circle",
-                },
-                "opacity": {
-                    "value": 0.5,
-                    "random": true,
-                    "anim": {
-                        "enable": true,
-                        "speed": 1,
-                        "opacity_min": 0.1,
-                        "sync": false
-                    }
-                },
-                "size": {
-                    "value": 3,
-                    "random": true,
-                    "anim": {
-                        "enable": false,
-                    }
-                },
-                "line_linked": {
-                    "enable": true,
-                    "distance": 150,
-                    "color": "#9932CC",
-                    "opacity": 0.2,
-                    "width": 1
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 2,
-                    "direction": "none",
-                    "random": false,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false,
-                }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": {
-                    "onhover": {
-                        "enable": true,
-                        "mode": "grab"
-                    },
-                    "onclick": {
-                        "enable": true,
-                        "mode": "push"
-                    },
-                    "resize": true
-                },
-                "modes": {
-                    "grab": {
-                        "distance": 140,
-                        "line_linked": {
-                            "opacity": 0.5
-                        }
-                    },
-                    "push": {
-                        "particles_nb": 4
-                    },
-                }
-            },
-            "retina_detect": true
-        });
-    </script>
 </body>
 
 </html>
